@@ -1,0 +1,258 @@
+package com.landenlabs.uicomponents;
+
+/*
+ * Copyright (c) 2015 Dennis Lang (LanDen Labs) landenlabs@gmail.com
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
+ * associated documentation files (the "Software"), to deal in the Software without restriction, including
+ * without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the
+ *  following conditions:
+ *
+ *  The above copyright notice and this permission notice shall be included in all copies or substantial
+ *  portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
+ * LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+ * NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+ * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ *  @author Dennis Lang  (3/21/2015)
+ *  @see http://landenlabs.com
+ *
+ */
+
+import android.os.Build;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+
+
+/**
+ * Main Activity to WebTester app.
+ *
+ * @author Dennis Lang (LanDen Labs)
+ * @see <a href="http://landenlabs.com/android/index-m.html"> author's web-site </a>
+ */
+public class MainActivity extends ActionBarActivity    {
+
+    /**
+     * The {@link android.support.v4.view.PagerAdapter} that will provide
+     * fragments for each of the sections. We use a
+     * {@link FragmentPagerAdapter} derivative, which will keep every
+     * loaded fragment in memory. If this becomes too memory intensive, it
+     * may be best to switch to a
+     * {@link android.support.v4.app.FragmentStatePagerAdapter}.
+     */
+    SectionsPagerAdapter mSectionsPagerAdapter;
+
+    /**
+     * The {@link ViewPager} that will host the section contents.
+     */
+    ViewPager mViewPager;
+
+    ActionBar mActionBar;
+
+    // ---------------------------------------------------------------------------------------------
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (savedInstanceState != null) {
+        }
+        setContentView(R.layout.activity_main);
+
+        mActionBar = getSupportActionBar();
+        if (mActionBar != null) {
+            mActionBar.setTitle("UiComponents v" + BuildConfig.VERSION_NAME + " API" + Build.VERSION.SDK_INT +
+                    (BuildConfig.DEBUG ? " Debug" : ""));
+
+            mActionBar.setSubtitle(BuildConfig.VERSION_NAME);
+            mActionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_TITLE | ActionBar.DISPLAY_SHOW_HOME);
+            mActionBar.setIcon(R.mipmap.ic_launcher);
+        }
+
+        // Set up the ViewPager with the sections adapter.
+        mViewPager = (ViewPager) findViewById(R.id.pager);
+        mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if (mActionBar != null && mSectionsPagerAdapter != null) {
+                    mActionBar.setSubtitle(mSectionsPagerAdapter.getPageTitle(position));
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+            }
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (mViewPager != null) {
+            // Create the adapter that will return a fragment for each page.
+            mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+            mViewPager.setAdapter(mSectionsPagerAdapter);
+            // Optionally set limit of pages to keep.
+            mViewPager.setOffscreenPageLimit(mSectionsPagerAdapter.getCount());
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mSectionsPagerAdapter = null;
+        if (mViewPager != null)
+            mViewPager.setAdapter(mSectionsPagerAdapter);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    // =============================================================================================
+    // SectionsPagerAdapter - implement page swipes
+    /**
+     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
+     * one of the sections/tabs/pages.
+     */
+    public class SectionsPagerAdapter extends FragmentPagerAdapter {
+
+        public SectionsPagerAdapter(FragmentManager fm) {
+            super(fm);
+
+            // ActionBar actionBar = getActionBar();
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            // getItem is called to instantiate the fragment for the given page.
+            // Return a PageFragment (defined as a static inner class below).
+            return PageFragment.newInstance(position);
+        }
+
+        @Override
+        public int getCount() {
+            return 5;  // View swipe page count.
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+
+            switch (position) {
+                case 0:
+                    return "Assorted";
+                case 1:
+                    return "List";
+                case 2:
+                    return "Custom List";
+                case 3:
+                    return "Toggle/Switch";
+                case 4:
+                    return "Checkbox";
+                default:
+                    return String.valueOf(position);
+            }
+        }
+    }
+
+    /**
+     * A page fragment with selectable layouts per page number.
+     */
+    public static class PageFragment extends Fragment {
+        /**
+         * The fragment argument representing the section number for this
+         * fragment.
+         */
+        private static final String ARG_page_number = "page_number";
+        int m_pageNum = 0;
+
+        /**
+         * Returns a new instance of this fragment for the given section
+         * number.
+         */
+        public static PageFragment newInstance(int sectionNumber) {
+            PageFragment fragment = new PageFragment();
+
+            Bundle args = new Bundle();
+            args.putInt(ARG_page_number, sectionNumber);
+            fragment.setArguments(args);
+            return fragment;
+        }
+
+        public PageFragment() {
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            Bundle args = getArguments();
+            if (args != null)
+                m_pageNum = args.getInt(ARG_page_number);
+
+            int layout = -1;
+            switch (m_pageNum) {
+
+                case 0:
+                    layout = R.layout.page1frag;
+                    break;
+                case 1:
+                    layout = R.layout.page2frag;
+                    break;
+                case 2:
+                    layout = R.layout.page3frag;
+                    break;
+                case 3:
+                    layout = R.layout.page4frag;
+                    break;
+                case 4:
+                    layout = R.layout.page5frag;
+                    break;
+
+                default:
+                    throw new UnsupportedOperationException("missing fragment");
+            }
+
+            View rootView = inflater.inflate(layout, container, false);
+            return rootView;
+        }
+    }
+}

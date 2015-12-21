@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">UiComponents</string>
+
+    <string name="page1Title">Page1</string>
+    <string name="page2Title">Page2</string>
+    <string name="page3Title">Page3</string>
+
+    <string name="action_settings">Settings</string>
+</resources>

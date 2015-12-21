@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+<item
+    android:id="@+id/checked"
+    android:state_checked="true"
+    android:drawable="@drawable/checkmark" />
+<item
+    android:id="@+id/unchecked"
+    android:drawable="@drawable/checkmark0" />
+
+<transition
+    android:fromId="@+id/unchecked"
+    android:toId="@+id/checked"
+    android:drawable="@drawable/checkline_to_check_animation_list" />
+
+<transition
+    android:fromId="@+id/checked"
+    android:toId="@+id/unchecked"
+    android:drawable="@drawable/checkline_to_uncheck_animation_list" />
+</animated-selector>

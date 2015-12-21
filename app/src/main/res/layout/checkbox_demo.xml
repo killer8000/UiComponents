@@ -1,0 +1,188 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/bg_dark"
+    android:padding="20dp"
+    tools:context=".FragPage1">
+
+    <!--
+     android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+    android:drawableRight="@drawable/btn_check_material_anim"
+    -->
+
+
+    <Button
+        android:id="@+id/p2Button1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:text="Button"
+        android:textColor="@android:color/white"
+        android:textAllCaps="false"
+        android:gravity="left|center_vertical"
+
+        android:clickable="true"
+        android:checked="true"
+
+        android:background="@drawable/transparent_ripple"
+        android:drawableRight="@drawable/checkline"
+        android:drawableTop="@drawable/checkline"
+        android:drawableLeft="@drawable/checkline"
+        android:drawableBottom="@drawable/checkline"
+        android:contextClickable="true"
+        android:textAlignment="textStart" />
+
+
+    <TextView
+        android:id="@+id/p2TextView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:text="TextView"
+        android:textColor="@android:color/white"
+        android:gravity="left|center_vertical"
+
+        android:button="@null"
+        android:clickable="true"
+        android:checked="true"
+
+        android:background="@drawable/transparent_ripple"
+        android:drawableRight="@drawable/checkline"
+        android:drawableTop="@drawable/checkline"
+        android:drawableLeft="@drawable/checkline"
+        android:drawableBottom="@drawable/checkline"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/white" />
+
+    <CheckBox
+        android:id="@+id/p2Checkbox1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textSize="30sp"
+        android:text="CheckBox"
+        android:textColor="@android:color/white"
+        android:gravity="left|center_vertical"
+        android:drawableRight="@drawable/checkline"
+        android:background="@drawable/transparent_ripple"
+        android:button="@null"
+        android:checked="true"
+        android:enabled="true" />
+
+    <android.support.v7.widget.AppCompatCheckBox
+        android:id="@+id/p2Checkbox2"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textSize="30sp"
+        android:text="CheckBox"
+        android:textColor="@android:color/white"
+        android:gravity="left|center_vertical"
+        android:drawableRight="@drawable/checkline"
+        android:background="@drawable/transparent_ripple"
+        android:button="@null"
+        android:checked="true"
+        android:enabled="true" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/white" />
+    <!--
+        <ToggleButton
+            android:id="@+id/p2ToggleButton1"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:textSize="30sp"
+            android:text="ToggleButton1"
+            android:gravity="center_vertical|left"
+            android:checked="true"
+            android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+            android:background="@drawable/transparent_ripple" />
+
+        <ToggleButton
+            android:id="@+id/p2ToggleButton2"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="ToggleButton2"
+            android:textSize="30sp"
+            android:gravity="center_vertical|left"
+            android:checked="true"
+            android:drawableRight="@drawable/btn_check_material_anim"
+            android:background="@drawable/transparent_ripple" />
+     -->
+
+    <ToggleButton
+        android:id="@+id/p2ToggleButton3"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textColor="@android:color/white"
+        android:text="ToggleButton3"
+        android:textSize="30sp"
+        android:gravity="center_vertical|left"
+
+        android:checked="true"
+
+        android:drawableRight="@drawable/checkline"
+        android:background="@drawable/transparent_ripple" />
+
+
+    <ImageButton
+        android:id="@+id/p2ImageButton1"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:textColor="@android:color/white"
+        android:text="ImageButton"
+
+        android:clickable="true"
+        android:checked="true"
+
+        android:src="@drawable/checkline"
+        android:background="@drawable/transparent_ripple"   />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/white" />
+
+    <Switch
+        android:id="@+id/p2Switch1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textColor="@android:color/white"
+        android:text="Switch"
+        android:textSize="30sp"
+        android:gravity="center_vertical|left"
+
+        android:checked="true"
+
+        android:background="@drawable/transparent_ripple"
+        android:thumb="@drawable/checkline"
+        android:track="@null"
+        />
+
+    <!-- android:background="@android:drawable/checkbox_on_background" -->
+
+
+    <android.support.v7.widget.SwitchCompat
+        android:id="@+id/p2Switch2"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textColor="@android:color/white"
+        android:text="SwitchCompat"
+        android:textSize="30sp"
+        android:gravity="center_vertical|left"
+
+        android:checked="true"
+        android:clickable="true"
+
+        android:background="@drawable/transparent_ripple"
+        android:thumb="@drawable/checkline"
+        android:track="@null"
+        />
+
+</LinearLayout>
