@@ -232,19 +232,19 @@ public class MainActivity extends ActionBarActivity    {
             switch (m_pageNum) {
 
                 case 0:
-                    layout = R.layout.page1frag;
+                    layout = R.layout.page0frag;
                     break;
                 case 1:
-                    layout = R.layout.page2frag;
+                    layout = R.layout.page1frag;
                     break;
                 case 2:
-                    layout = R.layout.page3frag;
+                    layout = R.layout.page2frag;
                     break;
                 case 3:
-                    layout = R.layout.page4frag;
+                    layout = R.layout.page3frag;
                     break;
                 case 4:
-                    layout = R.layout.page5frag;
+                    layout = R.layout.page4frag;
                     break;
 
                 default:
