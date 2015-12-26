@@ -104,12 +104,12 @@ public class MainActivity extends ActionBarActivity    {
     @Override
     protected void onResume() {
         super.onResume();
-        if (mViewPager != null) {
+        if (mViewPager != null && mViewPager.getAdapter() == null) {
             // Create the adapter that will return a fragment for each page.
             mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
             mViewPager.setAdapter(mSectionsPagerAdapter);
             // Optionally set limit of pages to keep.
-            mViewPager.setOffscreenPageLimit(mSectionsPagerAdapter.getCount());
+            // mViewPager.setOffscreenPageLimit(mSectionsPagerAdapter.getCount());
         }
     }
 
@@ -117,8 +117,8 @@ public class MainActivity extends ActionBarActivity    {
     protected void onPause() {
         super.onPause();
         mSectionsPagerAdapter = null;
-        if (mViewPager != null)
-            mViewPager.setAdapter(mSectionsPagerAdapter);
+        // if (mViewPager != null)
+        //     mViewPager.setAdapter(mSectionsPagerAdapter);
     }
 
     @Override
@@ -198,17 +198,11 @@ public class MainActivity extends ActionBarActivity    {
      * A page fragment with selectable layouts per page number.
      */
     public static class PageFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
+        // The fragment argument representing the section number for this  fragment.
         private static final String ARG_page_number = "page_number";
         int m_pageNum = 0;
 
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
+        // Returns a new instance of this fragment for the given section  number.
         public static PageFragment newInstance(int sectionNumber) {
             PageFragment fragment = new PageFragment();
 

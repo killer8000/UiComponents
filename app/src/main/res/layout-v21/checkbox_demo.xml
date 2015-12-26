@@ -18,13 +18,13 @@
             android:orientation="vertical" >
 
     <!--
-     android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
-    android:drawableRight="@drawable/btn_check_material_anim"
+       android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+       android:drawableRight="@drawable/btn_check_material_anim"
 
        android:drawableRight="@drawable/state_test"
-        android:drawableTop="@drawable/state_test"
-        android:drawableLeft="@drawable/state_test"
-        android:drawableBottom="@drawable/state_test"
+       android:drawableTop="@drawable/state_test"
+       android:drawableLeft="@drawable/state_test"
+       android:drawableBottom="@drawable/state_test"
     -->
 
     <Button
@@ -42,7 +42,6 @@
         android:drawableRight="@drawable/checkline"
         />
 
-
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/p2Button2"
         android:layout_width="match_parent"
@@ -56,8 +55,7 @@
 
         android:background="@drawable/transparent_ripple"
         android:drawableRight="@drawable/checkline"
-      />
-
+        />
 
     <TextView
         android:id="@+id/p2TextView1"
@@ -176,7 +174,6 @@
         android:drawableRight="@drawable/checkline"
         android:background="@drawable/transparent_ripple" />
 
-    <!--
     <ToggleButton
         android:id="@+id/p2ToggleButton2"
         android:layout_width="match_parent"
@@ -191,7 +188,6 @@
         android:checked="true"
         android:drawableRight="@drawable/btn_check_material_anim"
         android:background="@drawable/transparent_ripple" />
--->
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -240,7 +236,6 @@
         android:drawableRight="@drawable/checkline"
         android:background="@drawable/transparent_ripple" />
 
-
     <android.support.v7.widget.AppCompatRadioButton
         android:id="@+id/p2RadioButton2"
         android:layout_width="match_parent"
@@ -254,7 +249,6 @@
         android:button="@null"
         android:drawableRight="@drawable/checkline"
         android:background="@drawable/transparent_ripple" />
-
 
     <View
         android:layout_width="match_parent"
@@ -276,10 +270,11 @@
 
         android:background="@drawable/transparent_ripple"
         android:thumb="@drawable/checkline"
-        android:track="@drawable/image_off"
+        android:track="@null"
         />
 
     <!-- android:background="@android:drawable/checkbox_on_background" -->
+
     <android.support.v7.widget.SwitchCompat
         android:id="@+id/p2Switch2"
         android:layout_width="match_parent"
@@ -296,7 +291,7 @@
         android:track="@null"
         />
 
-        </LinearLayout>
+</LinearLayout>
     </ScrollView>
 
     <View

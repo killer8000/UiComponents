@@ -29,6 +29,7 @@ import android.animation.TypeEvaluator;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -85,7 +86,18 @@ public class AnimListFrag  extends Fragment {
         return mRootView;
     }
 
-    public void setup() {
+    @Override
+    public void onDestroyView()
+    {
+        super.onDestroyView();
+        // Required to prevent duplicate id when Fragment re-created.
+        Fragment fragment = (getFragmentManager().findFragmentById(R.id.anim_list_id));
+        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+        ft.remove(fragment);
+        ft.commit();
+    }
+
+    private void setup() {
         mTitle1 = Ui.viewById(mRootView, R.id.title1);
         mTitle2 = Ui.viewById(mRootView, R.id.title2);
 

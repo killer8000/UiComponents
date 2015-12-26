@@ -1,23 +1,25 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/holder1"
+            android:id="@+id/switch_holder"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/bg"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="10dp">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="ToggleButton"
+                android:text="ToggleButtons"
                 android:textSize="20sp" />
 
             <ToggleButton
@@ -36,7 +38,7 @@
             <View
                 android:layout_width="wrap_content"
                 android:layout_height="1dp"
-                android:background="#404040" />
+                android:background="#80808080" />
 
             <ToggleButton
                 android:id="@+id/toggleButton2"
@@ -60,7 +62,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Switch"
+                android:text="Switches"
                 android:textSize="20sp" />
 
             <Switch
@@ -70,9 +72,9 @@
                 android:background="@drawable/transparent_ripple"
 
                 android:text="Custom\nthumb track"
-                android:textColor="#00ff00"
-                android:textOn=""
+                android:textColor="#008080"
                 android:textOff=""
+                android:textOn=""
                 android:textSize="@dimen/buttonTextSize"
                 android:thumb="@drawable/thumb"
                 android:track="@drawable/track" />
@@ -80,7 +82,7 @@
             <View
                 android:layout_width="wrap_content"
                 android:layout_height="1dp"
-                android:background="#404040" />
+                android:background="#80808080" />
 
             <Switch
                 android:id="@+id/switchButton2"
@@ -90,7 +92,7 @@
 
                 android:switchMinWidth="60dp"
                 android:text="Using\nTint"
-                android:textColor="#00ff00"
+                android:textColor="#008080"
 
                 android:textSize="@dimen/buttonTextSize"
                 android:thumbTint="#2096F0"
@@ -113,7 +115,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:background="@drawable/transparent_ripple"
-                android:text="Hello\nWorld"
+                android:text="Tint\nTrack Thumb"
                 android:textColor="#ff00ff"
                 android:textSize="@dimen/buttonTextSize"
                 android:theme="@style/SwitchBlueTheme"
@@ -123,7 +125,7 @@
             <View
                 android:layout_width="wrap_content"
                 android:layout_height="1dp"
-                android:background="#404040" />
+                android:background="#80808080" />
 
             <android.support.v7.widget.SwitchCompat
                 android:id="@+id/switchCompat2"
@@ -131,11 +133,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
-                android:thumb="@drawable/thumb"
-                android:track="@drawable/track"
-
                 android:text="Custom\nShapes"
-                android:theme="@style/SwitchBlueTheme" />
+                android:theme="@style/SwitchBlueTheme"
+
+                android:thumb="@drawable/thumb"
+                android:track="@drawable/track" />
 
             <android.support.v7.widget.SwitchCompat
                 android:id="@+id/switchCompat3"
@@ -143,30 +145,56 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
-                android:thumb="@drawable/thumb9"
                 android:text="Custom\nImage"
-                android:theme="@style/SwitchBlueTheme" />
-
-            <View
-                android:layout_width="wrap_content"
-                android:layout_height="2dp"
-                android:background="#404040" />
-
-            <ToggleButton
-                android:id="@+id/enabledTb"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/transparent_ripple"
-                android:drawableRight="@drawable/toggle_selector"
-                android:gravity="left"
-                android:textAllCaps="false"
-                android:textColor="#ff0000"
-                android:textOff="Disabled"
-                android:textOn="Enabled"
-                android:textSize="@dimen/buttonTextSize"
-                android:checked="true" />
+                android:theme="@style/SwitchBlueTheme"
+                android:thumb="@drawable/thumb9" />
 
         </LinearLayout>
     </ScrollView>
 
-</RelativeLayout>
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="2dp"
+        android:background="#404040" />
+
+    <LinearLayout
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ToggleButton
+            android:id="@+id/enabledTb"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textOff="Disabled"
+            android:textOn="Enabled"
+            android:textSize="20sp"
+            android:checked="true"
+            android:background="@drawable/transparent_ripple" />
+
+        <ToggleButton
+            android:id="@+id/checkedTb"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textOff="unChecked"
+            android:textOn="Checked"
+            android:textSize="20sp"
+            android:checked="true"
+            android:background="@drawable/transparent_ripple" />
+
+        <ToggleButton
+            android:id="@+id/backgroundTb"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textOff="DarkBg"
+            android:textOn="LightBg"
+            android:textSize="20sp"
+            android:checked="true"
+            android:background="@drawable/transparent_ripple" />
+    </LinearLayout>
+
+
+</LinearLayout>

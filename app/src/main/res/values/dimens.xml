@@ -4,7 +4,8 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
 
-    <dimen name="buttonTextSize">30sp</dimen>
+    <dimen name="buttonHeight">50dp</dimen>
+    <dimen name="buttonTextSize">20sp</dimen>
 
     <dimen name="thumb_size">28dp</dimen>      <!-- 28 40 20 -->
     <dimen name="track_width">20dp</dimen>     <!-- 20 -->
