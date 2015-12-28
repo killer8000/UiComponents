@@ -108,8 +108,10 @@ public class MainActivity extends ActionBarActivity    {
             // Create the adapter that will return a fragment for each page.
             mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
             mViewPager.setAdapter(mSectionsPagerAdapter);
-            // Optionally set limit of pages to keep.
-            // mViewPager.setOffscreenPageLimit(mSectionsPagerAdapter.getCount());
+            if (false) {
+                // Optionally set limit of pages to keep.
+                mViewPager.setOffscreenPageLimit(mSectionsPagerAdapter.getCount());
+            }
         }
     }
 
@@ -149,6 +151,26 @@ public class MainActivity extends ActionBarActivity    {
     }
 
     // =============================================================================================
+    static class Item {
+        String mTitle;
+        int mLayout;
+        public Item(String title, int layout) {
+            mTitle = title; mLayout = layout;
+        }
+    }
+    static final Item[] mItems = new Item[] {
+            new Item( "Assorted", R.layout.page0frag),
+
+            new Item( "List", R.layout.page_radio_list),
+            new Item( "List1", R.layout.page_list1),
+            new Item( "Custom List",  R.layout.page_anim_list ),
+
+            new Item( "Toggle/Switch",  R.layout.page_switches),
+            new Item( "CheckboxRight",  R.layout.page_checkbox_right ),
+            new Item( "CheckboxLeft",  R.layout.page_checkbox_left ),
+    };
+
+    // =============================================================================================
     // SectionsPagerAdapter - implement page swipes
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
@@ -171,26 +193,12 @@ public class MainActivity extends ActionBarActivity    {
 
         @Override
         public int getCount() {
-            return 5;  // View swipe page count.
+            return mItems.length;  // View swipe page count.
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
-
-            switch (position) {
-                case 0:
-                    return "Assorted";
-                case 1:
-                    return "List";
-                case 2:
-                    return "Custom List";
-                case 3:
-                    return "Toggle/Switch";
-                case 4:
-                    return "Checkbox";
-                default:
-                    return String.valueOf(position);
-            }
+            return mItems[position].mTitle;
         }
     }
 
@@ -212,39 +220,11 @@ public class MainActivity extends ActionBarActivity    {
             return fragment;
         }
 
-        public PageFragment() {
-        }
-
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            Bundle args = getArguments();
-            if (args != null)
-                m_pageNum = args.getInt(ARG_page_number);
-
-            int layout = -1;
-            switch (m_pageNum) {
-
-                case 0:
-                    layout = R.layout.page0frag;
-                    break;
-                case 1:
-                    layout = R.layout.page1frag;
-                    break;
-                case 2:
-                    layout = R.layout.page2frag;
-                    break;
-                case 3:
-                    layout = R.layout.page3frag;
-                    break;
-                case 4:
-                    layout = R.layout.page4frag;
-                    break;
-
-                default:
-                    throw new UnsupportedOperationException("missing fragment");
-            }
-
+            m_pageNum = getArguments().getInt(ARG_page_number);
+            int layout =  mItems[m_pageNum].mLayout;
             View rootView = inflater.inflate(layout, container, false);
             return rootView;
         }

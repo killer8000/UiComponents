@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#804040"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+
+
+    <TextView
+        android:id="@+id/topTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:padding="10dp"
+        android:background="#d0d0ff"
+        android:text="Scrolling RadioBtns" />
+
+    <ListView
+        android:id="@+id/list1view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@+id/topTitle"
+        android:layout_above="@+id/bottomArea"
+        android:background="@drawable/paper_pink"
+        android:layout_margin="5dp"
+        android:padding="15dp"
+        android:choiceMode="singleChoice"
+        android:scrollbars="vertical"
+        android:smoothScrollbar="true"
+        android:footerDividersEnabled="true"
+        android:headerDividersEnabled="true"
+        android:dividerHeight="1dp"
+        android:divider="#402040"
+        tools:listitem="@layout/list1_row_checkbox" />
+        />
+
+    <RadioGroup
+        android:id="@+id/bottomArea"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="horizontal"
+        android:background="#d0d0ff"
+        android:layout_alignParentBottom="true" >
+
+        <RadioButton
+            android:id="@+id/ckBoxRb"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="CkBox"
+            android:checked="true"
+            />
+
+        <RadioButton
+            android:id="@+id/ckTxBoxRb"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="CkTxBox"
+            />
+
+    </RadioGroup>
+
+</RelativeLayout>

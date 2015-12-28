@@ -20,11 +20,12 @@ import java.util.List;
  */
 public class CheckboxDemoFrag  extends Fragment implements View.OnClickListener {
 
-    private View mRootView;
+    protected View mRootView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mRootView = inflater.inflate(R.layout.checkbox_demo, container, false);
+
+        mRootView = inflater.inflate(R.layout.checkbox_right_demo, container, false);
         setup();
         return mRootView;
     }
@@ -49,7 +50,7 @@ public class CheckboxDemoFrag  extends Fragment implements View.OnClickListener 
         }
     }
 
-    private void setup() {
+    protected void setup() {
 
         addView(Ui.needViewById(mRootView, R.id.p2Button1));
         addView(Ui.viewById(mRootView, R.id.p2Button2));
