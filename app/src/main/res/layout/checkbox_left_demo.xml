@@ -10,7 +10,7 @@
         android:layout_height="0dp"
         android:layout_weight="1">
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -270,7 +270,7 @@
 
                 android:textSize="@dimen/buttonTextSize"
                 android:thumb="@drawable/checkline"
-                android:track="@null" />
+                android:track="@drawable/image_off" />
 
             <!-- android:background="@android:drawable/checkbox_on_background" -->
             <android.support.v7.widget.SwitchCompat

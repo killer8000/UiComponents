@@ -143,7 +143,7 @@ public class MainActivity extends ActionBarActivity    {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.menu_settings) {
             return true;
         }
 
@@ -161,8 +161,8 @@ public class MainActivity extends ActionBarActivity    {
     static final Item[] mItems = new Item[] {
             new Item( "Assorted", R.layout.page0frag),
 
-            new Item( "List", R.layout.page_radio_list),
-            new Item( "List1", R.layout.page_list1),
+            new Item( "RadioBtn List", R.layout.page_radio_list),
+            new Item( "CkBox List", R.layout.page_list1),
             new Item( "Custom List",  R.layout.page_anim_list ),
 
             new Item( "Toggle/Switch",  R.layout.page_switches),

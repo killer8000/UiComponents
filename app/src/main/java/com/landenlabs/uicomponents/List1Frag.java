@@ -40,8 +40,9 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Demonstrate rotating Two Views using  ObjectAnimators (slide look)
- * Using rotation (R) only.   See ActivityObjAnimListRT for alternate look.
+ * Demonstrate list of checkboxes (two different types).
+ * CheckBox  does not honor the single selection mode of ListView
+ * CheckedTextView honors the single selection mode of ListView
  *
  * @author Dennis Lang (LanDen Labs)
  * @see <a href="http://landenlabs.com/android/index-m.html"> author's web-site </a>

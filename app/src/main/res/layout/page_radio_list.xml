@@ -42,23 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
                 android:padding="10dp"
-                android:text="New RadioButton1" />
-
-            <RadioButton
-                android:id="@+id/radioButton3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:padding="10dp"
-                android:text="New RadioButton2" />
-
-            <RadioButton
-                android:id="@+id/radioButton4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:padding="10dp"
-                android:text="New RadioButton3" />
+                android:text="RadioButton Def1" />
 
             <RadioButton
                 android:id="@+id/radioButton5"
@@ -66,7 +50,34 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
                 android:padding="10dp"
-                android:text="New RadioButton4" />
+                android:text="RadioButton Top2"
+                android:background="#c0c0ff"
+                android:button="@null"
+                android:drawableTop="@android:drawable/btn_radio"
+                android:gravity="center" />
+
+            <RadioButton
+                android:id="@+id/radioButton3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:padding="10dp"
+                android:text="RadioButtonRight3"
+                android:button="@null"
+                android:drawableRight="@android:drawable/btn_radio"
+                />
+
+            <RadioButton
+                android:id="@+id/radioButton4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:padding="10dp"
+                android:background="#c0c0ff"
+                android:text="RadioButtonBottom4"
+                android:button="@null"
+                android:drawableBottom="@android:drawable/btn_radio"
+                android:gravity="center" />
 
             <RadioButton
                 android:id="@+id/radioButton6"
@@ -81,6 +92,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
+                android:background="#c0c0ff"
                 android:padding="10dp"
                 android:text="New RadioButton6" />
 
@@ -96,6 +108,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
+                android:background="#c0c0ff"
                 android:padding="10dp"
                 android:text="New RadioButton8" />
 
