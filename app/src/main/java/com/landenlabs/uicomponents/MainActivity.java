@@ -119,13 +119,14 @@ public class MainActivity extends ActionBarActivity    {
     protected void onPause() {
         super.onPause();
         mSectionsPagerAdapter = null;
-        // if (mViewPager != null)
-        //     mViewPager.setAdapter(mSectionsPagerAdapter);
+        if (mViewPager != null)
+             mViewPager.setAdapter(mSectionsPagerAdapter);
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
+        // Prevent crash on rotation - due to nested fragments.
+        // super.onSaveInstanceState(outState);
     }
 
     @Override
