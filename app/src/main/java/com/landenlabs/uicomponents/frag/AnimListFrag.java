@@ -1,4 +1,4 @@
-package com.landenlabs.uicomponents;
+package com.landenlabs.uicomponents.frag;
 
 /**
  * Copyright (c) 2015 Dennis Lang (LanDen Labs) landenlabs@gmail.com
@@ -37,6 +37,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.landenlabs.uicomponents.R;
+import com.landenlabs.uicomponents.Ui;
 
 import java.util.Arrays;
 import java.util.List;
@@ -90,11 +93,16 @@ public class AnimListFrag  extends Fragment {
     public void onDestroyView()
     {
         super.onDestroyView();
-        // Required to prevent duplicate id when Fragment re-created.
-        Fragment fragment = (getFragmentManager().findFragmentById(R.id.anim_list_id));
-        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-        ft.remove(fragment);
-        ft.commit();
+
+        if (! getRetainInstance()) {
+            // Required to prevent duplicate id when Fragment re-created.
+            Fragment fragment = (getFragmentManager().findFragmentById(R.id.anim_list_id));
+            if (fragment != null) {
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.remove(fragment);
+                ft.commit();
+            }
+        }
     }
 
     private void setup() {

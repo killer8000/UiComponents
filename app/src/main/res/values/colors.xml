@@ -6,4 +6,7 @@
 
     <color name="control_checkable_material"> #00ff00</color>
     <color name="highlight">#80ffff00</color>
+
+    <color name="row0">#80c0c0ff</color>
+    <color name="row1">#80c0ffc0</color>
 </resources>

@@ -160,6 +160,8 @@ public class MainActivity extends ActionBarActivity    {
     }
     static final Item[] mItems = new Item[] {
             new Item( "Assorted", R.layout.page0frag),
+            new Item( "Grid Images", R.layout.page_grid_image),
+            new Item( "Images", R.layout.page_images),
 
             new Item( "RadioBtn List", R.layout.page_radio_list),
             new Item( "CkBox List", R.layout.page_list1),

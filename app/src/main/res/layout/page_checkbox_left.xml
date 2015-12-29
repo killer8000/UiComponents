@@ -2,7 +2,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/checkbox_demo_id"
-    android:name="com.landenlabs.uicomponents.CheckboxLeftDemoFrag"
+    android:name="com.landenlabs.uicomponents.frag.CheckboxLeftDemoFrag"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:layout="@layout/checkbox_left_demo" />

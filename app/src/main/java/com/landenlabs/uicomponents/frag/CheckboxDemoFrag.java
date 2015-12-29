@@ -1,4 +1,4 @@
-package com.landenlabs.uicomponents;
+package com.landenlabs.uicomponents.frag;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,6 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckedTextView;
 import android.widget.CompoundButton;
+
+import com.landenlabs.uicomponents.R;
+import com.landenlabs.uicomponents.Ui;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,11 +37,16 @@ public class CheckboxDemoFrag  extends Fragment implements View.OnClickListener 
     public void onDestroyView()
     {
         super.onDestroyView();
-        // Required to prevent duplicate id when Fragment re-created.
-        Fragment fragment = (getFragmentManager().findFragmentById(R.id.checkbox_demo_id));
-        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-        ft.remove(fragment);
-        ft.commit();
+
+        if (! getRetainInstance()) {
+            // Required to prevent duplicate id when Fragment re-created.
+            Fragment fragment = (getFragmentManager().findFragmentById(R.id.checkbox_demo_id));
+            if (fragment != null) {
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.remove(fragment);
+                ft.commit();
+            }
+        }
     }
 
     private List<View> mViewList = new ArrayList<>();

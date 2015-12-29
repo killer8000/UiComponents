@@ -5,7 +5,7 @@
             android:duration="500"
             android:propertyName="translationZ"
             android:valueType="floatType"
-            android:valueTo="40" />
+            android:valueTo="20" />
     </item>
 
     <item android:state_checked="true">
@@ -13,7 +13,7 @@
             android:duration="500"
             android:propertyName="translationZ"
             android:valueType="floatType"
-            android:valueTo="40" />
+            android:valueTo="20" />
     </item>
 
     <item android:state_pressed="false">

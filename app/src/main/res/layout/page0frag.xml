@@ -31,6 +31,7 @@
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:stateListAnimator="@anim/press"
                 android:text="Button Full" />
 
             <Button
@@ -38,22 +39,26 @@
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:stateListAnimator="@anim/press"
                 android:layout_gravity="right"
                 android:text="Button Wrap" />
 
             <RadioGroup
                 android:background="#e0e0ff"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <RadioButton
                     android:id="@+id/p0RadioButton1"
+                    android:stateListAnimator="@anim/press"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="RadioBtn Full" />
 
                 <RadioButton
                     android:id="@+id/p0RadioButton2"
+                    android:stateListAnimator="@anim/press"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
@@ -69,16 +74,27 @@
 
                 <CheckBox
                     android:id="@+id/p0CheckBox"
+                    android:stateListAnimator="@anim/press"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:text="CheckBox Full" />
 
                 <CheckBox
                     android:id="@+id/p0CheckBox2"
+                    android:stateListAnimator="@anim/press"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
                     android:text="CheckBox wrap" />
+
+            </GridLayout>
+
+            <LinearLayout
+                android:id="@+id/p0GridLayout2"
+                android:background="#e0ffe0"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
                 <CheckedTextView
                     android:id="@+id/p0CheckedTextView1"
@@ -99,12 +115,13 @@
                     android:text="CheckTextBox wrap"
                     android:checked="true"
                     android:clickable="true" />
-            </GridLayout>
+            </LinearLayout>
 
             <ToggleButton
                 android:id="@+id/o0ToggleButton1"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:stateListAnimator="@anim/press"
                 android:text="New ToggleButton" />
 
             <ToggleButton
@@ -112,13 +129,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
+                android:stateListAnimator="@anim/press"
                 android:text="New ToggleButton" />
 
             <ImageButton
                 android:id="@+id/p0ImageButton1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/image100" />
+                android:src="@drawable/image100"
+                android:stateListAnimator="@anim/press" />
 
         </LinearLayout>
     </ScrollView>
