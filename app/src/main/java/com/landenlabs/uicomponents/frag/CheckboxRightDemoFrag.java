@@ -8,7 +8,10 @@ import android.view.ViewGroup;
 import com.landenlabs.uicomponents.R;
 
 /**
- * Created by dlang_local on 12/27/2015.
+ * Demonstrate Checkbox ui components with checkmark on right margin.
+ *
+ * @author Dennis Lang (LanDen Labs)
+ * @see <a href="http://landenlabs.com/android/index-m.html"> author's web-site </a>
  */
 public class CheckboxRightDemoFrag extends CheckboxDemoFrag {
     @Override

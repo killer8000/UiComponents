@@ -45,8 +45,9 @@ import java.util.List;
 
 /**
  * Demonstrate list of checkboxes (two different types).
- * CheckBox  does not honor the single selection mode of ListView
- * CheckedTextView honors the single selection mode of ListView
+ *   CheckBox  does not honor the single selection mode of ListView
+ *   CheckedTextView honors the single selection mode of ListView
+ * and most of the standard pre-built list row layouts.
  *
  * @author Dennis Lang (LanDen Labs)
  * @see <a href="http://landenlabs.com/android/index-m.html"> author's web-site </a>

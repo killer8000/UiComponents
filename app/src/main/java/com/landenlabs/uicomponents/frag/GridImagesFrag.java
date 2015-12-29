@@ -46,7 +46,6 @@ import com.landenlabs.uicomponents.Ui;
  * @see <a href="http://landenlabs.com/android/index-m.html"> author's web-site </a>
  */
 
-
 public class GridImagesFrag  extends Fragment   {
 
     View mRootView;
