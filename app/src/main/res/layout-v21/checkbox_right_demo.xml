@@ -15,16 +15,6 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <!--
-               android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
-               android:drawableRight="@drawable/btn_check_material_anim"
-
-               android:drawableRight="@drawable/state_test"
-               android:drawableTop="@drawable/state_test"
-               android:drawableLeft="@drawable/state_test"
-               android:drawableBottom="@drawable/state_test"
-            -->
-
             <Button
                 android:id="@+id/p2Button1"
                 android:layout_width="match_parent"
