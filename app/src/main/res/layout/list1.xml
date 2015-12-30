@@ -52,7 +52,7 @@
             <RadioButton
                 android:id="@+id/row_ckBoxRb"
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:text="CkBox"
                 android:checked="true"
                 />
@@ -60,7 +60,7 @@
             <RadioButton
                 android:id="@+id/row_ckTxBoxRb"
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:text="CkTxBox"
                 />
 
@@ -72,13 +72,13 @@
             <RadioButton
                 android:id="@+id/row_simpleList1"
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:text="Simple List1"
                 />
             <RadioButton
                 android:id="@+id/row_simpleChk1"
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:text="Simple Chk1"
                 />
 
@@ -86,13 +86,13 @@
             <RadioButton
                 android:id="@+id/row_singleChoice1"
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:text="Single Choice"
                 />
             <RadioButton
                 android:id="@+id/row_multiChoice1"
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:text="Multi Choice"
                 />
 
@@ -100,13 +100,13 @@
             <RadioButton
                 android:id="@+id/row_activatedList1"
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:text="Activated List"
                 />
             <RadioButton
                 android:id="@+id/row_selectable"
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:text="Selectable"
                 />
 

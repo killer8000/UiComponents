@@ -23,6 +23,7 @@ package com.landenlabs.uicomponents.frag;
  *
  */
 
+import android.animation.AnimatorInflater;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -36,6 +37,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.landenlabs.uicomponents.BuildConfig;
 import com.landenlabs.uicomponents.R;
 import com.landenlabs.uicomponents.Ui;
 
@@ -116,6 +118,11 @@ public class GridImagesFrag  extends Fragment   {
                 imageView.setLayoutParams(new GridView.LayoutParams(85, 85));
                 imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 imageView.setPadding(8, 8, 8, 8);
+
+                imageView.setClickable(true);
+                if (BuildConfig.VERSION_CODE >= 21) {
+                    imageView.setStateListAnimator(AnimatorInflater.loadStateListAnimator(mContext, R.anim.press));
+                }
             } else {
                 imageView = (ImageView) convertView;
             }

@@ -49,6 +49,8 @@
                 android:layout_height="90dp"
                 android:background="@color/row1"
                 android:scaleType="fitStart"
+                android:clickable="true"
+                android:stateListAnimator="@anim/press"
                 android:src="@drawable/image200" />
 
             <TextView
@@ -64,6 +66,8 @@
                 android:layout_height="90dp"
                 android:background="@color/row0"
                 android:scaleType="fitEnd"
+                android:clickable="true"
+                android:stateListAnimator="@anim/press"
                 android:src="@drawable/image200" />
 
             <TextView
@@ -79,6 +83,8 @@
                 android:layout_height="90dp"
                 android:background="@color/row1"
                 android:scaleType="fitCenter"
+                android:clickable="true"
+                android:stateListAnimator="@anim/press"
                 android:src="@drawable/image200" />
 
             <TextView
@@ -94,6 +100,8 @@
                 android:layout_height="90dp"
                 android:background="@color/row0"
                 android:scaleType="center"
+                android:clickable="true"
+                android:stateListAnimator="@anim/press"
                 android:src="@drawable/image200" />
 
             <TextView
@@ -102,6 +110,7 @@
                 android:layout_marginTop="10dp"
                 android:background="@color/row1"
                 android:text="centerInside"
+
                 android:textAppearance="@style/TextAppearanceWhite20" />
 
             <ImageView
@@ -109,6 +118,8 @@
                 android:layout_height="90dp"
                 android:background="@color/row1"
                 android:scaleType="centerInside"
+                android:clickable="true"
+                android:stateListAnimator="@anim/press"
                 android:src="@drawable/image200" />
 
             <TextView
@@ -124,6 +135,8 @@
                 android:layout_height="90dp"
                 android:background="@color/row0"
                 android:scaleType="centerCrop"
+                android:clickable="true"
+                android:stateListAnimator="@anim/press"
                 android:src="@drawable/image200" />
 
             <TextView
@@ -139,6 +152,8 @@
                 android:layout_height="90dp"
                 android:background="@color/row1"
                 android:scaleType="fitXY"
+                android:clickable="true"
+                android:stateListAnimator="@anim/press"
                 android:src="@drawable/image200" />
         </LinearLayout>
     </ScrollView>
