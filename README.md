@@ -5,7 +5,15 @@ Switches
 ![ScreenShot](https://raw.github.com/landenlabs/UiComponents/master/screenshots/page7-switches.png)
 
 Checkboxes
-![ScreenShot](https://github.com/landenlabs/UiComponents/master/screenshots/page8-checkboxes.png)
+![ScreenShot](https://raw.github.com/landenlabs/UiComponents/master/screenshots/page8-checkboxes.png)
 
 Switches (gif)
-![ScreenShot](https://http://landenlabs.com/android/uicomponents/switches.gif)
+![ScreenShot](http://landenlabs.com/android/uicomponents/switches.gif)
+
+Text
+![ScreenShot](https://raw.github.com/landenlabs/UiComponents/master/screenshots/page1-text.png)
+
+Image ScaleType 
+![ScreenShot](https://raw.github.com/landenlabs/UiComponents/master/screenshots/page3-image-scale.png)
+
+
