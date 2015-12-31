@@ -15,13 +15,14 @@
         android:background="#d0d0ff"
         android:text="Scrolling RadioBtns" />
 
+    <!--  android:background="@drawable/paper_pink" -->
     <ListView
         android:id="@+id/list1view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_below="@+id/topTitle"
         android:layout_above="@+id/bottomArea"
-        android:background="@drawable/paper_pink"
+        android:background="#e0a020"
         android:layout_margin="5dp"
         android:padding="15dp"
         android:choiceMode="singleChoice"
