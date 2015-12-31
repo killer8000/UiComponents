@@ -1,6 +1,10 @@
 # UiComponents
 Demonstrate various Ui Components (useful to see how they change on different API levels 19...23)
 
+
+[Wiki link](http://landenlabs.com/android/uicomponents/uicomponents.html) for more information.
+
+
 Switches 
 
 ![ScreenShot](http://landenlabs.com/android/uicomponents/switches.gif)
