@@ -42,5 +42,4 @@
     android:toId="@+id/unchecked"
     android:drawable="@drawable/checkline_to_uncheck_animation_list" />
 
-
 </animated-selector>
