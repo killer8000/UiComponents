@@ -8,5 +8,8 @@
     <color name="highlight">#80ffff00</color>
 
     <color name="row0">#80c0c0ff</color>
+    <color name="rowtx0">#40408f</color>
     <color name="row1">#80c0ffc0</color>
+    <color name="rowtx1">#408f40</color>
+    <color name="rowtx">#303030</color>
 </resources>

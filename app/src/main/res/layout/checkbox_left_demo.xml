@@ -1,6 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="#303030"
     android:orientation="vertical"
     android:padding="10dp">
@@ -14,7 +14,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <!--
@@ -172,7 +172,7 @@
                 android:textOn="ToggleButtonOn"
                 android:textSize="@dimen/buttonTextSize" />
 
-            <!--
+            <!-- -->
             <ToggleButton
                 android:id="@+id/p2ToggleButton2"
                 android:layout_width="match_parent"
@@ -187,7 +187,6 @@
                 android:textOff="ToggleBtnnAnimOff"
                 android:textOn="ToggleBtnnAnimOn"
                 android:textSize="@dimen/buttonTextSize" />
-            -->
 
             <RelativeLayout
                 android:id="@+id/p2ImageButton1"

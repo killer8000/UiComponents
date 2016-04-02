@@ -24,6 +24,7 @@ package com.landenlabs.uicomponents.frag;
  */
 
 import android.animation.AnimatorInflater;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -176,7 +177,9 @@ public class List1Frag  extends Fragment implements CompoundButton.OnCheckedChan
                 // String itemStr = listView.getItemAtPosition(position).toString();
                 // title.setText(itemStr);
                 mCurrentIdx = position;
-                view.setStateListAnimator(AnimatorInflater.loadStateListAnimator(view.getContext(), R.anim.press));
+                if(Build.VERSION.SDK_INT >= 21) {
+                    view.setStateListAnimator(AnimatorInflater.loadStateListAnimator(view.getContext(), R.anim.press));
+                }
                 view.setPressed(true);
             }
         });

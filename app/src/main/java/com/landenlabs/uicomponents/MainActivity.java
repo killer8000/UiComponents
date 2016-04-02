@@ -25,12 +25,14 @@ package com.landenlabs.uicomponents;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -63,6 +65,9 @@ public class MainActivity extends ActionBarActivity    {
 
     ActionBar mActionBar;
 
+    static final String STATE_ADAPTER = "secPageAdapter";
+    Parcelable mAdapterParcelable;
+
     // ---------------------------------------------------------------------------------------------
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +83,7 @@ public class MainActivity extends ActionBarActivity    {
 
             mActionBar.setSubtitle(BuildConfig.VERSION_NAME);
             mActionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_TITLE | ActionBar.DISPLAY_SHOW_HOME);
-            mActionBar.setIcon(R.mipmap.ic_launcher);
+            mActionBar.setIcon(R.drawable.uicomponents_sm);
         }
 
         // Set up the ViewPager with the sections adapter.
@@ -105,6 +110,7 @@ public class MainActivity extends ActionBarActivity    {
     protected void onResume() {
         super.onResume();
         if (mViewPager != null && mViewPager.getAdapter() == null) {
+            Log.d("foo", "onResume");
             // Create the adapter that will return a fragment for each page.
             mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
             mViewPager.setAdapter(mSectionsPagerAdapter);
@@ -112,12 +118,18 @@ public class MainActivity extends ActionBarActivity    {
                 // Optionally set limit of pages to keep.
                 mViewPager.setOffscreenPageLimit(mSectionsPagerAdapter.getCount());
             }
+            if (mAdapterParcelable != null) {
+                mSectionsPagerAdapter.restoreState(mAdapterParcelable, null);
+            }
         }
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+        Log.d("foo", "onPause");
+        if (mSectionsPagerAdapter != null)
+            mAdapterParcelable = mSectionsPagerAdapter.saveState();
         mSectionsPagerAdapter = null;
         if (mViewPager != null)
              mViewPager.setAdapter(mSectionsPagerAdapter);
@@ -125,8 +137,6 @@ public class MainActivity extends ActionBarActivity    {
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        // Prevent crash on rotation - due to nested fragments.
-        // super.onSaveInstanceState(outState);
     }
 
     @Override
@@ -159,6 +169,7 @@ public class MainActivity extends ActionBarActivity    {
             mTitle = title; mLayout = layout;
         }
     }
+
     static final Item[] mItems = new Item[] {
             new Item( "Assorted", R.layout.page0frag),
             new Item( "Text", R.layout.page_text),
@@ -167,12 +178,15 @@ public class MainActivity extends ActionBarActivity    {
             new Item( "Images", R.layout.page_images),
 
             new Item( "RadioBtn List", R.layout.page_radio_list),
-            new Item( "CkBox List", R.layout.page_list1),
+            new Item( "CkBox List", R.layout.page_list1),       // min api 21
             new Item( "Custom List",  R.layout.page_anim_list ),
 
             new Item( "Toggle/Switch",  R.layout.page_switches),
             new Item( "CheckboxRight",  R.layout.page_checkbox_right ),
             new Item( "CheckboxLeft",  R.layout.page_checkbox_left ),
+
+            new Item( "RelLayout",  R.layout.page_rellayout ),
+            new Item( "LayoutAnim",  R.layout.page_layout_anim ),
     };
 
     // =============================================================================================

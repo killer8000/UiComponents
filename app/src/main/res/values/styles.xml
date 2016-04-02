@@ -25,8 +25,10 @@
         <item name="android:textColor">#ff00ff</item>
         <item name="android:textSize">@dimen/buttonTextSize</item>
         <item name="android:background">@drawable/transparent_ripple</item>
+        <!-- min API 15
         <item name="android:thumbTint">#2096F0</item>
         <item name="android:trackTint">#165B90</item>
+        -->
     </style>
     <style name="TextAppearanceBlack" parent="@android:style/TextAppearance.Widget.TextView.SpinnerItem">
         <item name="android:textColor">@android:color/black</item>

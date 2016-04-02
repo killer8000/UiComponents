@@ -40,7 +40,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/row1"
+                android:background="@color/rowtx"
+                android:gravity="center"
                 android:text="fitStart"
                 android:textAppearance="@style/TextAppearanceWhite20" />
 
@@ -48,16 +49,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="90dp"
                 android:background="@color/row1"
-                android:scaleType="fitStart"
                 android:clickable="true"
-                android:stateListAnimator="@anim/press"
-                android:src="@drawable/image200" />
+                android:scaleType="fitStart"
+                android:src="@drawable/image200"
+                android:stateListAnimator="@anim/press" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:background="@color/row0"
+                android:background="@color/rowtx"
+                android:gravity="center"
                 android:text="fitEnd"
                 android:textAppearance="@style/TextAppearanceWhite20" />
 
@@ -65,16 +67,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="90dp"
                 android:background="@color/row0"
-                android:scaleType="fitEnd"
                 android:clickable="true"
-                android:stateListAnimator="@anim/press"
-                android:src="@drawable/image200" />
+                android:scaleType="fitEnd"
+                android:src="@drawable/image200"
+                android:stateListAnimator="@anim/press" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:background="@color/row1"
+                android:background="@color/rowtx"
+                android:gravity="center"
                 android:text="fitCenter"
                 android:textAppearance="@style/TextAppearanceWhite20" />
 
@@ -82,16 +85,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="90dp"
                 android:background="@color/row1"
-                android:scaleType="fitCenter"
                 android:clickable="true"
-                android:stateListAnimator="@anim/press"
-                android:src="@drawable/image200" />
+                android:scaleType="fitCenter"
+                android:src="@drawable/image200"
+                android:stateListAnimator="@anim/press" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:background="@color/row0"
+                android:background="@color/rowtx"
+                android:gravity="center"
                 android:text="center"
                 android:textAppearance="@style/TextAppearanceWhite20" />
 
@@ -99,34 +103,35 @@
                 android:layout_width="match_parent"
                 android:layout_height="90dp"
                 android:background="@color/row0"
-                android:scaleType="center"
                 android:clickable="true"
-                android:stateListAnimator="@anim/press"
-                android:src="@drawable/image200" />
+                android:scaleType="center"
+                android:src="@drawable/image200"
+                android:stateListAnimator="@anim/press" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:background="@color/row1"
+                android:background="@color/rowtx"
+                android:gravity="center"
                 android:text="centerInside"
-
                 android:textAppearance="@style/TextAppearanceWhite20" />
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="90dp"
                 android:background="@color/row1"
-                android:scaleType="centerInside"
                 android:clickable="true"
-                android:stateListAnimator="@anim/press"
-                android:src="@drawable/image200" />
+                android:scaleType="centerInside"
+                android:src="@drawable/image200"
+                android:stateListAnimator="@anim/press" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:background="@color/row0"
+                android:background="@color/rowtx"
+                android:gravity="center"
                 android:text="centerCrop"
                 android:textAppearance="@style/TextAppearanceWhite20" />
 
@@ -134,16 +139,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="90dp"
                 android:background="@color/row0"
-                android:scaleType="centerCrop"
                 android:clickable="true"
-                android:stateListAnimator="@anim/press"
-                android:src="@drawable/image200" />
+                android:scaleType="centerCrop"
+                android:src="@drawable/image200"
+                android:stateListAnimator="@anim/press" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:background="@color/row1"
+                android:background="@color/rowtx"
+                android:gravity="center"
                 android:text="fitXY"
                 android:textAppearance="@style/TextAppearanceWhite20" />
 
@@ -151,10 +157,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="90dp"
                 android:background="@color/row1"
-                android:scaleType="fitXY"
                 android:clickable="true"
-                android:stateListAnimator="@anim/press"
-                android:src="@drawable/image200" />
+                android:scaleType="fitXY"
+                android:src="@drawable/image200"
+                android:stateListAnimator="@anim/press" />
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>
