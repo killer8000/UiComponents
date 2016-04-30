@@ -171,11 +171,14 @@ public class MainActivity extends ActionBarActivity    {
     }
 
     static final Item[] mItems = new Item[] {
+            new Item( "FullScreen",  R.layout.page_fullscreen ),
+
             new Item( "Assorted", R.layout.page0frag),
             new Item( "Text", R.layout.page_text),
 
             new Item( "Grid Images", R.layout.page_grid_image),
-            new Item( "Images", R.layout.page_images),
+            new Item( "Images", R.layout.page_image_scales),
+            new Item( "ImageOverlap",  R.layout.page_image_over ),
 
             new Item( "RadioBtn List", R.layout.page_radio_list),
             new Item( "CkBox List", R.layout.page_list1),       // min api 21

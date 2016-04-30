@@ -68,7 +68,7 @@ public class AnimLayoutFrag  extends Fragment {
 
         if (! getRetainInstance()) {
             // Required to prevent duplicate id when Fragment re-created.
-            Fragment fragment = (getFragmentManager().findFragmentById(R.id.rel_layout_id));
+            Fragment fragment = (getFragmentManager().findFragmentById(R.id.layout_anim_id));
             if (fragment != null) {
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                 ft.remove(fragment);
