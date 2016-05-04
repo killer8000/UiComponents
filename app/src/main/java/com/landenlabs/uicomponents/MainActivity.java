@@ -36,6 +36,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -143,6 +144,14 @@ public class MainActivity extends ActionBarActivity    {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        SubMenu pageMenu = menu.addSubMenu("Pages...");
+        int groupId = 1;
+        int itemId = 100;
+        for (Item item : mItems) {
+            pageMenu.add(groupId, itemId, itemId, item.mTitle);
+            itemId++;
+        }
         return true;
     }
 
@@ -155,6 +164,10 @@ public class MainActivity extends ActionBarActivity    {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.menu_settings) {
+            return true;
+        }
+        if (id > 100 && id < 100 + mItems.length) {
+            mViewPager.setCurrentItem(id - 100);
             return true;
         }
 
@@ -171,7 +184,6 @@ public class MainActivity extends ActionBarActivity    {
     }
 
     static final Item[] mItems = new Item[] {
-            new Item( "FullScreen",  R.layout.page_fullscreen ),
 
             new Item( "Assorted", R.layout.page0frag),
             new Item( "Text", R.layout.page_text),
@@ -190,6 +202,7 @@ public class MainActivity extends ActionBarActivity    {
 
             new Item( "RelLayout",  R.layout.page_rellayout ),
             new Item( "LayoutAnim",  R.layout.page_layout_anim ),
+            new Item( "FullScreen",  R.layout.page_fullscreen ),
     };
 
     // =============================================================================================
