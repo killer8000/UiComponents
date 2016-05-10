@@ -203,6 +203,7 @@ public class MainActivity extends ActionBarActivity    {
             new Item( "RelLayout",  R.layout.page_rellayout ),
             new Item( "LayoutAnim",  R.layout.page_layout_anim ),
             new Item( "FullScreen",  R.layout.page_fullscreen ),
+            new Item( "ElevShadow",  R.layout.page_elevation ),
     };
 
     // =============================================================================================
