@@ -78,6 +78,12 @@ public class ImageScalesFrag  extends Fragment implements View.OnClickListener  
             case R.id.image_size_50:
                 setImage(R.drawable.image50);
                 break;
+            case R.id.image_size_100w300h:
+                setImage(R.drawable.image100w300h);
+                break;
+            case R.id.image_size_300w100h:
+                setImage(R.drawable.image300w100h);
+                break;
             case R.id.image_size_200:
                 setImage(R.drawable.image200);
                 break;
@@ -96,6 +102,8 @@ public class ImageScalesFrag  extends Fragment implements View.OnClickListener  
         mLowerLeftFill = Ui.viewById(mRootView, R.id.image_lowerLeftFill);
 
         Ui.viewById(mRootView, R.id.image_size_50).setOnClickListener(this);
+        Ui.viewById(mRootView, R.id.image_size_100w300h).setOnClickListener(this);
+        Ui.viewById(mRootView, R.id.image_size_300w100h).setOnClickListener(this);
         Ui.viewById(mRootView, R.id.image_size_200).setOnClickListener(this);
         Ui.viewById(mRootView, R.id.image_size_400).setOnClickListener(this);
 

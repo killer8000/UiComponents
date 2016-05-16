@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp">
@@ -23,8 +25,14 @@
         android:padding="5dp"
         android:text="-- Bottom --" />
 
-    <RadioGroup
+    <HorizontalScrollView
         android:id="@+id/image_sizes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+    <RadioGroup
+
         android:background="#e0e0ff"
         android:layout_below="@id/title"
         android:layout_width="match_parent"
@@ -38,6 +46,22 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="50x50" />
+
+        <RadioButton
+            android:id="@+id/image_size_100w300h"
+            android:stateListAnimator="@anim/press"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="100x300" />
+        <RadioButton
+            android:id="@+id/image_size_300w100h"
+            android:stateListAnimator="@anim/press"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="300x100" />
+
         <RadioButton
             android:id="@+id/image_size_200"
             android:stateListAnimator="@anim/press"
@@ -54,7 +78,7 @@
             android:layout_height="wrap_content"
             android:text="400x400" />
     </RadioGroup>
-
+    </HorizontalScrollView>
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -70,6 +94,26 @@
             android:layout_height="wrap_content"
             android:background="@drawable/squares10_tiles"
             android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/rowtx"
+                android:gravity="center"
+                android:text="PercentLayout 16:9"
+                android:textAppearance="@style/TextAppearanceWhite20" />
+
+            <android.support.percent.PercentRelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                >
+                <ImageView
+                    android:background="@color/row0"
+                    android:src="@drawable/image200"
+                    app:layout_widthPercent="50%"
+                    app:layout_aspectRatio="178%" />
+            </android.support.percent.PercentRelativeLayout>
 
             <TextView
                 android:layout_width="match_parent"
@@ -233,6 +277,27 @@
                 android:scaleType="matrix"
                 android:src="@drawable/image200"
                 android:stateListAnimator="@anim/press" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/rowtx"
+                android:gravity="center"
+                android:text="AdjustViewBounds"
+                android:textAppearance="@style/TextAppearanceWhite20" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/row0"
+                android:clickable="true"
+                android:adjustViewBounds="true"
+                android:src="@drawable/image200"
+                android:stateListAnimator="@anim/press" />
+
+
         </LinearLayout>
     </ScrollView>
+
 </RelativeLayout>
