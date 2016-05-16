@@ -35,7 +35,8 @@
         <ImageView
             android:id="@+id/imageTop"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="100dp"
+            android:layout_alignParentTop="true"
 
             android:clickable="true"
             android:scaleType="fitXY"
@@ -45,7 +46,7 @@
         <ImageView
             android:id="@+id/imageBot"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="100dp"
             android:layout_below="@id/imageTop"
 
             android:layout_marginTop="-50dp"
@@ -110,7 +111,7 @@
                 android:text="Gradient" />
         </LinearLayout>
 
-        <ScrollView
+        <HorizontalScrollView
             android:id="@+id/paintModeRG"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -181,7 +182,7 @@
                     android:text="Dst" />
 
             </RadioGroup>
-        </ScrollView>
+        </HorizontalScrollView>
 
         <ScrollView
             android:layout_width="match_parent"

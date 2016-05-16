@@ -172,7 +172,7 @@
                 android:textOn="ToggleButtonOn"
                 android:textSize="@dimen/buttonTextSize" />
 
-            <!-- -->
+    <!--
             <ToggleButton
                 android:id="@+id/p2ToggleButton2"
                 android:layout_width="match_parent"
@@ -187,6 +187,7 @@
                 android:textOff="ToggleBtnnAnimOff"
                 android:textOn="ToggleBtnnAnimOn"
                 android:textSize="@dimen/buttonTextSize" />
+    -->
 
             <RelativeLayout
                 android:id="@+id/p2ImageButton1"
