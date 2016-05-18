@@ -184,7 +184,7 @@ public class MainActivity extends ActionBarActivity    {
     }
 
     static final Item[] mItems = new Item[] {
-
+            new Item( "Coordinated", R.layout.page_coordinated ),
             new Item( "Assorted", R.layout.page0frag),
             new Item( "Text", R.layout.page_text),
 
@@ -204,6 +204,7 @@ public class MainActivity extends ActionBarActivity    {
             new Item( "LayoutAnim",  R.layout.page_layout_anim ),
             new Item( "FullScreen",  R.layout.page_fullscreen ),
             new Item( "ElevShadow",  R.layout.page_elevation ),
+
     };
 
     // =============================================================================================
