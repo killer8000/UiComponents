@@ -26,7 +26,7 @@ import android.widget.TextView;
 public class ExTextView extends TextView {
 
     boolean mHasDecenders = true;
-    int mShrink = 0;
+    int mOrgHeight = 0;
     public ExTextView(Context context) {
         this(context, null);
     }
@@ -70,8 +70,8 @@ public class ExTextView extends TextView {
         if (!mHasDecenders) {
             int hgt = getHeight();
             int bl = getBaseline();
-            if (mShrink == 0 && hgt > bl) {
-                mShrink = hgt - bl;
+            if (hgt > bl) {
+                mOrgHeight = hgt;
                 setHeight(bl);
             }
         }
