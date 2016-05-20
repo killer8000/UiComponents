@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:textSize="14sp"
+                android:text="Five columns\n1: TextView AllCaps includeFontPadding=false\n2: TextView\n3: ExTextView\n4: ExTextView AllCaps, decenders=false fontPad=false\n5: same as #1\n"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#000"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#8000ff00"
+                        android:text="@string/textCompareStr"
+                        android:textAllCaps="true"
+                        android:textColor="#fff"
+                        android:includeFontPadding="false"
+                        android:textSize="@dimen/textCompareSize" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#4000ff00"
+                        android:text="@string/textCompareStr"
+                        android:includeFontPadding="false"
+                        android:textAllCaps="true"
+                        android:textColor="#fff"
+                        android:textSize="@dimen/textCompareSize" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#8000ff00"
+                        android:text="@string/textCompareStr"
+                        android:textAllCaps="true"
+                        android:textColor="#fff"
+                        android:includeFontPadding="false"
+                        android:textSize="@dimen/textCompareSize" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#80404000"
+                        android:text="@string/textCompareStr"
+                        android:textAllCaps="false"
+                        android:textColor="#fff"
+                        android:textSize="@dimen/textCompareSize" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#40404000"
+                        android:text="@string/textCompareStr"
+                        android:textAllCaps="false"
+                        android:textColor="#fff"
+                        android:textSize="@dimen/textCompareSize" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#80404000"
+                        android:text="@string/textCompareStr"
+                        android:textAllCaps="false"
+                        android:textColor="#fff"
+                        android:textSize="@dimen/textCompareSize" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <com.landenlabs.uicomponents.ExTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#80ff0000"
+                        android:text="@string/textCompareStr"
+                        android:textColor="#fff"
+                        android:textSize="@dimen/textCompareSize"
+                        />
+
+                    <com.landenlabs.uicomponents.ExTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#40ff0000"
+                        android:text="@string/textCompareStr"
+                        android:textColor="#fff"
+                        android:textSize="@dimen/textCompareSize"
+                        />
+
+                    <com.landenlabs.uicomponents.ExTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#80ff0000"
+                        android:text="@string/textCompareStr"
+                        android:textColor="#fff"
+                        android:textSize="@dimen/textCompareSize"
+
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <com.landenlabs.uicomponents.ExTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#8000ffff"
+                        android:text="@string/textCompareStr"
+                        android:textColor="#fff"
+                        android:textAllCaps="true"
+                        android:textSize="@dimen/textCompareSize"
+                        android:includeFontPadding="false"
+                        app:descenders="false" />
+
+                    <com.landenlabs.uicomponents.ExTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#4000ffff"
+                        android:text="@string/textCompareStr"
+                        android:textColor="#fff"
+                        android:textAllCaps="true"
+                        android:textSize="@dimen/textCompareSize"
+                        android:includeFontPadding="false"
+                        app:descenders="false" />
+
+                    <com.landenlabs.uicomponents.ExTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#8000ffff"
+                        android:text="@string/textCompareStr"
+                        android:textColor="#fff"
+                        android:textAllCaps="true"
+                        android:textSize="@dimen/textCompareSize"
+                        android:includeFontPadding="false"
+                        app:descenders="false" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#8000ff00"
+                        android:text="@string/textCompareStr"
+                        android:textAllCaps="true"
+                        android:textColor="#fff"
+                        android:includeFontPadding="false"
+                        android:textSize="@dimen/textCompareSize" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#4000ff00"
+                        android:text="@string/textCompareStr"
+                        android:includeFontPadding="false"
+                        android:textAllCaps="true"
+                        android:textColor="#fff"
+                        android:textSize="@dimen/textCompareSize" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#8000ff00"
+                        android:text="@string/textCompareStr"
+                        android:textAllCaps="true"
+                        android:textColor="#fff"
+                        android:includeFontPadding="false"
+                        android:textSize="@dimen/textCompareSize" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#f00"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="#000"
+                android:text="All ExTextView\nAllCaps\ndescenders=false\nincludeFontPadding=false\n"
+                />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:background="#444"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <com.landenlabs.uicomponents.ExTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#8000ffff"
+                        android:text="@string/textCompareStr"
+                        android:textColor="#fff"
+                        android:textAllCaps="true"
+                        android:textSize="10sp"
+                        android:includeFontPadding="false"
+                        app:descenders="false" />
+
+                    <com.landenlabs.uicomponents.ExTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#4000ffff"
+                        android:text="@string/textCompareStr"
+                        android:textColor="#fff"
+                        android:textAllCaps="true"
+                        android:textSize="10sp"
+                        android:includeFontPadding="false"
+                        app:descenders="false" />
+
+                    <com.landenlabs.uicomponents.ExTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#8000ffff"
+                        android:text="@string/textCompareStr"
+                        android:textColor="#fff"
+                        android:textAllCaps="true"
+                        android:textSize="10sp"
+                        android:includeFontPadding="false"
+                        app:descenders="false" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <com.landenlabs.uicomponents.ExTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#8000ffff"
+                        android:text="@string/textCompareStr"
+                        android:textColor="#fff"
+                        android:textAllCaps="true"
+                        android:textSize="14sp"
+                        android:includeFontPadding="false"
+                        app:descenders="false" />
+
+                    <com.landenlabs.uicomponents.ExTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#4000ffff"
+                        android:text="@string/textCompareStr"
+                        android:textColor="#fff"
+                        android:textAllCaps="true"
+                        android:textSize="14sp"
+                        android:includeFontPadding="false"
+                        app:descenders="false" />
+
+                    <com.landenlabs.uicomponents.ExTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#8000ffff"
+                        android:text="@string/textCompareStr"
+                        android:textColor="#fff"
+                        android:textAllCaps="true"
+                        android:textSize="14sp"
+                        android:includeFontPadding="false"
+                        app:descenders="false" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <com.landenlabs.uicomponents.ExTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#8000ffff"
+                        android:text="@string/textCompareStr"
+                        android:textColor="#fff"
+                        android:textAllCaps="true"
+                        android:textSize="16sp"
+                        android:includeFontPadding="false"
+                        app:descenders="false" />
+
+                    <com.landenlabs.uicomponents.ExTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#4000ffff"
+                        android:text="@string/textCompareStr"
+                        android:textColor="#fff"
+                        android:textAllCaps="true"
+                        android:textSize="16sp"
+                        android:includeFontPadding="false"
+                        app:descenders="false" />
+
+                    <com.landenlabs.uicomponents.ExTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#8000ffff"
+                        android:text="@string/textCompareStr"
+                        android:textColor="#fff"
+                        android:textAllCaps="true"
+                        android:textSize="16sp"
+                        android:includeFontPadding="false"
+                        app:descenders="false" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <com.landenlabs.uicomponents.ExTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#8000ffff"
+                        android:text="@string/textCompareStr"
+                        android:textColor="#fff"
+                        android:textAllCaps="true"
+                        android:textSize="@dimen/textCompareSize"
+                        android:includeFontPadding="false"
+                        app:descenders="false" />
+
+                    <com.landenlabs.uicomponents.ExTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#4000ffff"
+                        android:text="@string/textCompareStr"
+                        android:textColor="#fff"
+                        android:textAllCaps="true"
+                        android:textSize="@dimen/textCompareSize"
+                        android:includeFontPadding="false"
+                        app:descenders="false" />
+
+                    <com.landenlabs.uicomponents.ExTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#8000ffff"
+                        android:text="@string/textCompareStr"
+                        android:textColor="#fff"
+                        android:textAllCaps="true"
+                        android:textSize="@dimen/textCompareSize"
+                        android:includeFontPadding="false"
+                        app:descenders="false" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

@@ -184,9 +184,10 @@ public class MainActivity extends ActionBarActivity    {
     }
 
     static final Item[] mItems = new Item[] {
-            new Item( "Coordinated", R.layout.page_coordinated ),
+
             new Item( "Assorted", R.layout.page0frag),
             new Item( "Text", R.layout.page_text),
+            new Item( "TextSize", R.layout.page_textsize),
 
             new Item( "Grid Images", R.layout.page_grid_image),
             new Item( "Images", R.layout.page_image_scales),
@@ -204,7 +205,7 @@ public class MainActivity extends ActionBarActivity    {
             new Item( "LayoutAnim",  R.layout.page_layout_anim ),
             new Item( "FullScreen",  R.layout.page_fullscreen ),
             new Item( "ElevShadow",  R.layout.page_elevation ),
-
+            new Item( "Coordinated", R.layout.page_coordinated ),
     };
 
     // =============================================================================================

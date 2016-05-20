@@ -11,6 +11,7 @@
     <string name="menu_about">Dennis Lang</string>
     <string name="menu_web">www.landenlabs.com</string>
 
+   <string name="textCompareStr">AgByA</string>
 
     <string-array name="states">
        <item>Alabama</item>
