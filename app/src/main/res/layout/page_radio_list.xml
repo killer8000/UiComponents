@@ -11,7 +11,7 @@
         android:layout_margin="20dp"
         android:padding="10dp"
         android:background="#d0d0ff"
-        android:text="Scrolling RadioBtns" />
+        android:text="- Scrolling RadioBtns -" />
 
 
     <TextView

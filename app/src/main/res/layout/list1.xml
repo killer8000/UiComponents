@@ -13,7 +13,7 @@
         android:layout_margin="5dp"
         android:padding="5dp"
         android:background="#d0d0ff"
-        android:text="Scrolling RadioBtns" />
+        android:text="- Scrolling RadioBtns -" />
 
     <!--  android:background="@drawable/paper_pink" -->
     <ListView

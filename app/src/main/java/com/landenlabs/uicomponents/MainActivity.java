@@ -187,7 +187,7 @@ public class MainActivity extends ActionBarActivity    {
 
             new Item( "Assorted", R.layout.page0frag),
             new Item( "Text", R.layout.page_text),
-            new Item( "TextSize", R.layout.page_textsize),
+            new Item( "TextSize", R.layout.page_text_height),
 
             new Item( "Grid Images", R.layout.page_grid_image),
             new Item( "Images", R.layout.page_image_scales),
