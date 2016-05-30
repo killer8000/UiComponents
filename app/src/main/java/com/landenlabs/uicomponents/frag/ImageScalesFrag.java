@@ -122,7 +122,18 @@ public class ImageScalesFrag  extends Fragment implements View.OnClickListener  
             if (view instanceof ImageView) {
                 ImageView imageView = (ImageView)view;
                 if (imageView.getScaleType() != ImageView.ScaleType.MATRIX) {
-                    ((ImageView) view).setImageResource(imageRes);
+                    imageView.setImageResource(imageRes);
+                }
+            } else if (view instanceof ViewGroup) {
+                ViewGroup viewGroup = (ViewGroup)view;
+                for (int childIdx = 0; childIdx != viewGroup.getChildCount(); childIdx++) {
+                    View child = viewGroup.getChildAt(childIdx);
+                    if (child instanceof ImageView) {
+                        ImageView imageView = (ImageView)child;
+                        if (imageView.getScaleType() != ImageView.ScaleType.MATRIX) {
+                            imageView.setImageResource(imageRes);
+                        }
+                    }
                 }
             }
         }

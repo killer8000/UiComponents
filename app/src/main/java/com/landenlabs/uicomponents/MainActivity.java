@@ -79,8 +79,8 @@ public class MainActivity extends ActionBarActivity    {
 
         mActionBar = getSupportActionBar();
         if (mActionBar != null) {
-            mActionBar.setTitle("UiComponents v" + BuildConfig.VERSION_NAME + " API" + Build.VERSION.SDK_INT +
-                    (BuildConfig.DEBUG ? " Debug" : ""));
+            mActionBar.setTitle("UiComponents API" + Build.VERSION.SDK_INT +
+                    (BuildConfig.DEBUG ? " Dbg" : ""));
 
             mActionBar.setSubtitle(BuildConfig.VERSION_NAME);
             mActionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_TITLE | ActionBar.DISPLAY_SHOW_HOME);
@@ -185,11 +185,14 @@ public class MainActivity extends ActionBarActivity    {
 
     static final Item[] mItems = new Item[] {
 
+
+
             new Item( "Assorted", R.layout.page0frag),
             new Item( "Text", R.layout.page_text),
             new Item( "TextSize", R.layout.page_text_height),
 
             new Item( "Grid Images", R.layout.page_grid_image),
+            new Item( "GridLayout", R.layout.page_grid_layout),
             new Item( "Images", R.layout.page_image_scales),
             new Item( "ImageOverlap",  R.layout.page_image_over ),
 
@@ -204,8 +207,11 @@ public class MainActivity extends ActionBarActivity    {
             new Item( "RelLayout",  R.layout.page_rellayout ),
             new Item( "LayoutAnim",  R.layout.page_layout_anim ),
             new Item( "FullScreen",  R.layout.page_fullscreen ),
+
+            // API 21
             new Item( "ElevShadow",  R.layout.page_elevation ),
             new Item( "Coordinated", R.layout.page_coordinated ),
+            new Item( "TabLayout", R.layout.page_tablayout),
     };
 
     // =============================================================================================
@@ -259,8 +265,8 @@ public class MainActivity extends ActionBarActivity    {
         }
 
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
+        public View onCreateView(
+                LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             m_pageNum = getArguments().getInt(ARG_page_number);
             int layout =  mItems[m_pageNum].mLayout;
             View rootView = inflater.inflate(layout, container, false);

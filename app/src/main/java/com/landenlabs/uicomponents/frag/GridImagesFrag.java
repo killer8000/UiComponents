@@ -25,19 +25,18 @@ package com.landenlabs.uicomponents.frag;
 
 import android.animation.AnimatorInflater;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.landenlabs.uicomponents.BuildConfig;
 import com.landenlabs.uicomponents.R;
 import com.landenlabs.uicomponents.Ui;
 
@@ -82,12 +81,14 @@ public class GridImagesFrag  extends Fragment   {
         GridView gridview = Ui.needViewById(mRootView, R.id.gridview);
         gridview.setAdapter(new ImageAdapter(getActivity()));
 
+        /*
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
                 Toast.makeText(getActivity(), "" + position,  Toast.LENGTH_SHORT).show();
             }
         });
+        */
     }
 
     public class ImageAdapter extends BaseAdapter {
@@ -119,15 +120,30 @@ public class GridImagesFrag  extends Fragment   {
                 imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 imageView.setPadding(8, 8, 8, 8);
 
-                imageView.setClickable(true);
-                if (BuildConfig.VERSION_CODE >= 21) {
+
+                final int pos = position;
+                imageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(view.getContext(), "Grid Pos:" + pos,  Toast.LENGTH_SHORT).show();
+                    }
+                });
+                if (Build.VERSION.SDK_INT >= 21) {
                     imageView.setStateListAnimator(AnimatorInflater.loadStateListAnimator(mContext, R.anim.press));
                 }
             } else {
                 imageView = (ImageView) convertView;
             }
 
-            imageView.setImageResource(mThumbIds[position]);
+            if (Build.VERSION.SDK_INT >= 21) {
+                // imageView.setElevation((position & 1) != 0 ? 0 : 10);
+            }
+
+        //    if ((position & 1) != 0)
+        //        imageView.setImageResource(mThumbIds[position]);
+        //    else
+                imageView.setBackgroundResource(mThumbIds[position]);
+
             return imageView;
         }
 

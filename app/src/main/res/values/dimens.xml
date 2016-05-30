@@ -3,6 +3,8 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
+    <dimen name="grid_layout_image_width">80dp</dimen>
+    <dimen name="grid_layout_image_height">80dp</dimen>
 
     <dimen name="buttonHeight">50dp</dimen>
     <dimen name="buttonTextSize">20sp</dimen>

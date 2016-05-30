@@ -16,6 +16,7 @@
 
     <GridView
         android:id="@+id/gridview"
+        android:background="#c0c0c0"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:columnWidth="90dp"

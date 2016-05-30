@@ -17,6 +17,16 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="ScrollTabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textColor">@color/lighten</item>
+    </style>
+
+    <style name="ScrollTabStyle" parent="Widget.Design.TabLayout">
+        <item name="android:textSize">14dp</item>
+        <item name="tabSelectedTextColor">@android:color/white</item>
+        <item name="tabTextAppearance">@style/ScrollTabTextAppearance</item>
+    </style>
+
     <style name="SwitchBlueTheme">
         <item name="colorControlActivated">#2096F0</item>
     </style>

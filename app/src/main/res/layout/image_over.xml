@@ -275,6 +275,22 @@
                     android:max="100" />
 
                 <TextView
+                    android:id="@+id/stroke_width_lbl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#c0c0ff"
+                    android:text="StrokeWidth"
+                    android:textColor="#ff0000"
+                    android:textSize="20sp" />
+
+                <SeekBar
+                    android:id="@+id/stroke_width_sb"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#c0c0ff"
+                    android:max="100" />
+
+                <TextView
                     android:id="@+id/ambient_lbl"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

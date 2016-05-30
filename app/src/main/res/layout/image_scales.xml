@@ -113,7 +113,7 @@
                     android:background="@color/row1"
                     android:src="@drawable/image200"
                     app:layout_aspectRatio="178%"
-                    app:layout_widthPercent="50%" />
+                    android:layout_height="90dp" />
             </android.support.percent.PercentRelativeLayout>
 
             <TextView
@@ -133,7 +133,7 @@
                     android:background="@color/row0"
                     android:src="@drawable/image200"
                     app:layout_aspectRatio="50%"
-                    app:layout_widthPercent="50%" />
+                    android:layout_height="90dp" />
             </android.support.percent.PercentRelativeLayout>
 
             <TextView

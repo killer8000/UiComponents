@@ -72,9 +72,9 @@ public class ImageOverFrag  extends Fragment
 
     SeekBar graySb;
     SeekBar lightx, lighty, lightz;
-    SeekBar radius, ambientSb, specularSb;
+    SeekBar radius, ambientSb, specularSb, strokeWidthSb;
     TextView grayLbl;
-    TextView lightxLbl, lightyLbl, lightzLbl, radiusLbl;
+    TextView lightxLbl, lightyLbl, lightzLbl, radiusLbl, strokeWidthLbl;
     TextView ambientTv, specularTv;
     CheckBox drawClosedCb, shaderGradientCb;
     int maxRadius = 100;
@@ -83,11 +83,13 @@ public class ImageOverFrag  extends Fragment
 
     int gray = 128;
     int lx = 3, ly =3, lz = 3;
-    int rad = 8;
+    int rad = 20;
     float ambient = 0.2f;    // 0..1
     float maxAmbient = 1.0f;
     float specular = 2.0f;    // 0..?
     float maxSpecular = 5.0f;
+    float maxStrokeWidth = 200.0f;
+    float strokeWidth = 60.0f;
 
     PorterDuff.Mode portDuffMode = PorterDuff.Mode.MULTIPLY;
     Paint.Style paintStyle = Paint.Style.STROKE;
@@ -134,6 +136,7 @@ public class ImageOverFrag  extends Fragment
         radius = Ui.viewById(mRootView, R.id.radius);
         ambientSb = Ui.viewById(mRootView, R.id.ambient);
         specularSb = Ui.viewById(mRootView, R.id.specular);
+        strokeWidthSb = Ui.viewById(mRootView, R.id.stroke_width_sb);
 
         drawClosedCb = Ui.viewById(mRootView, R.id.draw_closed);
         drawClosedCb.setOnClickListener(this);
@@ -147,6 +150,7 @@ public class ImageOverFrag  extends Fragment
         radius.setProgress(seekMax * rad / maxRadius);
         ambientSb.setProgress((int)(seekMax * ambient / maxAmbient));
         specularSb.setProgress((int)(seekMax * specular / maxSpecular));
+        strokeWidthSb.setProgress((int)(seekMax * strokeWidth / maxStrokeWidth));
 
         graySb.setOnSeekBarChangeListener(this);
         lightx.setOnSeekBarChangeListener(this);
@@ -155,6 +159,7 @@ public class ImageOverFrag  extends Fragment
         radius.setOnSeekBarChangeListener(this);
         ambientSb.setOnSeekBarChangeListener(this);
         specularSb.setOnSeekBarChangeListener(this);
+        strokeWidthSb.setOnSeekBarChangeListener(this);
 
         grayLbl   = Ui.viewById(mRootView, R.id.gray_lbl);
         lightxLbl = Ui.viewById(mRootView, R.id.light_x_lbl);
@@ -163,6 +168,7 @@ public class ImageOverFrag  extends Fragment
         radiusLbl = Ui.viewById(mRootView, R.id.radius_lbl);
         ambientTv = Ui.viewById(mRootView, R.id.ambient_lbl);
         specularTv = Ui.viewById(mRootView, R.id.specular_lbl);
+        strokeWidthLbl = Ui.viewById(mRootView, R.id.stroke_width_lbl);
 
         Ui.viewById(mRootView, R.id.filter_blur).setOnClickListener(this);
         Ui.viewById(mRootView, R.id.filter_emboss).setOnClickListener(this);
@@ -198,6 +204,7 @@ public class ImageOverFrag  extends Fragment
         lx = getXYZ(lightx);
         ly = getXYZ(lighty);
         lz = getXYZ(lightz);
+        strokeWidth = strokeWidthSb.getProgress() * maxStrokeWidth / seekMax;
         rad = radius.getProgress() * maxRadius / seekMax;
 
         ambient = ambientSb.getProgress() * maxAmbient / seekMax;
@@ -206,17 +213,18 @@ public class ImageOverFrag  extends Fragment
         lightxLbl.setText("X " + lx);
         lightyLbl.setText("Y " + ly);
         lightzLbl.setText("Z " + lz);
+        strokeWidthLbl.setText("StrokeWidth " + strokeWidth);
         radiusLbl.setText("Radius " + rad);
         specularTv.setText(String.format("Specual %.1f", specular));
         ambientTv.setText(String.format("Ambient %.1f", ambient));
 
         // http://stackoverflow.com/questions/1705239/how-should-i-give-images-rounded-corners-in-android
-        BitmapDrawable bmDrawable = (BitmapDrawable)getResources().getDrawable(R.drawable.paper_pink);
-        Bitmap myCoolBitmap = bmDrawable.getBitmap();
-        int w = myCoolBitmap.getWidth(), h = myCoolBitmap.getHeight();
+        BitmapDrawable botDrawable = (BitmapDrawable)getResources().getDrawable(R.drawable.paper_pink);
+        int imgWidth = botDrawable.getIntrinsicWidth();
+        int imgHeight = botDrawable.getIntrinsicHeight();
 
-        Bitmap rounder = Bitmap.createBitmap(w,h,Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(rounder);
+        Bitmap canvasDrawable = Bitmap.createBitmap(imgWidth, imgHeight, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(canvasDrawable);
 
         // We're going to apply this paint eventually using a porter-duff xfer mode.
         // This will allow us to only overwrite certain pixels. RED is arbitrary. This
@@ -228,14 +236,14 @@ public class ImageOverFrag  extends Fragment
 
         boolean drawRoundedCorners = false;
         if (drawRoundedCorners) {
-            // We're just reusing xferPaint to paint a normal looking rounded box, the 20.f
+            // We're just reusing xferPaint to paint a normal looking rounded box, the 80.f
             // is the amount we're rounding by.
-            canvas.drawRoundRect(new RectF(0, 0, w, h), 80.0f, 80.0f, xferPaint);
+            canvas.drawRoundRect(new RectF(0, 0, imgWidth, imgHeight), 80.0f, 80.0f, xferPaint);
         }
 
         // ---------------- draw notch
 
-        float notchCenter = w * 0.50f;  // Notch center 50% from left edge.
+        float notchCenter = imgWidth * 0.50f;  // Notch center 50% from left edge.
         float notchWidth = notchCenter / 2;
 
         boolean drawNotch = true;
@@ -245,9 +253,9 @@ public class ImageOverFrag  extends Fragment
             notchPath.lineTo(notchCenter - notchWidth, 0);
             notchPath.lineTo(notchCenter, notchWidth*2);
             notchPath.lineTo(notchCenter + notchWidth, 0);
-            notchPath.lineTo(w, 0);
-            notchPath.lineTo(w, h);
-            notchPath.lineTo(0, h);
+            notchPath.lineTo(imgWidth, 0);
+            notchPath.lineTo(imgWidth, imgHeight);
+            notchPath.lineTo(0, imgHeight);
             notchPath.close();
             canvas.drawPath(notchPath, xferPaint);
         }
@@ -255,22 +263,23 @@ public class ImageOverFrag  extends Fragment
         // Now we apply the 'magic sauce' to the paint
         xferPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_IN));
 
-        Bitmap result = Bitmap.createBitmap(myCoolBitmap.getWidth(), myCoolBitmap.getHeight() ,Bitmap.Config.ARGB_8888);
+        Bitmap result = Bitmap.createBitmap(imgWidth, imgHeight, Bitmap.Config.ARGB_8888);
         Canvas resultCanvas = new Canvas(result);
-        resultCanvas.drawBitmap(myCoolBitmap, 0, 0, null);
+        resultCanvas.drawBitmap(botDrawable.getBitmap(), 0, 0, null);
 
         boolean doDrawNotchShadow = true;
         if (doDrawNotchShadow) {
-            drawNotchShadow(resultCanvas, grayColor, notchCenter, notchWidth, w);
+            drawNotchShadow(resultCanvas, grayColor, notchCenter, notchWidth, imgWidth, strokeWidth);
         }
 
-        resultCanvas.drawBitmap(rounder, 0, 0, xferPaint);
+        resultCanvas.drawBitmap(canvasDrawable, 0, 0, xferPaint);
 
         ImageView topView = Ui.viewById(mRootView, R.id.imageBot);
         topView.setImageBitmap(result);
     }
 
-    private void drawNotchShadow(Canvas canvas, int color, float notchCenter, float notchWidth, float pathWidth) {
+    private void drawNotchShadow(Canvas canvas, int color, float notchCenter, float notchWidth,
+                                 float pathWidth, float strokeWidth) {
 
         Path notchPath = new Path();
         notchPath.moveTo(0, 0);
@@ -296,7 +305,7 @@ public class ImageOverFrag  extends Fragment
         paint.setStyle(paintStyle); // Paint.Style.STROKE);
         //    paint.setStrokeJoin(Paint.Join.ROUND);
         //    paint.setStrokeCap(Paint.Cap.ROUND);
-        paint.setStrokeWidth(notchWidth);
+        paint.setStrokeWidth(strokeWidth);
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.MULTIPLY));
 
         float[] lightSrc = new float[]{lx, ly, lz};
