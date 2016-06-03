@@ -249,6 +249,25 @@
                 android:layout_marginTop="10dp"
                 android:background="@color/rowtx"
                 android:gravity="center"
+                android:text="centerCrop (code)"
+                android:textAppearance="@style/TextAppearanceWhite20" />
+
+            <View
+                android:id="@+id/view_centerFill"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:background="@color/row0"
+                android:clickable="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/image200"
+                android:stateListAnimator="@anim/press" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/rowtx"
+                android:gravity="center"
                 android:text="fitXY"
                 android:textAppearance="@style/TextAppearanceWhite20" />
 

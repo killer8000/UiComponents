@@ -65,22 +65,27 @@ public class ImageOverFrag  extends Fragment
     View mRootView;
 
     enum Filters { NoFilter, EmbossFilter, BlurFilter }
-    Filters filters = Filters.EmbossFilter;
+    Filters filters = Filters.BlurFilter;
 
     enum ShaderType { NoShader, GradientShader };
     ShaderType shaderType = ShaderType.NoShader;
 
-    SeekBar graySb;
+    SeekBar graySb, alphaSb, strokeWidthSb;
+    TextView grayLbl, alphaLbl, strokeWidthLbl;
+
+    View lightHolder;
     SeekBar lightx, lighty, lightz;
-    SeekBar radius, ambientSb, specularSb, strokeWidthSb;
-    TextView grayLbl;
-    TextView lightxLbl, lightyLbl, lightzLbl, radiusLbl, strokeWidthLbl;
+    SeekBar radius, ambientSb, specularSb;
+    TextView lightxLbl, lightyLbl, lightzLbl, radiusLbl;
     TextView ambientTv, specularTv;
+
     CheckBox drawClosedCb, shaderGradientCb;
+
     int maxRadius = 100;
     int maxXYZ = 10;
     int seekMax = 100;
 
+    int alpha = 255;
     int gray = 128;
     int lx = 3, ly =3, lz = 3;
     int rad = 20;
@@ -130,13 +135,17 @@ public class ImageOverFrag  extends Fragment
         });
 
         graySb = Ui.viewById(mRootView, R.id.gray_sb);
+        alphaSb = Ui.viewById(mRootView, R.id.alpha_sb);
+        strokeWidthSb = Ui.viewById(mRootView, R.id.stroke_width_sb);
+
+        lightHolder = Ui.viewById(mRootView, R.id.light_holder);
         lightx = Ui.viewById(mRootView, R.id.light_x);
         lighty = Ui.viewById(mRootView, R.id.light_y);
         lightz = Ui.viewById(mRootView, R.id.light_z);
         radius = Ui.viewById(mRootView, R.id.radius);
         ambientSb = Ui.viewById(mRootView, R.id.ambient);
         specularSb = Ui.viewById(mRootView, R.id.specular);
-        strokeWidthSb = Ui.viewById(mRootView, R.id.stroke_width_sb);
+
 
         drawClosedCb = Ui.viewById(mRootView, R.id.draw_closed);
         drawClosedCb.setOnClickListener(this);
@@ -144,6 +153,7 @@ public class ImageOverFrag  extends Fragment
         shaderGradientCb.setOnClickListener(this);
 
         graySb.setProgress(gray);
+        alphaSb.setProgress(alpha);
         setXYZ(lightx, lx);
         setXYZ(lighty, ly);
         setXYZ(lightz, lz);
@@ -153,6 +163,7 @@ public class ImageOverFrag  extends Fragment
         strokeWidthSb.setProgress((int)(seekMax * strokeWidth / maxStrokeWidth));
 
         graySb.setOnSeekBarChangeListener(this);
+        alphaSb.setOnSeekBarChangeListener(this);
         lightx.setOnSeekBarChangeListener(this);
         lighty.setOnSeekBarChangeListener(this);
         lightz.setOnSeekBarChangeListener(this);
@@ -162,6 +173,7 @@ public class ImageOverFrag  extends Fragment
         strokeWidthSb.setOnSeekBarChangeListener(this);
 
         grayLbl   = Ui.viewById(mRootView, R.id.gray_lbl);
+        alphaLbl   = Ui.viewById(mRootView, R.id.alpha_lbl);
         lightxLbl = Ui.viewById(mRootView, R.id.light_x_lbl);
         lightyLbl = Ui.viewById(mRootView, R.id.light_y_lbl);
         lightzLbl = Ui.viewById(mRootView, R.id.light_z_lbl);
@@ -199,7 +211,11 @@ public class ImageOverFrag  extends Fragment
         gray = graySb.getProgress();
         int grayColor = 0xff000000 + gray + gray*256 + gray*256*256;
         grayLbl.setBackgroundColor(grayColor);
-        grayLbl.setText(String.valueOf(gray));
+        grayLbl.setText("Gray: " + String.valueOf(gray));
+
+        alpha = alphaSb.getProgress();
+        alphaLbl.setText("Alpha: " + String.valueOf(alpha));
+        grayColor = gray + gray*256 + gray*256*256 + alpha*256*256*256;
 
         lx = getXYZ(lightx);
         ly = getXYZ(lighty);
@@ -364,12 +380,15 @@ public class ImageOverFrag  extends Fragment
             // ---- Filters
             case R.id.filter_blur:
                 filters = Filters.BlurFilter;
+                lightHolder.setVisibility(View.GONE);
                 break;
             case R.id.filter_emboss:
                 filters = Filters.EmbossFilter;
+                lightHolder.setVisibility(View.VISIBLE);
                 break;
             case R.id.filter_none:
                 filters = Filters.NoFilter;
+                lightHolder.setVisibility(View.GONE);
                 break;
 
             // ---- Shaders

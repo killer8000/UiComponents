@@ -66,7 +66,7 @@
             <RadioButton
                 android:id="@+id/filter_blur"
                 android:layout_width="wrap_content"
-
+                android:checked="true"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Blur" />
@@ -76,7 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:checked="true"
+
                 android:text="Emboss" />
 
             <RadioButton
@@ -89,19 +89,18 @@
 
         <LinearLayout
             android:id="@+id/btnHolder"
-            android:background="#80c0c0"
-            android:orientation="horizontal"
-            android:layout_below="@+id/imagePaintRG"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imagePaintRG"
+            android:background="#80c0c0"
+            android:orientation="horizontal">
 
             <CheckBox
                 android:id="@+id/draw_closed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Closed"
                 android:checked="true"
-                />
+                android:text="Closed" />
 
             <CheckBox
                 android:id="@+id/shader_gradient"
@@ -208,13 +207,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
-
                 <TextView
                     android:id="@+id/gray_lbl"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#808080"
-                    android:text="X"
+                    android:text="Color:"
                     android:textColor="#ffffff"
                     android:textSize="20sp" />
 
@@ -225,54 +223,22 @@
                     android:background="#ffffff"
                     android:max="255" />
 
-
                 <TextView
-                    android:id="@+id/light_x_lbl"
+                    android:id="@+id/alpha_lbl"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#ffc0c0"
-                    android:text="X"
-                    android:textColor="#ff0000"
+                    android:background="#808080"
+                    android:text="Alpha:"
+                    android:textColor="#ffffff"
                     android:textSize="20sp" />
 
                 <SeekBar
-                    android:id="@+id/light_x"
+                    android:id="@+id/alpha_sb"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#ffc0c0"
-                    android:max="100" />
+                    android:background="#ffffff"
+                    android:max="255" />
 
-                <TextView
-                    android:id="@+id/light_y_lbl"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#c0ffc0"
-                    android:text="Y"
-                    android:textColor="#ff0000"
-                    android:textSize="20sp" />
-
-                <SeekBar
-                    android:id="@+id/light_y"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#c0ffc0"
-                    android:max="100" />
-
-                <TextView
-                    android:id="@+id/light_z_lbl"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#c0c0ff"
-                    android:text="Z"
-                    android:textColor="#ff0000"
-                    android:textSize="20sp" />
-
-                <SeekBar
-                    android:id="@+id/light_z"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#c0c0ff"
-                    android:max="100" />
 
                 <TextView
                     android:id="@+id/stroke_width_lbl"
@@ -290,32 +256,87 @@
                     android:background="#c0c0ff"
                     android:max="100" />
 
-                <TextView
-                    android:id="@+id/ambient_lbl"
+                <LinearLayout
+                    android:id="@+id/light_holder"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Ambient"
-                    android:textColor="#ff0000"
-                    android:textSize="20sp" />
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
-                <SeekBar
-                    android:id="@+id/ambient"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/light_x_lbl"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#ffc0c0"
+                        android:text="X"
+                        android:textColor="#ff0000"
+                        android:textSize="20sp" />
 
-                <TextView
-                    android:id="@+id/specular_lbl"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Ambient"
-                    android:textColor="#ff0000"
-                    android:textSize="20sp" />
+                    <SeekBar
+                        android:id="@+id/light_x"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#ffc0c0"
+                        android:max="100" />
 
-                <SeekBar
-                    android:id="@+id/specular"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/light_y_lbl"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#c0ffc0"
+                        android:text="Y"
+                        android:textColor="#ff0000"
+                        android:textSize="20sp" />
 
+                    <SeekBar
+                        android:id="@+id/light_y"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#c0ffc0"
+                        android:max="100" />
+
+                    <TextView
+                        android:id="@+id/light_z_lbl"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#c0c0ff"
+                        android:text="Z"
+                        android:textColor="#ff0000"
+                        android:textSize="20sp" />
+
+                    <SeekBar
+                        android:id="@+id/light_z"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#c0c0ff"
+                        android:max="100" />
+
+                    <TextView
+                        android:id="@+id/ambient_lbl"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Ambient"
+                        android:textColor="#ff0000"
+                        android:textSize="20sp" />
+
+                    <SeekBar
+                        android:id="@+id/ambient"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/specular_lbl"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Ambient"
+                        android:textColor="#ff0000"
+                        android:textSize="20sp" />
+
+                    <SeekBar
+                        android:id="@+id/specular"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
             </LinearLayout>
         </ScrollView>
     </RelativeLayout>

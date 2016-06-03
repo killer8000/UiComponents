@@ -1,6 +1,11 @@
 package com.landenlabs.uicomponents.frag;
 
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Matrix;
+import android.graphics.RectF;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -95,11 +100,13 @@ public class ImageScalesFrag  extends Fragment implements View.OnClickListener  
 
     ImageView mUpperLeftFill;
     ImageView mLowerLeftFill;
+    View mCenterFill;
 
     private void setup() {
         mImageHolder = Ui.viewById(mRootView, R.id.image_holder);
         mUpperLeftFill = Ui.viewById(mRootView, R.id.image_upperLeftFill);
         mLowerLeftFill = Ui.viewById(mRootView, R.id.image_lowerLeftFill);
+        mCenterFill = Ui.viewById(mRootView, R.id.view_centerFill);
 
         Ui.viewById(mRootView, R.id.image_size_50).setOnClickListener(this);
         Ui.viewById(mRootView, R.id.image_size_100w300h).setOnClickListener(this);
@@ -140,6 +147,7 @@ public class ImageScalesFrag  extends Fragment implements View.OnClickListener  
 
         fillUpperLeft(getResources().getDrawable(imageRes), mUpperLeftFill);
         fillLowerLeft(getResources().getDrawable(imageRes), mLowerLeftFill);
+        setScaledImage(getResources().getDrawable(imageRes), mCenterFill);
     }
 
     private void fillUpperLeft(final Drawable drawable, ImageView imageView) {
@@ -187,5 +195,58 @@ public class ImageScalesFrag  extends Fragment implements View.OnClickListener  
         imageView.setImageDrawable(drawable);
     }
 
+    private void setScaledImage(final Drawable bgImage, View view) {
+        if (bgImage != null) {
+            // view.setBackgroundResource(bgImage);
+            BitmapDrawable bmDrawable = (BitmapDrawable) bgImage;
+            Bitmap bmImage = bmDrawable.getBitmap();
+            int screenWidthPx = Resources.getSystem().getDisplayMetrics().widthPixels;
+            int viewHeightPx =  view.getMeasuredHeight();
+            Bitmap scaledImage = scaleCenterCrop(bmImage, screenWidthPx, viewHeightPx);
+            view.setBackgroundDrawable(new BitmapDrawable(scaledImage));
+        }
+    }
 
+
+    /**
+     * Scale using Center Crop (source scaled till filling both new dimensions)
+     * @param source
+     * @param newWidth
+     * @param newHeight
+     * @return Center Crop scaled image.
+     */
+    public static Bitmap scaleCenterCrop(Bitmap source, int newWidth, int newHeight) {
+        int sourceWidth = source.getWidth();
+        int sourceHeight = source.getHeight();
+
+        // Compute the scaling factors to fit the new height and width, respectively.
+        // To cover the final image, the final scaling will be the bigger
+        // of these two.
+        float xScale = (float) newWidth / sourceWidth;
+        float yScale = (float) newHeight / sourceHeight;
+        float scale = Math.max(xScale, yScale);
+
+        // Now get the size of the source bitmap when scaled
+        float scaledWidth = scale * sourceWidth;
+        float scaledHeight = scale * sourceHeight;
+
+        // Let's find out the upper left coordinates if the scaled bitmap
+        // should be centered in the new size give by the parameters
+        float left = (newWidth - scaledWidth) / 2;
+        float top = (newHeight - scaledHeight) / 2;
+
+        // The target rectangle for the scaled source bitmap
+        RectF targetRect = new RectF(left, top, left + scaledWidth, top + scaledHeight);
+
+        if (newWidth > 0 &&  newHeight > 0) {
+            // Finally, we create a new bitmap of the specified size and draw our new,
+            // scaled bitmap onto it.
+            Bitmap dest = Bitmap.createBitmap(newWidth, newHeight, source.getConfig());
+            Canvas canvas = new Canvas(dest);
+            canvas.drawBitmap(source, null, targetRect, null);
+            return dest;
+        }
+
+        return null;
+    }
 }
