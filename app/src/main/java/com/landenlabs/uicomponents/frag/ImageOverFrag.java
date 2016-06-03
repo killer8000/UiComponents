@@ -267,6 +267,8 @@ public class ImageOverFrag  extends Fragment
         Canvas resultCanvas = new Canvas(result);
         resultCanvas.drawBitmap(botDrawable.getBitmap(), 0, 0, null);
 
+        // resultCanvas.drawBitmap(canvasDrawable, 0, 0, xferPaint);
+
         boolean doDrawNotchShadow = true;
         if (doDrawNotchShadow) {
             drawNotchShadow(resultCanvas, grayColor, notchCenter, notchWidth, imgWidth, strokeWidth);
@@ -299,8 +301,8 @@ public class ImageOverFrag  extends Fragment
         }
 
         Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-            paint.setAntiAlias(true);
-            paint.setDither(true);
+        paint.setAntiAlias(true);
+        paint.setDither(true);
         paint.setColor(color);
         paint.setStyle(paintStyle); // Paint.Style.STROKE);
         //    paint.setStrokeJoin(Paint.Join.ROUND);
