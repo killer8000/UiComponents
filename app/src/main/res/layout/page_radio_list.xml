@@ -97,7 +97,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
-                android:background="#c0c0ff"
+
                 android:button="@null"
                 android:drawableTop="@android:drawable/btn_radio"
                 android:gravity="center"
@@ -119,7 +119,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
-                android:background="#c0c0ff"
                 android:button="@null"
                 android:drawableBottom="@android:drawable/btn_radio"
                 android:gravity="center"
@@ -131,8 +130,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
+                android:button="@null"
+                android:drawableLeft="@android:drawable/btn_radio"
+                android:drawableRight="@android:drawable/btn_radio"
                 android:padding="10dp"
-                android:text="New RadioButton5" />
+                android:text="Left and Right" />
 
             <RadioButton
                 android:id="@+id/radioButton7"
@@ -140,8 +142,9 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
                 android:background="#c0c0ff"
+                android:drawableRight="@android:drawable/btn_radio"
                 android:padding="10dp"
-                android:text="New RadioButton6" />
+                android:text="def and right" />
 
             <RadioButton
                 android:id="@+id/radioButton8"

@@ -185,8 +185,6 @@ public class MainActivity extends ActionBarActivity    {
 
     static final Item[] mItems = new Item[] {
 
-
-
             new Item( "Assorted", R.layout.page0frag),
             new Item( "Text", R.layout.page_text),
             new Item( "TextSize", R.layout.page_text_height),
@@ -196,6 +194,7 @@ public class MainActivity extends ActionBarActivity    {
             new Item( "Images", R.layout.page_image_scales),
             new Item( "ImageOverlap",  R.layout.page_image_over ),
 
+            new Item( "RadioBtn Tabs", R.layout.page_radio_btns),
             new Item( "RadioBtn List", R.layout.page_radio_list),
             new Item( "CkBox List", R.layout.page_list1),       // min api 21
             new Item( "Custom List",  R.layout.page_anim_list ),

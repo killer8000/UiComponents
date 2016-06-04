@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="#d0d0ff"
+        android:padding="10dp"
+        android:gravity="center"
+        android:text="- Tabs built from Radio Btns -" />
+
+
+    <LinearLayout
+        android:background="#f0f0c0"
+        android:id="@+id/bottom"
+        android:layout_below="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:background="#d0d0ff"
+            android:padding="10dp"
+            android:textSize="16dp"
+            android:gravity="center"
+            android:text="-- RadioGroup in Code --" />
+
+        <RadioGroup
+            android:id="@+id/tab_holder1"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:background="#fff"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:gravity="fill_horizontal"
+            android:layout_height="wrap_content"
+            android:contextClickable="true"
+            android:showDividers="middle"
+            android:divider="?android:attr/dividerHorizontal"
+             />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20px" />
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioGroup
+                android:id="@+id/tab_holder2"
+                android:padding="10dp"
+                android:background="#fff"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:showDividers="middle"
+                android:divider="?android:attr/dividerHorizontal"
+                />
+        </HorizontalScrollView>
+
+        <TextView
+            android:textSize="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:background="#d0d0ff"
+            android:padding="10dp"
+            android:gravity="center"
+            android:text="-- RadioGroup in XML --" />
+
+        <RadioGroup
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:background="#555"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:gravity="fill_horizontal"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/tabHome"
+                style="@style/RadioTab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/tab_home"
+                android:text="Home" />
+
+            <RadioButton
+                android:id="@+id/tabMap"
+                style="@style/RadioTab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/tab_map"
+                android:text="Map" />
+
+            <RadioButton
+                android:id="@+id/tabHourly"
+                style="@style/RadioTab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/tab_hourly"
+                android:text="Hourly" />
+
+            <RadioButton
+                android:id="@+id/tabDaily"
+                style="@style/RadioTab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/tab_daily"
+                android:text="Daily" />
+
+        </RadioGroup>
+
+    </LinearLayout>
+
+</RelativeLayout>
