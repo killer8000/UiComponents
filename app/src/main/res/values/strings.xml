@@ -13,6 +13,17 @@
 
    <string name="textCompareStr">AgByA</string>
 
+   <string-array name="states8">
+      <item>1.Alabama</item>
+      <item>2.Alaska</item>
+      <item>3.Arizona</item>
+      <item>4.Arkansas</item>
+      <item>5.California</item>
+      <item>6.Colorado</item>
+      <item>7.Connecticut</item>
+      <item>8.Delaware</item>
+   </string-array>
+
     <string-array name="states">
        <item>Alabama</item>
        <item>Alaska</item>

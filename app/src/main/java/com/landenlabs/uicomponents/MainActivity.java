@@ -185,6 +185,8 @@ public class MainActivity extends ActionBarActivity    {
 
     static final Item[] mItems = new Item[] {
 
+            new Item( "DrawerLayout", R.layout.page_drawer_layout),
+
             new Item( "Assorted", R.layout.page0frag),
             new Item( "Text", R.layout.page_text),
             new Item( "TextSize", R.layout.page_text_height),

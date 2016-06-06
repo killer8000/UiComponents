@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp">
@@ -26,41 +27,40 @@
 
     <LinearLayout
         android:id="@+id/button_holder"
-        android:layout_above="@id/bottom"
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:layout_above="@id/bottom"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/setVisualBtn1"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Go 1" />
+            android:layout_weight="1"
+            android:text="Apply Left" />
 
         <Button
             android:id="@+id/setVisualBtn2"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Go 2" />
-
+            android:layout_weight="1"
+            android:text="Apply Right" />
 
     </LinearLayout>
 
     <ScrollView
-        android:layout_below="@+id/title"
-        android:layout_above="@+id/button_holder"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/button_holder"
+        android:layout_below="@+id/title"
         android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
             android:baselineAligned="false"
-            android:measureWithLargestChild="false">
+            android:measureWithLargestChild="false"
+            android:orientation="horizontal">
 
             <ListView
                 android:id="@+id/sysuilist1"
@@ -68,6 +68,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="#e0a020"
+                android:choiceMode="multipleChoice"
                 android:divider="#402040"
                 android:dividerHeight="1dp"
                 android:footerDividersEnabled="true"
@@ -75,7 +76,6 @@
                 android:padding="10dp"
                 android:scrollbars="vertical"
                 android:smoothScrollbar="true"
-                android:choiceMode="multipleChoice"
                 tools:listitem="@layout/list1_row_checkbox" />
             />
 
@@ -85,6 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="#a0e020"
+                android:choiceMode="multipleChoice"
                 android:divider="#402040"
                 android:dividerHeight="1dp"
                 android:footerDividersEnabled="true"
@@ -92,14 +93,11 @@
                 android:padding="10dp"
                 android:scrollbars="vertical"
                 android:smoothScrollbar="true"
-                android:choiceMode="multipleChoice"
                 tools:listitem="@layout/list1_row_checkbox" />
             />
 
         </LinearLayout>
 
     </ScrollView>
-
-
 
 </RelativeLayout>
