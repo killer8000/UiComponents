@@ -154,6 +154,7 @@ public class RadioBtnFrag  extends Fragment {
                 }
                 */
 
+                button.setBackgroundResource(R.drawable.ripple_boarderless);
                 button.setPadding(padding, padding, padding, padding);
                 button.setGravity(Gravity.CENTER);
                 button.setTextColor(colorStateList);
