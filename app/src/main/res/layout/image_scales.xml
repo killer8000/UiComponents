@@ -344,6 +344,46 @@
                 android:src="@drawable/image200"
                 android:stateListAnimator="@anim/press" />
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/rowtx"
+                android:gravity="center"
+                android:text="maxHeight=50, maxWidth=100, adj=false"
+                android:textAppearance="@style/TextAppearanceWhite20" />
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="false"
+                android:maxWidth="100dp"
+                android:maxHeight="50dp"
+                android:background="@color/row1"
+                android:clickable="true"
+                android:src="@drawable/image200"
+                android:stateListAnimator="@anim/press" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/rowtx"
+                android:gravity="center"
+                android:text="maxHeight=50, maxWidth=100, adj=true"
+                android:textAppearance="@style/TextAppearanceWhite20" />
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:maxWidth="100dp"
+                android:maxHeight="50dp"
+                android:background="@color/row0"
+                android:clickable="true"
+                android:src="@drawable/image200"
+                android:stateListAnimator="@anim/press" />
+
 
         </LinearLayout>
     </ScrollView>
