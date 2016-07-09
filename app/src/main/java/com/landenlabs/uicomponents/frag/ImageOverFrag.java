@@ -1,34 +1,3 @@
-package com.landenlabs.uicomponents.frag;
-
-import android.graphics.Bitmap;
-import android.graphics.BlurMaskFilter;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.EmbossMaskFilter;
-import android.graphics.LinearGradient;
-import android.graphics.MaskFilter;
-import android.graphics.Paint;
-import android.graphics.Path;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
-import android.graphics.RectF;
-import android.graphics.Shader;
-import android.graphics.drawable.BitmapDrawable;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.ImageView;
-import android.widget.SeekBar;
-import android.widget.TextView;
-
-import com.landenlabs.uicomponents.R;
-import com.landenlabs.uicomponents.Ui;
-
-
 /**
  * Copyright (c) 2015 Dennis Lang (LanDen Labs) landenlabs@gmail.com
  *
@@ -51,6 +20,34 @@ import com.landenlabs.uicomponents.Ui;
  * @see http://landenlabs.com
  *
  */
+package com.landenlabs.uicomponents.frag;
+
+import android.graphics.Bitmap;
+import android.graphics.BlurMaskFilter;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.EmbossMaskFilter;
+import android.graphics.LinearGradient;
+import android.graphics.MaskFilter;
+import android.graphics.Paint;
+import android.graphics.Path;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.RectF;
+import android.graphics.Shader;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.ImageView;
+import android.widget.SeekBar;
+import android.widget.TextView;
+
+import com.landenlabs.uicomponents.R;
+import com.landenlabs.uicomponents.Ui;
+
 
 /**
  * Demonstrate overlapping images with notch cut out of top image.
@@ -59,7 +56,7 @@ import com.landenlabs.uicomponents.Ui;
  * @see <a href="http://landenlabs.com/android/index-m.html"> author's web-site </a>
  */
 
-public class ImageOverFrag  extends Fragment
+public class ImageOverFrag  extends UiFragment
         implements SeekBar.OnSeekBarChangeListener, View.OnClickListener {
 
     View mRootView;
@@ -107,21 +104,19 @@ public class ImageOverFrag  extends Fragment
         return mRootView;
     }
 
+    @Override
+    public int getFragId() {
+        return R.id.images_over_id;
+    }
 
     @Override
-    public void onDestroyView()
-    {
-        super.onDestroyView();
+    public String getName() {
+        return "ImageOver";
+    }
 
-        if (! getRetainInstance()) {
-            // Required to prevent duplicate id when Fragment re-created.
-            Fragment fragment = (getFragmentManager().findFragmentById(R.id.images_over_id));
-            if (fragment != null) {
-                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.remove(fragment);
-                ft.commit();
-            }
-        }
+    @Override
+    public String getDescription() {
+        return "??";
     }
 
 

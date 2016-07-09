@@ -25,12 +25,19 @@ package com.landenlabs.uicomponents;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.res.Resources;
+import android.graphics.Outline;
+import android.os.Build;
 import android.support.v4.app.FragmentActivity;
+import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.ViewOutlineProvider;
 import android.widget.TextView;
 
 /**
- * Created by dlang_local on 8/27/2015.
+ * Created by Dennis Lang on 8/27/2015.
+ * @author Dennis Lang (LanDen Labs)
+ * @see <a href="http://landenlabs.com/android/index-m.html"> author's web-site </a>
  */
 public class Ui {
 
@@ -76,5 +83,43 @@ public class Ui {
         textView.setSingleLine(false);
         textView.setTextSize(20);
         return dialog;
+    }
+
+    /**
+     * @return Screen Width in Pixels,
+     */
+    public static int getScreenWidthPixels() {
+        DisplayMetrics metrics = Resources.getSystem().getDisplayMetrics();
+        return metrics.widthPixels;
+    }
+
+    public static int getScreenHeightPixels() {
+        DisplayMetrics metrics = Resources.getSystem().getDisplayMetrics();
+        return metrics.heightPixels;
+    }
+
+    public static int pxToDp(int px) {
+        return  (int)(px / Resources.getSystem().getDisplayMetrics().density);
+    }
+
+    public static int dpToPx(int dp) {
+        return (int)(dp *  Resources.getSystem().getDisplayMetrics().density);
+    }
+
+    public static void setRectOutline(View view) {
+        final int width = view.getWidth();
+        final int height = view.getHeight();
+
+        if (Build.VERSION.SDK_INT >= 21) {
+            view.setOutlineProvider(new ViewOutlineProvider() {
+                @Override
+                public void getOutline(View view, Outline outline) {
+
+                    if (Build.VERSION.SDK_INT >= 21) {
+                        outline.setRect(0, 0, width, height);
+                    }
+                }
+            });
+        }
     }
 }

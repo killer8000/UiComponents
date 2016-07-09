@@ -1,5 +1,3 @@
-package com.landenlabs.uicomponents.frag;
-
 /**
  * Copyright (c) 2015 Dennis Lang (LanDen Labs) landenlabs@gmail.com
  *
@@ -23,13 +21,13 @@ package com.landenlabs.uicomponents.frag;
  *
  */
 
+package com.landenlabs.uicomponents.frag;
+
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.TypeEvaluator;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,7 +49,7 @@ import java.util.List;
  * @author Dennis Lang (LanDen Labs)
  * @see <a href="http://landenlabs.com/android/index-m.html"> author's web-site </a>
  */
-public class AnimListFrag  extends Fragment {
+public class AnimListFrag  extends UiFragment {
 
     // ---- Timer ----
     private Handler m_handler = new Handler();
@@ -90,19 +88,18 @@ public class AnimListFrag  extends Fragment {
     }
 
     @Override
-    public void onDestroyView()
-    {
-        super.onDestroyView();
+    public int getFragId() {
+        return R.id.anim_list_id;
+    }
 
-        if (! getRetainInstance()) {
-            // Required to prevent duplicate id when Fragment re-created.
-            Fragment fragment = (getFragmentManager().findFragmentById(R.id.anim_list_id));
-            if (fragment != null) {
-                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.remove(fragment);
-                ft.commit();
-            }
-        }
+    @Override
+    public String getName() {
+        return "AnimList";
+    }
+
+    @Override
+    public String getDescription() {
+        return "??";
     }
 
     private void setup() {

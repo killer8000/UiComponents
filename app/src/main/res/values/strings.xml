@@ -1,19 +1,20 @@
 <resources>
-    <string name="app_name">UiComponents</string>
+    <string name="app_name" translatable="false">UiComponents</string>
+    <string name="app_desc" translatable="false">UiComponents\n Demo UI Components\nBy Dennis Lang\nwww.landenlabs.com</string>
 
-    <string name="page1Title">Page1</string>
-    <string name="page2Title">Page2</string>
-    <string name="page3Title">Page3</string>
+    <string name="page1Title" translatable="false">Page1</string>
+    <string name="page2Title" translatable="false">Page2</string>
+    <string name="page3Title" translatable="false">Page3</string>
 
-    <string name="textItems">Two\nText Rows</string>
+    <string name="textItems" translatable="false">Two\nText Rows</string>
 
-    <string name="menu_settings">Ui Components v1.2</string>
-    <string name="menu_about">Dennis Lang</string>
-    <string name="menu_web">www.landenlabs.com</string>
+    <string name="menu_settings" translatable="false">Ui Components v1.4</string>
+    <string name="menu_about" translatable="false">Dennis Lang</string>
+    <string name="menu_web" translatable="false">www.landenlabs.com</string>
 
-   <string name="textCompareStr">AgByA</string>
+   <string name="textCompareStr" translatable="false">AgByA</string>
 
-   <string-array name="states8">
+   <string-array name="states8" translatable="false">
       <item>1.Alabama</item>
       <item>2.Alaska</item>
       <item>3.Arizona</item>
@@ -24,7 +25,8 @@
       <item>8.Delaware</item>
    </string-array>
 
-    <string-array name="states">
+    <string-array name="states" translatable="false">
+       <item>--First--</item>
        <item>Alabama</item>
        <item>Alaska</item>
        <item>Arizona</item>
@@ -75,6 +77,6 @@
        <item>West Virginia</item>
        <item>Wisconsin</item>
        <item>Wyoming</item>
-       <item>Washington DC</item>
+       <item>--Last--</item>
     </string-array>
 </resources>

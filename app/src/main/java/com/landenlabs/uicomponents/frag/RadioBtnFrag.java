@@ -1,24 +1,3 @@
-package com.landenlabs.uicomponents.frag;
-
-import android.content.res.ColorStateList;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.StateListDrawable;
-import android.os.Build;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.graphics.drawable.DrawableCompat;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-
-import com.landenlabs.uicomponents.R;
-import com.landenlabs.uicomponents.Ui;
-
 /**
  * Copyright (c) 2015 Dennis Lang (LanDen Labs) landenlabs@gmail.com
  *
@@ -41,6 +20,24 @@ import com.landenlabs.uicomponents.Ui;
  * @see http://landenlabs.com
  *
  */
+package com.landenlabs.uicomponents.frag;
+
+import android.content.res.ColorStateList;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.StateListDrawable;
+import android.os.Build;
+import android.os.Bundle;
+import android.support.v4.graphics.drawable.DrawableCompat;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+
+import com.landenlabs.uicomponents.R;
+import com.landenlabs.uicomponents.Ui;
 
 /**
  * Demonstrate Radio Buttons
@@ -49,7 +46,7 @@ import com.landenlabs.uicomponents.Ui;
  * @see <a href="http://landenlabs.com/android/index-m.html"> author's web-site </a>
  */
 
-public class RadioBtnFrag  extends Fragment {
+public class RadioBtnFrag  extends UiFragment {
 
     View mRootView;
 
@@ -63,20 +60,20 @@ public class RadioBtnFrag  extends Fragment {
     }
 
 
-    @Override
-    public void onDestroyView()
-    {
-        super.onDestroyView();
 
-        if (! getRetainInstance()) {
-            // Required to prevent duplicate id when Fragment re-created.
-            Fragment fragment = (getFragmentManager().findFragmentById(R.id.layout_radio_btn_id));
-            if (fragment != null) {
-                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.remove(fragment);
-                ft.commit();
-            }
-        }
+    @Override
+    public int getFragId() {
+        return R.id.layout_radio_btn_id;
+    }
+
+    @Override
+    public String getName() {
+        return "RadioBtn";
+    }
+
+    @Override
+    public String getDescription() {
+        return "??";
     }
 
     private void setup() {

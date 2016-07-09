@@ -1,23 +1,3 @@
-package com.landenlabs.uicomponents.frag;
-
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Matrix;
-import android.graphics.RectF;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-
-import com.landenlabs.uicomponents.R;
-import com.landenlabs.uicomponents.Ui;
-
 /**
  * Copyright (c) 2015 Dennis Lang (LanDen Labs) landenlabs@gmail.com
  * <p/>
@@ -39,6 +19,24 @@ import com.landenlabs.uicomponents.Ui;
  * @author Dennis Lang  (3/21/2015)
  * @see http://landenlabs.com
  */
+package com.landenlabs.uicomponents.frag;
+
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Matrix;
+import android.graphics.Rect;
+import android.graphics.RectF;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+
+import com.landenlabs.uicomponents.R;
+import com.landenlabs.uicomponents.Ui;
 
 /**
  * Demonstrate Image Scale modes.
@@ -47,7 +45,7 @@ import com.landenlabs.uicomponents.Ui;
  * @see <a href="http://landenlabs.com/android/index-m.html"> author's web-site </a>
  */
 
-public class ImageScalesFrag  extends Fragment implements View.OnClickListener  {
+public class ImageScalesFrag  extends UiFragment implements View.OnClickListener  {
 
     View mRootView;
     ViewGroup mImageHolder;
@@ -60,21 +58,19 @@ public class ImageScalesFrag  extends Fragment implements View.OnClickListener  
         return mRootView;
     }
 
+    @Override
+    public int getFragId() {
+        return R.id.image_scales_id;
+    }
 
     @Override
-    public void onDestroyView()
-    {
-        super.onDestroyView();
+    public String getName() {
+        return "ImageScales";
+    }
 
-        if (! getRetainInstance()) {
-            // Required to prevent duplicate id when Fragment re-created.
-            Fragment fragment = (getFragmentManager().findFragmentById(R.id.image_scales_id));
-            if (fragment != null) {
-                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.remove(fragment);
-                ft.commit();
-            }
-        }
+    @Override
+    public String getDescription() {
+        return "??";
     }
 
     @Override
@@ -104,6 +100,9 @@ public class ImageScalesFrag  extends Fragment implements View.OnClickListener  
     ImageView mUpperLeftFill;
     ImageView mLowerLeftFill;
     View mCenterFill;
+    Bitmap mPrevBm1;
+    Bitmap mPrevBm2;
+    Bitmap mPrevBm3;
 
     private void setup() {
         mImageHolder = Ui.viewById(mRootView, R.id.image_holder);
@@ -149,12 +148,12 @@ public class ImageScalesFrag  extends Fragment implements View.OnClickListener  
             }
         }
 
-        fillUpperLeft(getResources().getDrawable(imageRes), mUpperLeftFill);
-        fillLowerLeft(getResources().getDrawable(imageRes), mLowerLeftFill);
-        setScaledImage(getResources().getDrawable(imageRes), mCenterFill);
+        mPrevBm1 = fillUpperLeft(getDrawable(imageRes), mUpperLeftFill, mPrevBm1);
+        mPrevBm2 = fillLowerLeft(getDrawable(imageRes), mLowerLeftFill, mPrevBm2);
+        mPrevBm3 = setScaledImage(getDrawable(imageRes), mCenterFill, mPrevBm3);
     }
 
-    private void fillUpperLeft(final Drawable drawable, ImageView imageView) {
+    private Bitmap fillUpperLeft(final Drawable drawable, ImageView imageView, Bitmap prevBm) {
 
         // Compute  matrix to fill viewer with drawable starting with upper left
         // Stretching till 2nd edge is crossed (filling screen) with correct aspect ratio.
@@ -173,9 +172,10 @@ public class ImageScalesFrag  extends Fragment implements View.OnClickListener  
         imageView.setScaleType(ImageView.ScaleType.MATRIX);
         imageView.setImageMatrix(m);
         imageView.setImageDrawable(drawable);
+        return prevBm;
     }
 
-    private void fillLowerLeft(final Drawable drawable, ImageView imageView) {
+    private Bitmap fillLowerLeft(final Drawable drawable, ImageView imageView, Bitmap prevBm) {
 
         // Compute  matrix to fill viewer with drawable starting with upper left
         // Stretching till 2nd edge is crossed (filling screen) with correct aspect ratio.
@@ -197,20 +197,26 @@ public class ImageScalesFrag  extends Fragment implements View.OnClickListener  
         imageView.setScaleType(ImageView.ScaleType.MATRIX);
         imageView.setImageMatrix(m);
         imageView.setImageDrawable(drawable);
+        return prevBm;
     }
 
-    private void setScaledImage(final Drawable bgImage, View view) {
+    private Bitmap setScaledImage(final Drawable bgImage, View view, Bitmap prevScaled) {
         if (bgImage != null) {
+            if (prevScaled != null)
+                prevScaled.recycle();
+
             // view.setBackgroundResource(bgImage);
             BitmapDrawable bmDrawable = (BitmapDrawable) bgImage;
             Bitmap bmImage = bmDrawable.getBitmap();
             int screenWidthPx = Resources.getSystem().getDisplayMetrics().widthPixels;
             int viewHeightPx =  view.getMeasuredHeight();
-            Bitmap scaledImage = scaleCenterCrop(bmImage, screenWidthPx, viewHeightPx);
-            view.setBackgroundDrawable(new BitmapDrawable(scaledImage));
+            prevScaled = scaleCenterCrop(bmImage, screenWidthPx, viewHeightPx);
+            view.setBackgroundDrawable(new BitmapDrawable(prevScaled));
+            // bmImage.recycle();
         }
-    }
 
+        return prevScaled;
+    }
 
     /**
      * Scale using Center Crop (source scaled till filling both new dimensions)
@@ -219,7 +225,7 @@ public class ImageScalesFrag  extends Fragment implements View.OnClickListener  
      * @param newHeight
      * @return Center Crop scaled image.
      */
-    public static Bitmap scaleCenterCrop(Bitmap source, int newWidth, int newHeight) {
+    public static Bitmap scaleCenterCrop2(Bitmap source, int newWidth, int newHeight) {
         int sourceWidth = source.getWidth();
         int sourceHeight = source.getHeight();
 
@@ -253,4 +259,38 @@ public class ImageScalesFrag  extends Fragment implements View.OnClickListener  
 
         return null;
     }
+
+    public static Bitmap scaleCenterCrop(Bitmap source,  int newWidth, int newHeight) {
+        int sourceWidth = source.getWidth();
+        int sourceHeight = source.getHeight();
+
+        double targetAspect = (double)newWidth / newHeight;
+        double sourceAspect = (double)sourceWidth / sourceHeight;
+
+        int left = 0;
+        int top = 0;
+        if (sourceAspect >= targetAspect) {
+            // Souce is wider then we need, compute side offset
+            left = (int)((sourceWidth - targetAspect * sourceHeight) / 2);
+        } else {
+            // Source is taller then we need cmopute top and bottom offset.
+            top = (int)((sourceHeight - sourceWidth / targetAspect) / 2);
+        }
+
+        // Source and target rectangle for the scaled  bitmap
+        Rect sourceRect = new Rect(left, top, sourceWidth - left, sourceHeight - top);
+        Rect targetRect = new Rect(0, 0, newWidth, newHeight);
+
+        if (newWidth > 0 &&  newHeight > 0) {
+            // Finally, we create a new bitmap of the specified size and draw our new,
+            // scaled bitmap onto it.
+            Bitmap dest = Bitmap.createBitmap(newWidth, newHeight, source.getConfig());
+            Canvas canvas = new Canvas(dest);
+            canvas.drawBitmap(source, sourceRect, targetRect, null);
+            return dest;
+        }
+
+        return null;
+    }
+
 }

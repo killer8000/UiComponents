@@ -40,9 +40,11 @@ import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.landenlabs.uicomponents.Util.PageItem;
+
 
 /**
- * Main Activity to WebTester app.
+ * Main Activity to UiComponents app.
  *
  * @author Dennis Lang (LanDen Labs)
  * @see <a href="http://landenlabs.com/android/index-m.html"> author's web-site </a>
@@ -59,11 +61,7 @@ public class MainActivity extends ActionBarActivity    {
      */
     SectionsPagerAdapter mSectionsPagerAdapter;
 
-    /**
-     * The {@link ViewPager} that will host the section contents.
-     */
     ViewPager mViewPager;
-
     ActionBar mActionBar;
 
     static final String STATE_ADAPTER = "secPageAdapter";
@@ -105,6 +103,7 @@ public class MainActivity extends ActionBarActivity    {
             public void onPageScrollStateChanged(int state) {
             }
         });
+
     }
 
     @Override
@@ -148,7 +147,7 @@ public class MainActivity extends ActionBarActivity    {
         SubMenu pageMenu = menu.addSubMenu("Pages...");
         int groupId = 1;
         int itemId = 100;
-        for (Item item : mItems) {
+        for (PageItem item : mItems) {
             pageMenu.add(groupId, itemId, itemId, item.mTitle);
             itemId++;
         }
@@ -167,53 +166,66 @@ public class MainActivity extends ActionBarActivity    {
             return true;
         }
         if (id > 100 && id < 100 + mItems.length) {
-            mViewPager.setCurrentItem(id - 100);
+            selectPage(id - 100);
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    // =============================================================================================
-    static class Item {
-        String mTitle;
-        int mLayout;
-        public Item(String title, int layout) {
-            mTitle = title; mLayout = layout;
+    @Override
+    public void onBackPressed() {
+        if (mViewPager.getCurrentItem() == 0) {
+            super.onBackPressed(); // This will pop the Activity from the stack.
+        } else {
+            selectPage(0);
         }
     }
 
-    static final Item[] mItems = new Item[] {
+    public void selectPage(int idx) {
+        Log.d("foo", "selectPage=" + idx);
+        mViewPager.setCurrentItem(idx);
+    }
 
-            // new Item( "DrawerLayout", R.layout.page_drawer_layout),
-            new Item( "ScrollResize", R.layout.page_scroll_resize),
+    public static PageItem[] getPageItems() {
+        return mItems;
+    }
 
-            new Item( "Assorted", R.layout.page0frag),
-            new Item( "Text", R.layout.page_text),
-            new Item( "TextSize", R.layout.page_text_height),
+    // =============================================================================================
 
-            new Item( "Grid Images", R.layout.page_grid_image),
-            new Item( "GridLayout", R.layout.page_grid_layout),
-            new Item( "Images", R.layout.page_image_scales),
-            new Item( "ImageOverlap",  R.layout.page_image_over ),
+    static final PageItem[] mItems = new PageItem[] {
 
-            new Item( "RadioBtn Tabs", R.layout.page_radio_btns),
-            new Item( "RadioBtn List", R.layout.page_radio_list),
-            new Item( "CkBox List", R.layout.page_list1),       // min api 21
-            new Item( "Custom List",  R.layout.page_anim_list ),
+            new PageItem( "Menu", R.layout.page_menu_frag),
 
-            new Item( "Toggle/Switch",  R.layout.page_switches),
-            new Item( "CheckboxRight",  R.layout.page_checkbox_right ),
-            new Item( "CheckboxLeft",  R.layout.page_checkbox_left ),
+            // new PageItem( "DrawerLayout", R.layout.page_drawer_layout),
+            new PageItem( "ScrollResize", R.layout.page_scroll_resize),
 
-            new Item( "RelLayout",  R.layout.page_rellayout ),
-            new Item( "LayoutAnim",  R.layout.page_layout_anim ),
-            new Item( "FullScreen",  R.layout.page_fullscreen ),
+            new PageItem( "Assorted", R.layout.page0frag),
+            new PageItem( "Text", R.layout.page_text),
+            new PageItem( "TextSize", R.layout.page_text_height),
+
+            new PageItem( "Grid Images", R.layout.page_grid_image),
+            new PageItem( "GridLayout", R.layout.page_grid_layout),
+            new PageItem( "ImageScales", R.layout.page_image_scales),
+            new PageItem( "ImageOverlap",  R.layout.page_image_over ),
+
+            new PageItem( "RadioBtn Tabs", R.layout.page_radio_btns),
+            new PageItem( "RadioBtn List", R.layout.page_radio_list),
+            new PageItem( "CkBox List", R.layout.page_list1),       // min api 21
+            new PageItem( "Custom List",  R.layout.page_anim_list ),
+
+            new PageItem( "Toggle/Switch",  R.layout.page_switches),
+            new PageItem( "CheckboxRight",  R.layout.page_checkbox_right ),
+            new PageItem( "CheckboxLeft",  R.layout.page_checkbox_left ),
+
+            new PageItem( "RelLayout",  R.layout.page_rellayout ),
+            new PageItem( "LayoutAnim",  R.layout.page_layout_anim ),
+            new PageItem( "FullScreen",  R.layout.page_fullscreen ),
 
             // API 21
-            new Item( "ElevShadow",  R.layout.page_elevation ),
-            new Item( "Coordinated", R.layout.page_coordinated ),
-            new Item( "TabLayout", R.layout.page_tablayout),
+            new PageItem( "ElevShadow",  R.layout.page_elevation ),
+            new PageItem( "Coordinated", R.layout.page_coordinated ),
+            new PageItem( "TabLayout", R.layout.page_tablayout),
     };
 
     // =============================================================================================
@@ -253,7 +265,7 @@ public class MainActivity extends ActionBarActivity    {
      */
     public static class PageFragment extends Fragment {
         // The fragment argument representing the section number for this  fragment.
-        private static final String ARG_page_number = "page_number";
+        static final String ARG_page_number = "page_number";
         int m_pageNum = 0;
 
         // Returns a new instance of this fragment for the given section  number.
@@ -272,6 +284,7 @@ public class MainActivity extends ActionBarActivity    {
             m_pageNum = getArguments().getInt(ARG_page_number);
             int layout =  mItems[m_pageNum].mLayout;
             View rootView = inflater.inflate(layout, container, false);
+
             return rootView;
         }
     }

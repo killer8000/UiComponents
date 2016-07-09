@@ -1,18 +1,3 @@
-package com.landenlabs.uicomponents.frag;
-
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ScrollView;
-import android.widget.TextView;
-
-import com.landenlabs.uicomponents.R;
-import com.landenlabs.uicomponents.Ui;
-
-
 /**
  * Copyright (c) 2015 Dennis Lang (LanDen Labs) landenlabs@gmail.com
  *
@@ -35,6 +20,17 @@ import com.landenlabs.uicomponents.Ui;
  * @see http://landenlabs.com
  *
  */
+package com.landenlabs.uicomponents.frag;
+
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ScrollView;
+import android.widget.TextView;
+
+import com.landenlabs.uicomponents.R;
+import com.landenlabs.uicomponents.Ui;
 
 /**
  * Demonstrate Scrollview resizing with views above and below.
@@ -43,7 +39,7 @@ import com.landenlabs.uicomponents.Ui;
  * @see <a href="http://landenlabs.com/android/index-m.html"> author's web-site </a>
  */
 
-public class ScrollResizeFrag  extends Fragment implements View.OnClickListener {
+public class ScrollResizeFrag  extends UiFragment implements View.OnClickListener {
 
     View mRootView;
     ViewGroup mDataHolder;
@@ -62,19 +58,18 @@ public class ScrollResizeFrag  extends Fragment implements View.OnClickListener 
     }
 
     @Override
-    public void onDestroyView()
-    {
-        super.onDestroyView();
+    public int getFragId() {
+        return R.id.layout_scroll_resize_id;
+    }
 
-        if (! getRetainInstance()) {
-            // Required to prevent duplicate id when Fragment re-created.
-            Fragment fragment = (getFragmentManager().findFragmentById(R.id.layout_scroll_resize_id));
-            if (fragment != null) {
-                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.remove(fragment);
-                ft.commit();
-            }
-        }
+    @Override
+    public String getName() {
+        return "ScrollResize";
+    }
+
+    @Override
+    public String getDescription() {
+        return "??";
     }
 
     @Override

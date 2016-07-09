@@ -1,25 +1,3 @@
-package com.landenlabs.uicomponents.frag;
-
-import android.animation.AnimatorInflater;
-import android.os.Build;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.AppCompatCheckedTextView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-
-import com.landenlabs.uicomponents.R;
-import com.landenlabs.uicomponents.Ui;
-
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * Copyright (c) 2015 Dennis Lang (LanDen Labs) landenlabs@gmail.com
  * <p/>
@@ -41,6 +19,25 @@ import java.util.List;
  * @author Dennis Lang  (3/21/2015)
  * @see http://landenlabs.com
  */
+package com.landenlabs.uicomponents.frag;
+
+import android.animation.AnimatorInflater;
+import android.os.Build;
+import android.os.Bundle;
+import android.support.v7.widget.AppCompatCheckedTextView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+
+import com.landenlabs.uicomponents.R;
+import com.landenlabs.uicomponents.Ui;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Demonstrate Image Scale modes.
@@ -49,7 +46,7 @@ import java.util.List;
  * @see <a href="http://landenlabs.com/android/index-m.html"> author's web-site </a>
  */
 
-public class FullScreenFrag  extends Fragment implements View.OnClickListener  {
+public class FullScreenFrag  extends UiFragment implements View.OnClickListener  {
 
 
     private final List<String> mListStrings = Arrays.asList(
@@ -78,21 +75,19 @@ public class FullScreenFrag  extends Fragment implements View.OnClickListener  {
         return mRootView;
     }
 
+    @Override
+    public int getFragId() {
+        return R.id.fullscreen_id;
+    }
 
     @Override
-    public void onDestroyView()
-    {
-        super.onDestroyView();
+    public String getName() {
+        return "FullScreen";
+    }
 
-        if (! getRetainInstance()) {
-            // Required to prevent duplicate id when Fragment re-created.
-            Fragment fragment = (getFragmentManager().findFragmentById(R.id.fullscreen_id));
-            if (fragment != null) {
-                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.remove(fragment);
-                ft.commit();
-            }
-        }
+    @Override
+    public String getDescription() {
+        return "??";
     }
 
     @Override

@@ -20,27 +20,19 @@
  * @see http://landenlabs.com
  *
  */
-package com.landenlabs.uicomponents.frag;
-
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import com.landenlabs.uicomponents.R;
+package com.landenlabs.uicomponents.Util;
 
 /**
- * Demonstrate Checkbox ui components with checkmark on right margin.
+ * Created by Dennis Lang on 7/6/16.
  *
  * @author Dennis Lang (LanDen Labs)
  * @see <a href="http://landenlabs.com/android/index-m.html"> author's web-site </a>
  */
-public class CheckboxRightDemoFrag extends CheckboxDemoFrag {
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+public class PageItem {
+    public String mTitle;
+    public int mLayout;
 
-        mRootView = inflater.inflate(R.layout.checkbox_right_demo, container, false);
-        setup();
-        return mRootView;
+    public PageItem(String title, int layout) {
+        mTitle = title; mLayout = layout;
     }
 }

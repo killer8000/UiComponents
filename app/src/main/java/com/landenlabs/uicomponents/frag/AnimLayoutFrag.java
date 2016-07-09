@@ -1,17 +1,3 @@
-package com.landenlabs.uicomponents.frag;
-
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-
-import com.landenlabs.uicomponents.R;
-import com.landenlabs.uicomponents.Ui;
-
-
 /**
  * Copyright (c) 2015 Dennis Lang (LanDen Labs) landenlabs@gmail.com
  *
@@ -35,6 +21,18 @@ import com.landenlabs.uicomponents.Ui;
  *
  */
 
+
+package com.landenlabs.uicomponents.frag;
+
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.landenlabs.uicomponents.R;
+import com.landenlabs.uicomponents.Ui;
+
 /**
  * Demonstrate animated layout of images.
  *
@@ -42,7 +40,7 @@ import com.landenlabs.uicomponents.Ui;
  * @see <a href="http://landenlabs.com/android/index-m.html"> author's web-site </a>
  */
 
-public class AnimLayoutFrag  extends Fragment {
+public class AnimLayoutFrag  extends UiFragment {
 
     View mRootView;
     ViewGroup mLayout1;
@@ -60,21 +58,19 @@ public class AnimLayoutFrag  extends Fragment {
         return mRootView;
     }
 
+    @Override
+    public int getFragId() {
+        return R.id.layout_anim_id;
+    }
 
     @Override
-    public void onDestroyView()
-    {
-        super.onDestroyView();
+    public String getName() {
+        return "AnimLayout";
+    }
 
-        if (! getRetainInstance()) {
-            // Required to prevent duplicate id when Fragment re-created.
-            Fragment fragment = (getFragmentManager().findFragmentById(R.id.layout_anim_id));
-            if (fragment != null) {
-                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.remove(fragment);
-                ft.commit();
-            }
-        }
+    @Override
+    public String getDescription() {
+        return "??";
     }
 
     private void setup() {

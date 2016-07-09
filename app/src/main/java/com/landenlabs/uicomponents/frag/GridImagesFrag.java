@@ -1,5 +1,3 @@
-package com.landenlabs.uicomponents.frag;
-
 /**
  * Copyright (c) 2015 Dennis Lang (LanDen Labs) landenlabs@gmail.com
  *
@@ -22,13 +20,12 @@ package com.landenlabs.uicomponents.frag;
  * @see http://landenlabs.com
  *
  */
+package com.landenlabs.uicomponents.frag;
 
 import android.animation.AnimatorInflater;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,7 +44,7 @@ import com.landenlabs.uicomponents.Ui;
  * @see <a href="http://landenlabs.com/android/index-m.html"> author's web-site </a>
  */
 
-public class GridImagesFrag  extends Fragment   {
+public class GridImagesFrag  extends UiFragment   {
 
     View mRootView;
 
@@ -59,21 +56,19 @@ public class GridImagesFrag  extends Fragment   {
         return mRootView;
     }
 
+    @Override
+    public int getFragId() {
+        return R.id.grid_images_id;
+    }
 
     @Override
-    public void onDestroyView()
-    {
-        super.onDestroyView();
+    public String getName() {
+        return "FullScreen";
+    }
 
-        if (! getRetainInstance()) {
-            // Required to prevent duplicate id when Fragment re-created.
-            Fragment fragment = (getFragmentManager().findFragmentById(R.id.grid_images_id));
-            if (fragment != null) {
-                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.remove(fragment);
-                ft.commit();
-            }
-        }
+    @Override
+    public String getDescription() {
+        return "??";
     }
 
     private void setup() {

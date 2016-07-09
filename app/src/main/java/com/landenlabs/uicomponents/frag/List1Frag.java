@@ -1,5 +1,3 @@
-package com.landenlabs.uicomponents.frag;
-
 /**
  * Copyright (c) 2015 Dennis Lang (LanDen Labs) landenlabs@gmail.com
  *
@@ -22,12 +20,11 @@ package com.landenlabs.uicomponents.frag;
  * @see http://landenlabs.com
  *
  */
+package com.landenlabs.uicomponents.frag;
 
 import android.animation.AnimatorInflater;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,7 +51,7 @@ import java.util.List;
  * @author Dennis Lang (LanDen Labs)
  * @see <a href="http://landenlabs.com/android/index-m.html"> author's web-site </a>
  */
-public class List1Frag  extends Fragment implements CompoundButton.OnCheckedChangeListener {
+public class List1Frag  extends UiFragment implements CompoundButton.OnCheckedChangeListener {
 
     private final List<String> mListStrings = Arrays.asList("Apple", "Avocado", "Banana",
             "Blueberry", "Coconut", "Durian", "Guava", "Kiwifruit",
@@ -76,19 +73,18 @@ public class List1Frag  extends Fragment implements CompoundButton.OnCheckedChan
     }
 
     @Override
-    public void onDestroyView()
-    {
-        super.onDestroyView();
+    public int getFragId() {
+        return R.id.list1_id;
+    }
 
-        if (! getRetainInstance()) {
-            // Required to prevent duplicate id when Fragment re-created.
-            Fragment fragment = (getFragmentManager().findFragmentById(R.id.list1_id));
-            if (fragment != null) {
-                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.remove(fragment);
-                ft.commit();
-            }
-        }
+    @Override
+    public String getName() {
+        return "List1";
+    }
+
+    @Override
+    public String getDescription() {
+        return "??";
     }
 
     @Override

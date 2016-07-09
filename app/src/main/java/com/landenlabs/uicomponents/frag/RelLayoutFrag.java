@@ -1,15 +1,3 @@
-package com.landenlabs.uicomponents.frag;
-
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import com.landenlabs.uicomponents.R;
-
-
 /**
  * Copyright (c) 2015 Dennis Lang (LanDen Labs) landenlabs@gmail.com
  *
@@ -32,6 +20,14 @@ import com.landenlabs.uicomponents.R;
  * @see http://landenlabs.com
  *
  */
+package com.landenlabs.uicomponents.frag;
+
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import com.landenlabs.uicomponents.R;
 
 /**
  * Demonstrate grid layout of images.
@@ -40,7 +36,7 @@ import com.landenlabs.uicomponents.R;
  * @see <a href="http://landenlabs.com/android/index-m.html"> author's web-site </a>
  */
 
-public class RelLayoutFrag  extends Fragment {
+public class RelLayoutFrag  extends UiFragment {
 
     View mRootView;
 
@@ -52,21 +48,19 @@ public class RelLayoutFrag  extends Fragment {
         return mRootView;
     }
 
+    @Override
+    public int getFragId() {
+        return R.id.rel_layout_id;
+    }
 
     @Override
-    public void onDestroyView()
-    {
-        super.onDestroyView();
+    public String getName() {
+        return "RelLayout";
+    }
 
-        if (! getRetainInstance()) {
-            // Required to prevent duplicate id when Fragment re-created.
-            Fragment fragment = (getFragmentManager().findFragmentById(R.id.rel_layout_id));
-            if (fragment != null) {
-                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.remove(fragment);
-                ft.commit();
-            }
-        }
+    @Override
+    public String getDescription() {
+        return "??";
     }
 
     private void setup() {

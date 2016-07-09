@@ -1,8 +1,28 @@
+/**
+ * Copyright (c) 2015 Dennis Lang (LanDen Labs) landenlabs@gmail.com
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
+ * associated documentation files (the "Software"), to deal in the Software without restriction, including
+ * without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the
+ * following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial
+ * portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
+ * LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+ * NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+ * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * @author Dennis Lang  (3/21/2015)
+ * @see http://landenlabs.com
+ *
+ */
 package com.landenlabs.uicomponents.frag;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +41,7 @@ import java.util.List;
  * @author Dennis Lang (LanDen Labs)
  * @see <a href="http://landenlabs.com/android/index-m.html"> author's web-site </a>
  */
-public class CheckboxDemoFrag  extends Fragment implements View.OnClickListener {
+public class CheckboxDemoFrag  extends UiFragment implements View.OnClickListener {
 
     protected View mRootView;
 
@@ -34,19 +54,18 @@ public class CheckboxDemoFrag  extends Fragment implements View.OnClickListener 
     }
 
     @Override
-    public void onDestroyView()
-    {
-        super.onDestroyView();
+    public int getFragId() {
+        return R.id.checkbox_demo_id;
+    }
 
-        if (! getRetainInstance()) {
-            // Required to prevent duplicate id when Fragment re-created.
-            Fragment fragment = (getFragmentManager().findFragmentById(R.id.checkbox_demo_id));
-            if (fragment != null) {
-                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.remove(fragment);
-                ft.commit();
-            }
-        }
+    @Override
+    public String getName() {
+        return "CheckboxDemo";
+    }
+
+    @Override
+    public String getDescription() {
+        return "??";
     }
 
     private List<View> mViewList = new ArrayList<>();
