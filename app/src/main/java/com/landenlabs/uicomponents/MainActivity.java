@@ -161,11 +161,7 @@ public class MainActivity extends ActionBarActivity    {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.menu_settings) {
-            return true;
-        }
-        if (id > 100 && id < 100 + mItems.length) {
+        if (id >= 100 && id < 100 + mItems.length) {
             selectPage(id - 100);
             return true;
         }
@@ -183,7 +179,6 @@ public class MainActivity extends ActionBarActivity    {
     }
 
     public void selectPage(int idx) {
-        Log.d("foo", "selectPage=" + idx);
         mViewPager.setCurrentItem(idx);
     }
 
@@ -197,17 +192,18 @@ public class MainActivity extends ActionBarActivity    {
 
             new PageItem( "Menu", R.layout.page_menu_frag),
 
+
             // new PageItem( "DrawerLayout", R.layout.page_drawer_layout),
-            new PageItem( "ScrollResize", R.layout.page_scroll_resize),
+            new PageItem( "Scroll Resize", R.layout.page_scroll_resize),
 
             new PageItem( "Assorted", R.layout.page0frag),
-            new PageItem( "Text", R.layout.page_text),
+            new PageItem( "Text Alignment", R.layout.page_text),
             new PageItem( "TextSize", R.layout.page_text_height),
 
-            new PageItem( "Grid Images", R.layout.page_grid_image),
+            new PageItem( "GridView Images", R.layout.page_grid_image),
             new PageItem( "GridLayout", R.layout.page_grid_layout),
-            new PageItem( "ImageScales", R.layout.page_image_scales),
-            new PageItem( "ImageOverlap",  R.layout.page_image_over ),
+            new PageItem( "Image Scales", R.layout.page_image_scales),
+            new PageItem( "Image Overlap",  R.layout.page_image_over ),
 
             new PageItem( "RadioBtn Tabs", R.layout.page_radio_btns),
             new PageItem( "RadioBtn List", R.layout.page_radio_list),
@@ -215,17 +211,22 @@ public class MainActivity extends ActionBarActivity    {
             new PageItem( "Custom List",  R.layout.page_anim_list ),
 
             new PageItem( "Toggle/Switch",  R.layout.page_switches),
-            new PageItem( "CheckboxRight",  R.layout.page_checkbox_right ),
-            new PageItem( "CheckboxLeft",  R.layout.page_checkbox_left ),
+            new PageItem( "Checkbox Right",  R.layout.page_checkbox_right ),
+            new PageItem( "Checkbox Left",  R.layout.page_checkbox_left ),
 
-            new PageItem( "RelLayout",  R.layout.page_rellayout ),
-            new PageItem( "LayoutAnim",  R.layout.page_layout_anim ),
-            new PageItem( "FullScreen",  R.layout.page_fullscreen ),
+            new PageItem( "Relative Layout",  R.layout.page_rellayout ),
+            new PageItem( "Layout Anim",  R.layout.page_layout_anim ),
+            new PageItem( "Full Screen",  R.layout.page_fullscreen ),
 
             // API 21
-            new PageItem( "ElevShadow",  R.layout.page_elevation ),
-            new PageItem( "Coordinated", R.layout.page_coordinated ),
-            new PageItem( "TabLayout", R.layout.page_tablayout),
+            new PageItem( "ElevShadow (API21)",  R.layout.page_elevation ),
+            new PageItem( "Coordinated (API21)", R.layout.page_coordinated ),
+            new PageItem( "TabLayout (API21)", R.layout.page_tablayout),
+
+            new PageItem( "GL Cube", R.layout.page_glcube_frag),
+            new PageItem( "Graph Line", R.layout.page_graphline_frag),
+
+            new PageItem( "View Shadows", R.layout.page_shadows)
     };
 
     // =============================================================================================

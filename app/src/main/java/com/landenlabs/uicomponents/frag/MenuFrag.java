@@ -48,7 +48,8 @@ import java.lang.ref.WeakReference;
  * @see <a href="http://landenlabs.com/android/index-m.html"> author's web-site </a>
  */
 
-public class MenuFrag extends UiFragment implements View.OnClickListener {
+public class MenuFrag extends UiFragment
+        implements View.OnClickListener {
 
     // ---- Local Data ----
     private View mRootView;
@@ -83,31 +84,49 @@ public class MenuFrag extends UiFragment implements View.OnClickListener {
         return mRootView;
     }
 
+    // =============================================================================================
+    // Fragment
+    @Override
+    public void onResume() {
+        super.onResume();
+        setupGrid(mMainActivityWeakRef.get().getPageItems());
+    }
+
+    // =============================================================================================
+    // UiFragment
+
+    @Override
     public int getFragId() {
         return R.id.menu_frag_id;
     }
 
+    @Override
     public String getName() {
         return "Menu";
     }
 
+    @Override
     public String getDescription() {
         return "Menu Grid";
     }
 
 
+    // =============================================================================================
+    // View.OnClickListener
+
     @Override
     public void onClick(View view) {
         if (mUiSplashScreen.isDone()) {
-            if (view instanceof TextView && view.getTag() != null) {
+            if ( view.getTag() instanceof Integer) {
                 final Integer idx = (Integer) view.getTag();
                 mListVg.callOnClick();
+                // Delay action to allow any ripple to play out.
                 mListVg.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         mMainActivityWeakRef.get().selectPage(idx.intValue());
                     }
-                }, 1000);
+                }, 500);
                 return;
             }
         }
@@ -126,11 +145,8 @@ public class MenuFrag extends UiFragment implements View.OnClickListener {
         }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        setupGrid(mMainActivityWeakRef.get().getPageItems());
-    }
+    // =============================================================================================
+    // =============================================================================================
 
     private void setupList(PageItem[] pageItems) {
         Ui.viewById(mRootView, R.id.menu_page_gridview).setVisibility(View.GONE);
@@ -186,6 +202,7 @@ public class MenuFrag extends UiFragment implements View.OnClickListener {
     }
 
     // =============================================================================================
+    // Adapter
 
     public class GridAdapter extends BaseAdapter {
         final private Context mContext;
@@ -208,6 +225,7 @@ public class MenuFrag extends UiFragment implements View.OnClickListener {
             return 0;
         }
 
+
         // create a new ImageView for each item referenced by the Adapter
         public View getView(int position, View convertView, ViewGroup parent) {
             Button itemView;
@@ -217,35 +235,21 @@ public class MenuFrag extends UiFragment implements View.OnClickListener {
                 itemView.setLines(4);
                 // itemView.setLayoutParams(new GridView.LayoutParams(200, 200));
                 // itemView.setPadding(8, 8, 8, 8);
-                itemView.setBackgroundResource(R.drawable.round_border_sel);
-                Ui.setRectOutline(itemView);
 
                 if (Build.VERSION.SDK_INT >= 21) {
                     itemView.setElevation(10);
-                }
-
-                final int pos = position;
-                itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        view.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                // Delay so ripple visible on button.
-                                mMainActivityWeakRef.get().selectPage(pos);
-                            }
-                        }, 500);
-                    }
-                });
-
-                if (Build.VERSION.SDK_INT >= 21) {
                     itemView.setStateListAnimator(AnimatorInflater.loadStateListAnimator(mContext, R.anim.press));
+
+                    itemView.setBackgroundResource(R.drawable.round_border_sel);
+                    Ui.setRectOutline(itemView);
                 }
             } else {
                 itemView = (Button) convertView;
             }
 
             itemView.setText(mPageItems[position].mTitle);
+            itemView.setTag(new Integer(position));
+            itemView.setOnClickListener(MenuFrag.this);
 
             return itemView;
         }

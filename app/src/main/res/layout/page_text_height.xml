@@ -398,6 +398,96 @@
 
             </LinearLayout>
 
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#f00"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="#000"
+            android:text="Font Families\n"
+            />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:background="#444"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textSize="20sp"
+                android:textColor="@android:color/white"
+                android:text="AgByA - casual"
+                android:fontFamily="casual"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:textSize="20sp"
+                android:textColor="@android:color/white"
+                android:text="AgByA - cursive"
+                android:fontFamily="cursive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:textSize="20sp"
+                android:textColor="@android:color/white"
+                android:text="AgByA - monospace"
+                android:fontFamily="monospace"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:textSize="20sp"
+                android:textColor="@android:color/white"
+                android:text="AgByA - sans-serif"
+                android:fontFamily="sans-serif"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:textSize="20sp"
+                android:textColor="@android:color/white"
+                android:text="AgByA - sans-serif-condensed"
+                android:fontFamily="sans-serif-condensed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:textSize="20sp"
+                android:textColor="@android:color/white"
+                android:text="AgByA - sans-serif-smallcaps"
+                android:fontFamily="sans-serif-smallcaps"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:textSize="20sp"
+                android:textColor="@android:color/white"
+                android:text="AgByA - serif"
+                android:fontFamily="serif"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:textSize="20sp"
+                android:textColor="@android:color/white"
+                android:text="AgByA - serif-monospace"
+                android:fontFamily="serif-monospace"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+
         </LinearLayout>
     </ScrollView>
 
