@@ -13,6 +13,7 @@
     <string name="menu_web" translatable="false">www.landenlabs.com</string>
 
    <string name="textCompareStr" translatable="false">AgByA</string>
+   <string name="long_string">This is a long string to force truncation</string>
 
    <string-array name="states8" translatable="false">
       <item>1.Alabama</item>

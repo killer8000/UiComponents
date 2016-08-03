@@ -77,6 +77,12 @@
         <item name="android:textSize">32sp</item>
     </style>
 
+    <style name="TextLongA" parent="@style/TextAppearanceWhite">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+
+
     <!--
     parent="@android:style/Widget.Material.Light.CompoundButton.RadioButton"
  <item name="android:background">#666</item>
