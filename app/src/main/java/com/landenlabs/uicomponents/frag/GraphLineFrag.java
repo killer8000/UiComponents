@@ -30,13 +30,10 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewParent;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.FrameLayout;
 
 import com.landenlabs.uicomponents.R;
 import com.landenlabs.uicomponents.Ui;
@@ -56,14 +53,15 @@ import java.util.ArrayList;
 
 public class GraphLineFrag  extends UiFragment implements View.OnClickListener {
 
-    View mRootView;
-    ViewGroup mGraphView;
+    View        mRootView;
+    ViewGroup   mGraphView;
 
     // =============================================================================================
     public static class LineView extends View {
 
         float mXScale = 5;
         float mLineWidth = 2;
+        int   mColor = Color.RED;
 
         ArrayList<Float> mPoints = new ArrayList<>();
 
@@ -76,7 +74,7 @@ public class GraphLineFrag  extends UiFragment implements View.OnClickListener {
             super.onDraw(canvas);
 
             Paint paint = new Paint();
-            paint.setColor(Color.RED);
+            paint.setColor(mColor);
             paint.setStrokeWidth(mLineWidth);
             paint.setStyle(Paint.Style.STROKE);
 
@@ -126,51 +124,55 @@ public class GraphLineFrag  extends UiFragment implements View.OnClickListener {
         }
     }
 
-    LineView mLineView;
+    LineView mLineView1;
+    LineView mLineView2;
     Runnable mAddPoints;
 
     private void setup() {
         mGraphView = Ui.viewById(mRootView, R.id.graph_line_surfaceview);
 
-        LinearLayout.LayoutParams lp =
-                new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                        ViewGroup.LayoutParams.MATCH_PARENT, 1.0f);
+        FrameLayout.LayoutParams lp =
+                new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,
+                        FrameLayout.LayoutParams.MATCH_PARENT);
 
         mGraphView.removeAllViews();
-
-        TextView tv = new TextView(mGraphView.getContext());
-        tv.setGravity(Gravity.CENTER);
-        tv.setText("Line Graph");
-        tv.setTextColor(0xffff0000);
-        tv.setTextSize(20.0f);
-        ViewParent p1 = tv.getParent();
-        mGraphView.addView(tv);
 
         final int updateMill = 50;
         final int maxPoints = 100;
         final int maxRange = 400;
         try {
-            mLineView = new LineView(mGraphView.getContext());
-            mLineView.setBackgroundColor(0xffd0d0d0);
-            mGraphView.addView(mLineView, lp);
-
-            mAddPoints = new Runnable() {
-                @Override
-                public void run() {
-                    if (mLineView.mPoints.size() > maxPoints) {
-                        mLineView.mPoints.remove(0);
-                    }
-                    mLineView.mPoints.add((float)(Math.random()*maxRange));
-                    mLineView.invalidate();
-                    mLineView.postDelayed(this, updateMill);
-                }
-            };
-            mLineView.postDelayed(mAddPoints, updateMill);
-
+            mLineView1 = createLine(mGraphView, lp, 0xff801010, 2, updateMill*1, maxPoints, maxRange/2);
+            mLineView2 = createLine(mGraphView, lp, 0xff108010, 4, updateMill*2, maxPoints, maxRange);
         } catch (Exception ex) {
             Log.e("GraphLineFrag", ex.getLocalizedMessage(), ex);
         }
 
         // Ui.viewById(mRootView, R.id.scroll_add).setOnClickListener(this);
+    }
+
+    private LineView createLine(
+            ViewGroup viewGroup, FrameLayout.LayoutParams lp, int lineColor, int lineWidth,
+            final int updateMill, final int maxPoints, final int maxRange) {
+
+        final LineView lineView = new LineView(mGraphView.getContext());
+        lineView.mColor = lineColor;
+        lineView.mLineWidth = lineWidth;
+        lineView.setBackgroundColor(0);
+        viewGroup.addView(lineView, lp);
+
+        mAddPoints = new Runnable() {
+            @Override
+            public void run() {
+                if (lineView.mPoints.size() > maxPoints) {
+                    lineView.mPoints.remove(0);
+                }
+                lineView.mPoints.add((float)(Math.random()*maxRange));
+                lineView.invalidate();
+                lineView.postDelayed(this, updateMill);
+            }
+        };
+        lineView.postDelayed(mAddPoints, updateMill);
+
+        return lineView;
     }
 }

@@ -225,6 +225,7 @@ public class MainActivity extends ActionBarActivity    {
 
             new PageItem( "GL Cube", R.layout.page_glcube_frag),
             new PageItem( "Graph Line", R.layout.page_graphline_frag),
+            new PageItem( "Anim Bg", R.layout.page_anim_bg_frag),
 
             new PageItem( "View Shadows", R.layout.page_shadows)
     };

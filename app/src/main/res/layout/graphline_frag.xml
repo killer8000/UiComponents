@@ -8,9 +8,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:text="Line Graph"
+        />
+
+    <FrameLayout
         android:id="@+id/graph_line_surfaceview"
-        android:orientation="vertical"
 
         android:padding="10dp"
         android:layout_margin="10dp"
@@ -21,5 +28,5 @@
         android:layout_weight="1">
 
 
-    </LinearLayout>
+    </FrameLayout>
 </LinearLayout>
