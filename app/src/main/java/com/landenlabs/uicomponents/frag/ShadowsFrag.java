@@ -23,8 +23,10 @@
 package com.landenlabs.uicomponents.frag;
 
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,32 +50,35 @@ public class ShadowsFrag  extends UiFragment
 
     View mRootView;
 
-    TextView textSizeLbl, textColorLbl;
-    SeekBar textSizeSb, textColorSb;
+    TextView textSizeLbl, textColorLbl, textBgColorLbl;
+    SeekBar textSizeSb, textColorSb, textBgColorSb;
 
-    TextView radiusLbl, offsetXLbl, offsetYLbl, shadowColorLbl;
-    SeekBar radiusSb, offsetXSb, offsetYSb, shadowColorSb;
+    TextView radiusLbl, offsetXLbl, offsetYLbl, shadowColorLbl, shadowAlphaLbl;
+    SeekBar radiusSb, offsetXSb, offsetYSb, shadowColorSb, shadowAlphaSb;
 
     TextView shadowText1, shadowText2, shadowText3;
-    ImageView shadowImage1, shadowImage2;
+    // ImageView shadowImage1, shadowImage2;
     View shadowView;
 
-    int seekMax = 255;
+    final int seekMax = 255;
 
-    int textSize = 20;
-    int maxTextSize = 40;
+    int textSize = 50;
+    final int maxTextSize = 100;
     int textColorIdx = 0;
-    int textColors[] = new int[] { Color.RED, Color.GREEN, Color.BLUE, Color.WHITE, Color.GRAY };
-    int maxTextColorIdx = textColors.length;
+    int textBgColor = 0xff;
+    int textColors[] = new int[] { Color.WHITE, Color.GRAY, Color.BLACK, Color.RED, Color.GREEN, Color.BLUE };
+    final int maxTextColorIdx = textColors.length;
 
     int radius = 10;
-    int maxRadius = 25;
+    final int maxRadius = 25;
     int offsetX = 10;
     int maxOffset = 25;
     int offsetY = 10;
-    int maxShadowColor = 25;
+    final int maxShadowColor = 255;
     int shadowColor = 0;
+    int shadowAlpha = 0xff;
 
+    boolean mProcessChange = true;
 
     public  static int ArrayFind(int[] array, int find) {
         for (int idx = 0; idx < array.length; idx++){
@@ -120,19 +125,23 @@ public class ShadowsFrag  extends UiFragment
         shadowText1 = Ui.viewById(mRootView, R.id.shadow_text1);
         shadowText2 = Ui.viewById(mRootView, R.id.shadow_text2);
         shadowText3 = Ui.viewById(mRootView, R.id.shadow_text3);
-        shadowImage1 = Ui.viewById(mRootView, R.id.shadow_image1);
-        shadowImage2 = Ui.viewById(mRootView, R.id.shadow_image2);
+    //    shadowImage1 = Ui.viewById(mRootView, R.id.shadow_image1);
+    //    shadowImage2 = Ui.viewById(mRootView, R.id.shadow_image2);
         shadowView = shadowText1;
 
         textSizeSb = Ui.viewById(mRootView, R.id.textsize_sb);
         textColorSb = Ui.viewById(mRootView, R.id.textcolor_sb);
+        textBgColorSb = Ui.viewById(mRootView, R.id.textbgcolor_sb);
         textSizeLbl = Ui.viewById(mRootView, R.id.textsize_lbl);
         textColorLbl = Ui.viewById(mRootView, R.id.textcolor_lbl);
+        textBgColorLbl = Ui.viewById(mRootView, R.id.textbgcolor_lbl);
 
         radiusSb = Ui.viewById(mRootView, R.id.radius_sb);
         radiusLbl = Ui.viewById(mRootView, R.id.radius_lbl);
         shadowColorSb = Ui.viewById(mRootView, R.id.shadowcolor_sb);
         shadowColorLbl = Ui.viewById(mRootView, R.id.shadowcolor_lbl);
+        shadowAlphaSb = Ui.viewById(mRootView, R.id.shadowalpha_sb);
+        shadowAlphaLbl = Ui.viewById(mRootView, R.id.shadowalpha_lbl);
         offsetXSb = Ui.viewById(mRootView, R.id.offsetx_sb);
         offsetXLbl = Ui.viewById(mRootView, R.id.offsetx_lbl);
         offsetYSb = Ui.viewById(mRootView, R.id.offsety_sb);
@@ -140,39 +149,37 @@ public class ShadowsFrag  extends UiFragment
 
         setPosSb(textSizeSb, textSize, maxTextSize);
         setPosSb(textColorSb, textColorIdx, maxTextColorIdx);
+        setPosSb(textBgColorSb, textBgColor, maxShadowColor);
         setPosSb(radiusSb, radius, maxRadius);
         setNegSb(offsetXSb, offsetX, maxOffset);
         setNegSb(offsetYSb, offsetY, maxOffset);
         setPosSb(shadowColorSb, shadowColor, maxShadowColor);
+        setPosSb(shadowAlphaSb, shadowAlpha, maxShadowColor);
 
         textSizeSb.setOnSeekBarChangeListener(this);
         textColorSb.setOnSeekBarChangeListener(this);
+        textBgColorSb.setOnSeekBarChangeListener(this);
         radiusSb.setOnSeekBarChangeListener(this);
         shadowColorSb.setOnSeekBarChangeListener(this);
+        shadowAlphaSb.setOnSeekBarChangeListener(this);
         offsetXSb.setOnSeekBarChangeListener(this);
         offsetYSb.setOnSeekBarChangeListener(this);
 
         shadowText1.setOnClickListener(this);
         shadowText2.setOnClickListener(this);
         shadowText3.setOnClickListener(this);
-        shadowImage1.setOnClickListener(this);
-        shadowImage2.setOnClickListener(this);
-
-
-        //    grayLbl   = Ui.viewById(mRootView, R.id.gray_lbl);
-    //    alphaLbl   = Ui.viewById(mRootView, R.id.alpha_lbl);
+    //    shadowImage1.setOnClickListener(this);
+    //    shadowImage2.setOnClickListener(this);
 
         updateView();
     }
 
     private void setPosSb(SeekBar seekBar, int value, int maxValue) {
-        // int iVal = (int)((maxXYZ/2 - value) * seekMax/maxXYZ);
-        int iVal = value * seekMax / maxValue;
+        int iVal = Math.round((float)value * seekMax / maxValue);
         seekBar.setProgress(iVal);
     }
     private int getPosSb(SeekBar seekBar, int maxValue) {
-        // return maxXYZ/2 - seekBar.getProgress() *  maxXYZ / seekMax;
-        return seekBar.getProgress() * maxValue / seekMax;
+        return Math.round((float)seekBar.getProgress() * maxValue / seekMax);
     }
 
     private void setNegSb(SeekBar seekBar, int value, int maxValue) {
@@ -189,6 +196,10 @@ public class ShadowsFrag  extends UiFragment
 
         textSize = getPosSb(textSizeSb, maxTextSize);
         textSizeLbl.setText(String.format("TextSize:%d", textSize));
+
+        textBgColor = getPosSb(textBgColorSb, maxShadowColor);
+        textBgColorLbl.setText(String.format("TextBgColor:%d", textBgColor));
+        textColorIdx = getPosSb(textColorSb, maxTextColorIdx);
         int textColor = textColors[textColorIdx];
         textColorLbl.setText(String.format("TextColor:%8x", textColor));
 
@@ -199,21 +210,28 @@ public class ShadowsFrag  extends UiFragment
         offsetY = getNegSb(offsetYSb, maxOffset);
         offsetYLbl.setText(String.format("OffsetY:%d", offsetY));
 
-        shadowColor = getPosSb(shadowColorSb, maxShadowColor);
-        int shadowColorARGB = 0xff000000 + shadowColor *256*256 + shadowColor *256 + shadowColor;
-        shadowColorLbl.setText(String.format("ShadowColor:%8x", shadowColorARGB));
+        shadowAlpha = getPosSb(shadowAlphaSb, maxShadowColor);
+        shadowAlphaLbl.setText(String.format("ShadowAlpha:%d", shadowAlpha));
 
-        
+        shadowColor = getPosSb(shadowColorSb, maxShadowColor);
+        shadowColorLbl.setText(String.format("ShadowColor:%d", shadowColor));
+
+        int shadowColorARGB = (shadowAlpha<<24) + (shadowColor<<16) + (shadowColor<<8) + shadowColor;
+
         if (shadowView instanceof TextView) {
             TextView shadowText = (TextView)shadowView;
-            shadowText.setTextSize(textSize);
+            shadowText.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
             shadowText.setTextColor(textColor);
+            shadowText.setBackgroundColor(Color.rgb(textBgColor, textBgColor, textBgColor));
             shadowText.setShadowLayer(radius, offsetX, offsetY, shadowColorARGB);
+            shadowText.setText(String.format("%s\nR=%d X=%d\nA=%d C=%d",
+                this.getResources().getString(R.string.shadow_text).toString(),
+                radius,  offsetX,
+                shadowAlpha, shadowColor));
         } else if (shadowView instanceof ImageView) {
             ImageView shadowImage = (ImageView)shadowView;
             shadowImage.getLayoutParams().width = textSize * 4;
             shadowImage.getLayoutParams().height = textSize * 4;
-            
         }
     }
 
@@ -240,29 +258,32 @@ public class ShadowsFrag  extends UiFragment
             case R.id.shadow_text1:
             case R.id.shadow_text2:
             case R.id.shadow_text3:
-            case R.id.shadow_image1:
-            case R.id.shadow_image2:
+         //   case R.id.shadow_image1:
+         //   case R.id.shadow_image2:
                 shadowView = view;
                 getValuesFromView();
                 break;
         }
 
-        updateView();
+        if (mProcessChange) {
+            updateView();
+        }
     }
 
 
     private void getValuesFromView() {
         
         if (shadowView instanceof  TextView) {
-            TextView shadowText = (TextView)shadowView; 
+            TextView shadowText = (TextView)shadowView;
+
             textSize = (int) shadowText.getTextSize();
             int textColor = shadowText.getCurrentTextColor();
             textColorIdx = Math.max(0, ArrayFind(textColors, textColor));
-            textColorLbl.setText(String.format("TextColor:%8x", textColor));
-
+            textBgColor = ((ColorDrawable)shadowText.getBackground()).getColor() & 255;
 
             if (Build.VERSION.SDK_INT >= 16) {
-                shadowColor = shadowText.getShadowColor();
+                shadowColor = shadowText.getShadowColor() & 255;
+                shadowAlpha = shadowText.getShadowColor() >> 24;
                 offsetX = (int) shadowText.getShadowDx();
                 offsetY = (int) shadowText.getShadowDy();
                 radius = (int) shadowText.getShadowRadius();
@@ -271,5 +292,22 @@ public class ShadowsFrag  extends UiFragment
             ImageView shadowImage = (ImageView)shadowView;
             textSize = shadowImage.getLayoutParams().width / 4;
         }
+
+        String msg = String.format(
+                "Tag:%s\nTextSize: %d\nTextColorIdx:%d\nTextBgColor:%d\nShadowColor:%d\nShadowAlpha:%d\nOffset:%d,%d\nRadius:%d\n",
+                ((String)shadowView.getTag()),
+                textSize, textColorIdx, textBgColor, shadowColor, shadowAlpha, offsetX, offsetY, radius);
+        // Toast.makeText(this.getActivity(), msg, Toast.LENGTH_SHORT).show();
+
+        mProcessChange = false;
+        setPosSb(textSizeSb, textSize, maxTextSize);
+        setPosSb(textColorSb, textColorIdx, maxTextColorIdx);
+        setPosSb(textBgColorSb, textBgColor, maxShadowColor);
+        setPosSb(radiusSb, radius, maxRadius);
+        setNegSb(offsetXSb, offsetX, maxOffset);
+        setNegSb(offsetYSb, offsetY, maxOffset);
+        setPosSb(shadowColorSb, shadowColor, maxShadowColor);
+        setPosSb(shadowAlphaSb, shadowAlpha, maxShadowColor);
+        mProcessChange = true;
     }
 }

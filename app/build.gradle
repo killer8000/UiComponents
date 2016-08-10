@@ -1,34 +1,79 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'uicomponents'
+            keyPassword 'Salem2nh-u'
+            storeFile file('/Users/ldennis/projects-android/keystores/uicomponents.jks')
+            storePassword 'Salem2nh-k'
+        }
+    }
     compileSdkVersion 23
     buildToolsVersion '23.0.3'
     defaultConfig {
         applicationId "com.landenlabs.uicomponents"
         minSdkVersion 15
         targetSdkVersion 23
-        versionName '1.4'
-        versionCode 104
+        versionName '1.5'
+        versionCode 105
+        renderscriptSupportModeEnabled true
+        signingConfig signingConfigs.config
     }
     buildTypes {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-
             applicationVariants.all { variant ->
                 appendVersionNameVersionCode(variant, defaultConfig)
             }
+            signingConfig signingConfigs.config
+        }
+        debug {
+            renderscriptDebuggable true
         }
     }
     productFlavors {
     }
+    lintOptions {
+        // abortOnError false
+        // checkReleaseBuilds false
+        disable 'MissingTranslation', 'ValidFragment', 'ContentDescription'
+    }
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+    }
+    sourceSets {
+        main {
+            // manifest.srcFile 'AndroidManifest.xml'
+            // java.srcDirs = ['src']
+            // resources.srcDirs = ['src']
+            // aidl.srcDirs = ['src']
+            renderscript.srcDirs = ['src']
+            // res.srcDirs = ['res']
+            // assets.srcDirs = ['assets']
+        }
+    }
+}
+
+ext {
+    supportLibVersion = '23.4.0'
+    leakCanaryVersion = '1.4-beta2'
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:23.4.0'
-    compile 'com.android.support:percent:23.4.0'
-    compile 'com.android.support:design:23.4.0'
+    compile "com.android.support:appcompat-v7:${supportLibVersion}"
+
+    compile "com.android.support:percent:${supportLibVersion}"
+
+    compile "com.android.support:design:${supportLibVersion}"
+
+    // Memory leaks tool
+    debugCompile "com.squareup.leakcanary:leakcanary-android:${leakCanaryVersion}"
+
+    releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:${leakCanaryVersion}"
 }
 
 def appendVersionNameVersionCode(variant, defaultConfig) {

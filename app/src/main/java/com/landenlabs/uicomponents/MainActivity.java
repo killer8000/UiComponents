@@ -23,6 +23,7 @@ package com.landenlabs.uicomponents;
  *
  */
 
+import android.content.pm.ApplicationInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -41,6 +42,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.landenlabs.uicomponents.Util.PageItem;
+import com.squareup.leakcanary.LeakCanary;
 
 
 /**
@@ -67,12 +69,21 @@ public class MainActivity extends ActionBarActivity    {
     static final String STATE_ADAPTER = "secPageAdapter";
     Parcelable mAdapterParcelable;
 
+    public static boolean isDebug(ApplicationInfo appInfo) {
+        return ((appInfo.flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0);
+    }
+
     // ---------------------------------------------------------------------------------------------
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (savedInstanceState != null) {
         }
+
+        if (isDebug(getApplicationInfo())) {
+            LeakCanary.install(this.getApplication());
+        }
+
         setContentView(R.layout.activity_main);
 
         mActionBar = getSupportActionBar();
@@ -227,7 +238,8 @@ public class MainActivity extends ActionBarActivity    {
             new PageItem( "Graph Line", R.layout.page_graphline_frag),
             new PageItem( "Anim Bg", R.layout.page_anim_bg_frag),
 
-            new PageItem( "View Shadows", R.layout.page_shadows)
+            new PageItem( "View Shadows", R.layout.page_shadows),
+            new PageItem( "Render Blur", R.layout.page_renderscript)
     };
 
     // =============================================================================================

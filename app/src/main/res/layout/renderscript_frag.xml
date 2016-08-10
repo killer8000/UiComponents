@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="#d0d0ff"
+        android:padding="5dp"
+        android:text="- RenderScript -" />
+
+
+    <RadioGroup
+        android:id="@+id/rs_imageRG"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#c0c0c0"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rs_image1rb"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:checked="false"
+            android:background="@drawable/blur1" />
+
+        <RadioButton
+            android:id="@+id/rs_image2rb"
+            android:layout_height="64dp"
+            android:layout_width="64dp"
+            android:checked="false"
+            android:background="@drawable/blur2"
+             />
+
+        <RadioButton
+            android:id="@+id/rs_image3rb"
+            android:layout_height="64dp"
+            android:layout_width="64dp"
+            android:checked="false"
+            android:background="@drawable/blur3"
+             />
+
+        <RadioButton
+            android:id="@+id/rs_image4rb"
+            android:layout_height="64dp"
+            android:layout_width="64dp"
+            android:checked="false"
+            android:background="@drawable/blur4"
+             />
+
+        <RadioButton
+            android:id="@+id/rs_image5rb"
+            android:layout_height="64dp"
+            android:layout_width="64dp"
+            android:checked="true"
+            android:background="@drawable/blur5"
+              />
+
+        <RadioButton
+            android:id="@+id/rs_image6rb"
+            android:layout_height="64dp"
+            android:layout_width="64dp"
+            android:checked="false"
+            android:background="@drawable/blur6"
+             />
+
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/rs_radius_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#808080"
+        android:text="Radius:"
+        android:textColor="#ffffff"
+        android:textSize="20sp" />
+
+    <SeekBar
+        android:id="@+id/rs_radius_sb"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_margin="20dp"
+        android:background="#ffffff"
+        android:max="255"
+        style="@android:style/Widget.SeekBar" />
+
+
+    <TextView
+        android:id="@+id/rs_scale_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#808080"
+        android:text="Scale:"
+        android:textColor="#ffffff"
+        android:textSize="20sp" />
+
+    <SeekBar
+        android:id="@+id/rs_scale_sb"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_margin="20dp"
+        android:background="#ffffff"
+        style="@android:style/Widget.SeekBar"
+        android:max="255" />
+
+    <ScrollView
+        android:id="@+id/rs_scroller"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/rs_image1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@drawable/image100w300h" />
+
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="10dp" />
+
+            <ImageView
+                android:id="@+id/rs_image2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@drawable/image100w300h" />
+
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="10dp" />
+
+            <ImageView
+                android:id="@+id/rs_image3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@drawable/image100w300h" />
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="Blur1: xxxx Msec"
+            android:textSize="20sp"
+            android:id="@+id/rs_blur1Time"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:text="Blur2: xxxx Msec"
+            android:id="@+id/rs_blur2Time"
+            android:textSize="20sp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+</LinearLayout>
