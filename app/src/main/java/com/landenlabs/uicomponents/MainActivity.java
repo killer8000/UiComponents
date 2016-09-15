@@ -42,7 +42,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.landenlabs.uicomponents.Util.PageItem;
-import com.squareup.leakcanary.LeakCanary;
 
 
 /**
@@ -81,7 +80,7 @@ public class MainActivity extends ActionBarActivity    {
         }
 
         if (isDebug(getApplicationInfo())) {
-            LeakCanary.install(this.getApplication());
+    //        LeakCanary.install(this.getApplication());
         }
 
         setContentView(R.layout.activity_main);

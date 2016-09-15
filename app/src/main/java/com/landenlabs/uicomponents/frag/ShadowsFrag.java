@@ -23,6 +23,7 @@
 package com.landenlabs.uicomponents.frag;
 
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -36,6 +37,7 @@ import android.widget.TextView;
 
 import com.landenlabs.uicomponents.R;
 import com.landenlabs.uicomponents.Ui;
+import com.landenlabs.uicomponents.Util.BitmapUtils;
 
 
 /**
@@ -57,7 +59,7 @@ public class ShadowsFrag  extends UiFragment
     SeekBar radiusSb, offsetXSb, offsetYSb, shadowColorSb, shadowAlphaSb;
 
     TextView shadowText1, shadowText2, shadowText3;
-    // ImageView shadowImage1, shadowImage2;
+    ImageView shadowImage1, shadowImage2;
     View shadowView;
 
     final int seekMax = 255;
@@ -125,8 +127,8 @@ public class ShadowsFrag  extends UiFragment
         shadowText1 = Ui.viewById(mRootView, R.id.shadow_text1);
         shadowText2 = Ui.viewById(mRootView, R.id.shadow_text2);
         shadowText3 = Ui.viewById(mRootView, R.id.shadow_text3);
-    //    shadowImage1 = Ui.viewById(mRootView, R.id.shadow_image1);
-    //    shadowImage2 = Ui.viewById(mRootView, R.id.shadow_image2);
+        shadowImage1 = Ui.viewById(mRootView, R.id.shadow_image1);
+        shadowImage2 = Ui.viewById(mRootView, R.id.shadow_image2);
         shadowView = shadowText1;
 
         textSizeSb = Ui.viewById(mRootView, R.id.textsize_sb);
@@ -168,8 +170,8 @@ public class ShadowsFrag  extends UiFragment
         shadowText1.setOnClickListener(this);
         shadowText2.setOnClickListener(this);
         shadowText3.setOnClickListener(this);
-    //    shadowImage1.setOnClickListener(this);
-    //    shadowImage2.setOnClickListener(this);
+        shadowImage1.setOnClickListener(this);
+        shadowImage2.setOnClickListener(this);
 
         updateView();
     }
@@ -216,7 +218,7 @@ public class ShadowsFrag  extends UiFragment
         shadowColor = getPosSb(shadowColorSb, maxShadowColor);
         shadowColorLbl.setText(String.format("ShadowColor:%d", shadowColor));
 
-        int shadowColorARGB = (shadowAlpha<<24) + (shadowColor<<16) + (shadowColor<<8) + shadowColor;
+        int shadowColorARGB = Color.argb(shadowAlpha, shadowColor, shadowColor, shadowColor);
 
         if (shadowView instanceof TextView) {
             TextView shadowText = (TextView)shadowView;
@@ -230,8 +232,20 @@ public class ShadowsFrag  extends UiFragment
                 shadowAlpha, shadowColor));
         } else if (shadowView instanceof ImageView) {
             ImageView shadowImage = (ImageView)shadowView;
-            shadowImage.getLayoutParams().width = textSize * 4;
-            shadowImage.getLayoutParams().height = textSize * 4;
+            ViewGroup.LayoutParams lp = shadowImage.getLayoutParams();
+            lp.width = textSize * 2;
+            lp.height = textSize * 2;
+            shadowImage.setLayoutParams(lp);
+
+            // shadowImage.setBackgroundColor(Color.rgb(textBgColor, textBgColor, textBgColor));
+            // shadowImage.setShadowLayer(radius, offsetX, offsetY, shadowColorARGB);
+
+            // String imageResName = (String)shadowImage.getTag();
+            // int imageRes = this.getResources().getIdentifier(imageResName, "drawable", this.getContext().getPackageName());
+            BitmapDrawable shadowDrawable = BitmapUtils.shadowImage(
+                    this.getResources(), shadowImage.getDrawable(),
+                    offsetX, offsetY, radius, shadowColorARGB);
+            shadowImage.setBackground(shadowDrawable);
         }
     }
 
@@ -240,7 +254,9 @@ public class ShadowsFrag  extends UiFragment
     // Seekbar onProgressChanged
 
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-        updateView();
+        if (mProcessChange) {
+            updateView();
+        }
     }
     public void onStartTrackingTouch(SeekBar seekBar) {
     }
@@ -258,8 +274,8 @@ public class ShadowsFrag  extends UiFragment
             case R.id.shadow_text1:
             case R.id.shadow_text2:
             case R.id.shadow_text3:
-         //   case R.id.shadow_image1:
-         //   case R.id.shadow_image2:
+            case R.id.shadow_image1:
+            case R.id.shadow_image2:
                 shadowView = view;
                 getValuesFromView();
                 break;
@@ -290,7 +306,7 @@ public class ShadowsFrag  extends UiFragment
             }
         } else if (shadowView instanceof  ImageView) {
             ImageView shadowImage = (ImageView)shadowView;
-            textSize = shadowImage.getLayoutParams().width / 4;
+            textSize = shadowImage.getWidth() / 2;
         }
 
         String msg = String.format(

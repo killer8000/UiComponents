@@ -1,21 +1,45 @@
-package com.landenlabs.uicomponents.Util;
+/**
+ * Copyright (c) 2015 Dennis Lang (LanDen Labs) landenlabs@gmail.com
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
+ * associated documentation files (the "Software"), to deal in the Software without restriction, including
+ * without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the
+ * following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial
+ * portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
+ * LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+ * NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+ * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * @author Dennis Lang  (3/21/2015)
+ * @see http://landenlabs.com
+ *
+ */
+package com.landenlabs.uicomponents.Util.BitmapFilters;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.support.v8.renderscript.Allocation;
-import android.support.v8.renderscript.Element;
-import android.support.v8.renderscript.RSRuntimeException;
-import android.support.v8.renderscript.RenderScript;
+import android.renderscript.Allocation;
+import android.renderscript.Element;
+import android.renderscript.RSRuntimeException;
+import android.renderscript.RenderScript;
 import android.util.Log;
 
 import com.landenlabs.uicomponents.R;
-
+import com.landenlabs.uicomponents.Util.ScriptC_horzblur;
+import com.landenlabs.uicomponents.Util.ScriptC_tint;
+import com.landenlabs.uicomponents.Util.ScriptC_vertblur;
 
 
 /**
  * Bitmap pixel filters, such as blur and tint.
  *
- * @author dlang
+ * @author Dennis Lang
  *
  */
 public class RenderScriptUtils {
@@ -29,7 +53,7 @@ public class RenderScriptUtils {
      * http://stackoverflow.com/questions/13435561/android-blur-bitmap-instantly
      *
      */
-    public static class Blur {
+    public static class Blur implements IBlur {
 
         private RenderScript mRS;
 
@@ -64,9 +88,11 @@ public class RenderScriptUtils {
             // mHorizontalScript.set_yDim(height);
             // mHorizontalScript.set_numSamples(2 * radius +1);
             // mHorizontalScript.set_invN(1.0f / mHorizontalScript.get_numSamples());
-            mHorizontalScript.bind_inImage(in);
-            mHorizontalScript.bind_outImage(out);
+            mHorizontalScript.set_inImage(in);
+            mHorizontalScript.set_outImage(out);
             mHorizontalScript.invoke_init_calc();
+
+            // Automatically partitions work across available processing cores on the device
             mHorizontalScript.forEach_root(rowIndexes);
         }
 
@@ -76,9 +102,11 @@ public class RenderScriptUtils {
             // mVerticalScript.set_yDim(height);
             // mVerticalScript.set_numSamples(2 * radius +1);
             // mVerticalScript.set_invN(1.0f / mVerticalScript.get_numSamples());
-            mVerticalScript.bind_inImage(in);
-            mVerticalScript.bind_outImage(out);
+            mVerticalScript.set_inImage(in);
+            mVerticalScript.set_outImage(out);
             mVerticalScript.invoke_init_calc();
+
+            // Automatically partitions work across available processing cores on the device
             mVerticalScript.forEach_root(columnIndexes);
         }
 
@@ -95,9 +123,8 @@ public class RenderScriptUtils {
         }
 
         private void blur(Bitmap src, Bitmap dst, int radius) {
-            Allocation srcImage = Allocation.createFromBitmap(mRS, src);
-            Allocation tmpImage = Allocation.createTyped(mRS, srcImage.getType());
-            Allocation dstImage = Allocation.createFromBitmap(mRS, dst);
+            Allocation srcImage = Allocation.createFromBitmap(mRS, src, Allocation.MipmapControl.MIPMAP_NONE, Allocation.USAGE_SCRIPT);
+            Allocation tmpImage = Allocation.createTyped(mRS, srcImage.getType(), Allocation.MipmapControl.MIPMAP_NONE, Allocation.USAGE_SCRIPT);
 
             int width = src.getWidth();
             int height = src.getHeight();
@@ -107,9 +134,14 @@ public class RenderScriptUtils {
 
             // Add more iterations if you like or simply make a loop
             vblur(radius, width, height, columnIndexes, srcImage, tmpImage);
+            srcImage.destroy();
+            Allocation dstImage = Allocation.createFromBitmap(mRS, dst, Allocation.MipmapControl.MIPMAP_NONE, Allocation.USAGE_SCRIPT);
             hblur(radius, width, height, rowIndexes, tmpImage, dstImage);
 
             dstImage.copyTo(dst);
+
+            tmpImage.destroy();
+            dstImage.destroy();
         }
     }
 
@@ -117,7 +149,7 @@ public class RenderScriptUtils {
     /**
      * Tint image using Render Script.
      *
-     * @author dlang
+     * @author Dennis Lang
      *
      */
     public static class Tint {

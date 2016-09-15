@@ -23,25 +23,32 @@
  */
 package com.landenlabs.uicomponents.frag;
 
+import android.app.ActivityManager;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.landenlabs.uicomponents.R;
 import com.landenlabs.uicomponents.Ui;
+import com.landenlabs.uicomponents.Util.BitmapFilters.IBlur;
+import com.landenlabs.uicomponents.Util.BitmapFilters.RenderScriptUtils;
 import com.landenlabs.uicomponents.Util.BitmapUtils;
-import com.landenlabs.uicomponents.Util.RenderScriptUtils;
 
 
 /**
@@ -61,10 +68,13 @@ public class RenderScriptFrag  extends UiFragment
     SeekBar mRadiusSb, mScaleSb;
 
     ImageView mImage1, mImage2, mImage3;
-    TextView mTime1Tv, mTime2Tv;
+    TextView mTime1Tv, mTime2Tv, mImageDimTv;
+    TextView mMemTv;
+
+    CheckBox mCustomBlurCk, mStdBlurCk;
 
     final int mSeekMax = 255;
-    final int mMaxRadius = 100;
+    final int mMaxRadius = 255;
     int mRadius = 10;
 
     final int mMaxScale = 100;
@@ -72,6 +82,37 @@ public class RenderScriptFrag  extends UiFragment
 
     RenderScriptUtils.Blur mBlur;
     Bitmap  mSrcBitmap;
+
+    /**
+     * GPS location processing async task.
+     *
+     * @author Maksym Trostyanchuk
+     */
+    private class BlurAsyncTask extends AsyncTask<Void, Void, Bitmap> {
+
+        private final IBlur mBlur;
+        private final Bitmap mInBitmap;
+        private final int mRadius;
+        private final ImageView mImageView;
+
+        private BlurAsyncTask(IBlur blur, Bitmap inBitmap, int radius, ImageView showResult) {
+            super();
+            mBlur = blur;
+            mInBitmap = inBitmap;
+            mRadius = radius;
+            mImageView = showResult;
+        }
+
+        @Override
+        protected Bitmap doInBackground(Void... params) {
+            return mBlur.blur(mInBitmap, mRadius);
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap outBitmap) {
+            mImageView.setImageBitmap(outBitmap);
+        }
+    }
 
     public  static int ArrayFind(int[] array, int find) {
         for (int idx = 0; idx < array.length; idx++){
@@ -112,13 +153,21 @@ public class RenderScriptFrag  extends UiFragment
         mImageScroller = Ui.viewById(mRootView, R.id.rs_scroller);
         mTime1Tv = Ui.viewById(mRootView, R.id.rs_blur1Time);
         mTime2Tv = Ui.viewById(mRootView, R.id.rs_blur2Time);
-        
+        mImageDimTv = Ui.viewById(mRootView, R.id.rs_image_dim_tv);
+        mMemTv = Ui.viewById(mRootView, R.id.rs_memory);
+
+        mCustomBlurCk = Ui.viewById(mRootView, R.id.rs_blurCustomCk);
+        mStdBlurCk = Ui.viewById(mRootView, R.id.rs_blurStdCk);
+        mCustomBlurCk.setOnClickListener(this);
+        mStdBlurCk.setOnClickListener(this);
+
         Ui.viewById(mRootView, R.id.rs_image1rb).setOnClickListener(this);
         Ui.viewById(mRootView, R.id.rs_image2rb).setOnClickListener(this);
         Ui.viewById(mRootView, R.id.rs_image3rb).setOnClickListener(this);
         Ui.viewById(mRootView, R.id.rs_image4rb).setOnClickListener(this);
         Ui.viewById(mRootView, R.id.rs_image5rb).setOnClickListener(this);
         Ui.viewById(mRootView, R.id.rs_image6rb).setOnClickListener(this);
+        Ui.viewById(mRootView, R.id.rs_image7rb).setOnClickListener(this);
 
         mImage1 = Ui.viewById(mRootView, R.id.rs_image1);
         mImage2 = Ui.viewById(mRootView, R.id.rs_image2);
@@ -150,13 +199,7 @@ public class RenderScriptFrag  extends UiFragment
     }
 
 
-
-
-    private void updateView() {
-
-        mRadius = getPosSb(mRadiusSb, mMaxRadius);
-        mRadiusTv.setText(String.format("Radius:%d", mRadius));
-
+    private void updateScale() {
         mScale = getPosSb(mScaleSb, mMaxScale);
         mScaleTv.setText(String.format("Scale:%d %%", mScale));
 
@@ -167,30 +210,77 @@ public class RenderScriptFrag  extends UiFragment
         int displayWidth = size.x;
         int displayHeight = size.y;
 
-        ViewGroup.LayoutParams lp =  mImageScroller.getLayoutParams();
-        lp.width = displayWidth * mScale / 100;
+        ViewGroup.LayoutParams lp = mImageScroller.getLayoutParams();
+        lp.height = displayWidth * mScale / 100;
         mImageScroller.setLayoutParams(lp);
+    }
+
+    /**
+     * Execute blur on selected image.
+     */
+    private void updateView() {
+
+        updateScale();
+        mRadius = getPosSb(mRadiusSb, mMaxRadius);
+        mRadiusTv.setText(String.format("Radius:%d", mRadius));
 
         if (mBlur == null) {
             mBlur = new RenderScriptUtils.Blur(this.getContext());
             mSrcBitmap = ((BitmapDrawable)mImage1.getDrawable()).getBitmap();
         }
 
-        long startNano = System.nanoTime();
-        Bitmap blurred2 = mBlur.blur(mSrcBitmap, mRadius);
-        mImage2.setImageBitmap(blurred2);
-        long blur1Nano = System.nanoTime() - startNano;
-        mTime1Tv.setText(String.format("Blur1: %,.2f Msec", blur1Nano / 1000.0f));
+        final ProgressDialog progress = new ProgressDialog(getContext());
+        progress.setTitle("Blurring...");
+        progress.setMessage("Please wait...");
+        progress.setCancelable(false);
+        progress.show();
 
-        try {
-            startNano = System.nanoTime();
-            Bitmap blurred3 = BitmapUtils.createBlurBitmap(this.getContext(), mSrcBitmap, mRadius);
-            mImage3.setImageBitmap(blurred3);
-        } catch (Exception ex) {
-            mImage3.setImageDrawable(new ColorDrawable(0xffff0000));
-        }
-        long blur2Nano = System.nanoTime() - startNano;
-        mTime2Tv.setText(String.format("Blur2: %,.2f Msec", blur2Nano / 1000.0f));
+        final Context context = this.getContext();
+
+        mRootView.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                long startNano;
+                if (mCustomBlurCk.isChecked()) {
+
+                    startNano = System.nanoTime();
+                    Bitmap blurred2 = mBlur.blur(mSrcBitmap, mRadius);
+                    mImage2.setImageBitmap(blurred2);
+                    long blur1Nano = System.nanoTime() - startNano;
+                    mTime1Tv.setText(String.format("CustomBlur: %,.2f Msec", blur1Nano / 1000.0f));
+                } else {
+                    mImage2.setImageBitmap(null);
+                    mTime1Tv.setText("disabled");
+                }
+
+                if (mStdBlurCk.isChecked()) {
+                    startNano = System.nanoTime();
+                    try {
+                        Bitmap blurred3 = BitmapUtils.createBlurBitmap(context, mSrcBitmap, mRadius);
+                        mImage3.setImageBitmap(blurred3);
+                    } catch (Exception ex) {
+                        mImage3.setImageDrawable(new ColorDrawable(0xffff0000));
+                    }
+                    long blur2Nano = System.nanoTime() - startNano;
+                    mTime2Tv.setText(String.format("StdBlur: %,.2f Msec", blur2Nano / 1000.0f));
+                } else {
+                    mImage3.setImageBitmap(null);
+                    mTime2Tv.setText("disabled");
+                }
+
+                ActivityManager.MemoryInfo mi = new ActivityManager.MemoryInfo();
+                ActivityManager activityManager = (ActivityManager)
+                        getActivity().getSystemService(Context.ACTIVITY_SERVICE);
+                activityManager.getMemoryInfo(mi);
+                if (Build.VERSION.SDK_INT > 15) {
+                    mMemTv.setText(String.format("Mem Avail:%,d Free:%,d", mi.availMem, mi.totalMem - mi.availMem));
+                } else {
+                    mMemTv.setText(String.format("Mem Avail:%,%d ", mi.availMem));
+                }
+
+                progress.dismiss();
+            }
+        }, 500);
     }
 
 
@@ -198,7 +288,11 @@ public class RenderScriptFrag  extends UiFragment
     // Seekbar onProgressChanged
 
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-        updateView();
+        if (seekBar == mScaleSb) {
+            updateScale();
+        } else {
+            updateView();
+        }
     }
     public void onStartTrackingTouch(SeekBar seekBar) {
     }
@@ -212,33 +306,55 @@ public class RenderScriptFrag  extends UiFragment
     public void onClick(View view) {
         int id = view.getId();
 
+        int imageRes = R.drawable.blur1;
         switch (id) {
             case R.id.rs_image1rb:
-                mImage1.setImageResource(R.drawable.blur1);
+                imageRes = R.drawable.blur1;
                 break;
 
             case R.id.rs_image2rb:
-                mImage1.setImageResource(R.drawable.blur2);
+                imageRes = R.drawable.blur2;
                 break;
 
             case R.id.rs_image3rb:
-                mImage1.setImageResource(R.drawable.blur3);
+                imageRes = R.drawable.blur3;
                 break;
 
             case R.id.rs_image4rb:
-                mImage1.setImageResource(R.drawable.blur4);
+                imageRes = R.drawable.blur4;
                 break;
 
             case R.id.rs_image5rb:
-                mImage1.setImageResource(R.drawable.blur5);
+                imageRes = R.drawable.blur5;
                 break;
 
             case R.id.rs_image6rb:
-                mImage1.setImageResource(R.drawable.blur6);
+                imageRes = R.drawable.blur6;
+                break;
+
+            case R.id.rs_image7rb:
+                imageRes = R.drawable.blur7;
                 break;
         }
 
-        mSrcBitmap = ((BitmapDrawable)mImage1.getDrawable()).getBitmap();
+        // Image 7 goes diagonal if loaded from mdpi directory.
+        mImage1.setImageResource(imageRes);
+
+        // TODO - why does this image not blur correctly.
+        // Image 7 works on nx7 if pulled out using density.
+        mSrcBitmap = ((BitmapDrawable)getResources().getDrawableForDensity(imageRes, DisplayMetrics.DENSITY_DEFAULT)).getBitmap();
+
+        // mSrcBitmap = ((BitmapDrawable)mImage1.getDrawable()).getBitmap();
+        mImage1.setImageBitmap(mSrcBitmap);
+
+        String dimStr = String.format("Dim:%d x %d PixelBytes:%d Density:%d %s",
+                mSrcBitmap.getWidth(), mSrcBitmap.getHeight(),
+                mSrcBitmap.getRowBytes() / mSrcBitmap.getWidth(),
+                mSrcBitmap.getDensity(),
+                mSrcBitmap.getConfig().name()
+        );
+        mImageDimTv.setText(dimStr);
+        // Toast.makeText(view.getContext(), "Image\n" + dimStr, Toast.LENGTH_SHORT).show();
 
         updateView();
     }

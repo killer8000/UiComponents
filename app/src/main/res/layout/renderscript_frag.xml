@@ -14,63 +14,68 @@
         android:padding="5dp"
         android:text="- RenderScript -" />
 
-
-    <RadioGroup
-        android:id="@+id/rs_imageRG"
+    <HorizontalScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#c0c0c0"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content">
 
-        <RadioButton
-            android:id="@+id/rs_image1rb"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:checked="false"
-            android:background="@drawable/blur1" />
+        <RadioGroup
+            android:id="@+id/rs_imageRG"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#c0c0c0"
+            android:orientation="horizontal">
 
-        <RadioButton
-            android:id="@+id/rs_image2rb"
-            android:layout_height="64dp"
-            android:layout_width="64dp"
-            android:checked="false"
-            android:background="@drawable/blur2"
-             />
+            <RadioButton
+                android:id="@+id/rs_image1rb"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:background="@drawable/tblur1"
+                android:checked="false" />
 
-        <RadioButton
-            android:id="@+id/rs_image3rb"
-            android:layout_height="64dp"
-            android:layout_width="64dp"
-            android:checked="false"
-            android:background="@drawable/blur3"
-             />
+            <RadioButton
+                android:id="@+id/rs_image2rb"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:background="@drawable/tblur2"
+                android:checked="false" />
 
-        <RadioButton
-            android:id="@+id/rs_image4rb"
-            android:layout_height="64dp"
-            android:layout_width="64dp"
-            android:checked="false"
-            android:background="@drawable/blur4"
-             />
+            <RadioButton
+                android:id="@+id/rs_image3rb"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:background="@drawable/tblur3"
+                android:checked="false" />
 
-        <RadioButton
-            android:id="@+id/rs_image5rb"
-            android:layout_height="64dp"
-            android:layout_width="64dp"
-            android:checked="true"
-            android:background="@drawable/blur5"
-              />
+            <RadioButton
+                android:id="@+id/rs_image4rb"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:background="@drawable/tblur4"
+                android:checked="false" />
 
-        <RadioButton
-            android:id="@+id/rs_image6rb"
-            android:layout_height="64dp"
-            android:layout_width="64dp"
-            android:checked="false"
-            android:background="@drawable/blur6"
-             />
+            <RadioButton
+                android:id="@+id/rs_image5rb"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:background="@drawable/tblur5"
+                android:checked="true" />
 
+            <RadioButton
+                android:id="@+id/rs_image6rb"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:background="@drawable/tblur6"
+                android:checked="false" />
 
-    </RadioGroup>
+            <RadioButton
+                android:id="@+id/rs_image7rb"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:background="@drawable/tblur7"
+                android:checked="false" />
+
+        </RadioGroup>
+    </HorizontalScrollView>
 
     <TextView
         android:id="@+id/rs_radius_tv"
@@ -83,12 +88,12 @@
 
     <SeekBar
         android:id="@+id/rs_radius_sb"
+        style="@android:style/Widget.SeekBar"
         android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:layout_margin="20dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:background="#ffffff"
-        android:max="255"
-        style="@android:style/Widget.SeekBar" />
+        android:max="255" />
 
 
     <TextView
@@ -102,28 +107,40 @@
 
     <SeekBar
         android:id="@+id/rs_scale_sb"
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:layout_margin="20dp"
-        android:background="#ffffff"
         style="@android:style/Widget.SeekBar"
-        android:max="255" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="#ffffff"
+        android:max="255"  />
+
+    <TextView
+        android:id="@+id/rs_image_dim_tv"
+        android:text="width x height"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
     <ScrollView
-        android:id="@+id/rs_scroller"
-        android:layout_weight="1"
         android:layout_width="match_parent"
-        android:layout_height="0dp">
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/rs_scroller"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/rs_image1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
                 android:adjustViewBounds="true"
                 android:src="@drawable/image100w300h" />
 
@@ -133,8 +150,8 @@
 
             <ImageView
                 android:id="@+id/rs_image2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
                 android:adjustViewBounds="true"
                 android:src="@drawable/image100w300h" />
 
@@ -144,36 +161,68 @@
 
             <ImageView
                 android:id="@+id/rs_image3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
                 android:adjustViewBounds="true"
                 android:src="@drawable/image100w300h" />
 
 
         </LinearLayout>
 
+    </HorizontalScrollView>
     </ScrollView>
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-        <TextView
-            android:text="Blur1: xxxx Msec"
-            android:textSize="20sp"
-            android:id="@+id/rs_blur1Time"
-            android:layout_weight="1"
+        <CheckBox
+            android:checked="false"
+            android:id="@+id/rs_blurCustomCk"
             android:layout_width="0dp"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Custom Blur"
+            android:textSize="20sp" />
 
-        <TextView
-            android:text="Blur2: xxxx Msec"
-            android:id="@+id/rs_blur2Time"
-            android:textSize="20sp"
-            android:layout_weight="1"
+        <CheckBox
+            android:checked="false"
+            android:id="@+id/rs_blurStdCk"
             android:layout_width="0dp"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Std Blur"
+            android:textSize="20sp" />
 
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/rs_blur1Time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Blur1: xxxx Msec"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/rs_blur2Time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Blur2: xxxx Msec"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+    <TextView
+        android:id="@+id/rs_memory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="Mem Free:xxxx Used:xxx Total:xxx"
+        android:gravity="center"/>
 </LinearLayout>
